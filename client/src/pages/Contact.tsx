@@ -48,7 +48,7 @@ export default function Contact() {
               <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight">GET IN TOUCH</h1>
             </div>
             <p className="text-muted-foreground mb-10 max-w-lg">
-              Have a question, feedback, or a partnership idea? We'd love to hear from you.
+              Have a question about hosting a party, need help with your account, or want to partner with us? We'd love to hear from you.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-5 gap-8">

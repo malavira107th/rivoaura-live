@@ -44,6 +44,7 @@ export default function CreateEvent() {
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [maxCapacity, setMaxCapacity] = useState(10000);
+  const [visibility, setVisibility] = useState<"public" | "private">("public");
 
   // Hosts
   const [hosts, setHosts] = useState<{ name: string; bio: string }[]>([
@@ -92,6 +93,7 @@ export default function CreateEvent() {
       venue,
       startTime: dateTime,
       maxCapacity,
+      visibility,
       hosts: validHosts.length > 0 ? validHosts : undefined,
       agenda: validAgenda.length > 0 ? validAgenda : undefined,
     });
@@ -266,6 +268,47 @@ export default function CreateEvent() {
                     max={100000}
                     className="w-full px-4 py-2.5 rounded-lg bg-background border border-border/60 text-foreground focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                   />
+                  <p className="text-xs text-muted-foreground mt-1">How many fans can join your party</p>
+                </div>
+
+                {/* Visibility Toggle */}
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Party Visibility *</label>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setVisibility("public")}
+                      className={`flex-1 px-4 py-3 rounded-lg border text-sm font-semibold transition-all ${
+                        visibility === "public"
+                          ? "bg-primary/10 border-primary text-primary"
+                          : "bg-background border-border/60 text-muted-foreground hover:border-primary/40"
+                      }`}
+                    >
+                      <div className="flex flex-col items-center gap-1">
+                        <span>Public</span>
+                        <span className="text-xs font-normal opacity-70">Anyone can find & join</span>
+                      </div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setVisibility("private")}
+                      className={`flex-1 px-4 py-3 rounded-lg border text-sm font-semibold transition-all ${
+                        visibility === "private"
+                          ? "bg-primary/10 border-primary text-primary"
+                          : "bg-background border-border/60 text-muted-foreground hover:border-primary/40"
+                      }`}
+                    >
+                      <div className="flex flex-col items-center gap-1">
+                        <span>Private</span>
+                        <span className="text-xs font-normal opacity-70">Invite link only</span>
+                      </div>
+                    </button>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1.5">
+                    {visibility === "public"
+                      ? "Your party will appear on the public Watch Parties page for everyone to see."
+                      : "Your party will only be accessible via a shareable link. It won't appear on the public listing."}
+                  </p>
                 </div>
               </div>
 

@@ -19,6 +19,7 @@ vi.mock("./db", () => {
       status: "upcoming" as const,
       hosts: JSON.stringify([{ name: "Rahul", bio: "Cricket analyst" }]),
       agenda: JSON.stringify([{ time: "1:30 PM", title: "Pre-match discussion" }]),
+      visibility: "public" as const,
       createdBy: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -37,6 +38,7 @@ vi.mock("./db", () => {
       status: "upcoming" as const,
       hosts: null,
       agenda: null,
+      visibility: "private" as const,
       createdBy: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -262,11 +264,12 @@ describe("auth.logout", () => {
 // EVENTS
 // ═══════════════════════════════════════════════════════════════════════════════
 describe("events.list", () => {
-  it("returns all events with seat counts (public)", async () => {
+  it("returns only public events with seat counts", async () => {
     const caller = appRouter.createCaller(createPublicContext());
     const events = await caller.events.list();
 
-    expect(events).toHaveLength(2);
+    // Only 1 event is public, the other is private
+    expect(events).toHaveLength(1);
     expect(events[0]).toHaveProperty("slug", "ind-vs-aus-2026");
     expect(events[0]).toHaveProperty("seatsTaken");
     expect(typeof events[0].seatsTaken).toBe("number");
@@ -307,7 +310,7 @@ describe("events.create (any authenticated user)", () => {
     ).rejects.toThrow();
   });
 
-  it("allows any authenticated user to create an event", async () => {
+  it("allows any authenticated user to create a public event", async () => {
     const caller = appRouter.createCaller(createAuthContext());
     const result = await caller.events.create({
       title: "New Event",
@@ -317,11 +320,29 @@ describe("events.create (any authenticated user)", () => {
       league: "Test League",
       venue: "Test Venue",
       startTime: new Date("2026-06-01T10:00:00Z"),
+      visibility: "public",
     });
 
     expect(result).toHaveProperty("id", 3);
     expect(result).toHaveProperty("slug");
     expect(result.slug).toContain("team-a-vs-team-b");
+  });
+
+  it("allows creating a private event", async () => {
+    const caller = appRouter.createCaller(createAuthContext());
+    const result = await caller.events.create({
+      title: "Private Party",
+      team1: "Team X",
+      team2: "Team Y",
+      format: "T20",
+      league: "Friendly",
+      venue: "Home",
+      startTime: new Date("2026-07-01T10:00:00Z"),
+      visibility: "private",
+    });
+
+    expect(result).toHaveProperty("id", 3);
+    expect(result).toHaveProperty("slug");
   });
 });
 

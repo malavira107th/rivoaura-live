@@ -128,11 +128,13 @@ export const appRouter = router({
 
   // ─── EVENTS ─────────────────────────────────────────────────────────
   events: router({
-    /** List all events (public) */
+    /** List all PUBLIC events (private events are hidden) */
     list: publicProcedure.query(async () => {
       const allEvents = await getAllEvents();
+      // Only show public events on the listing page
+      const publicEvents = allEvents.filter(e => e.visibility === "public");
       const enriched = await Promise.all(
-        allEvents.map(async (event) => {
+        publicEvents.map(async (event) => {
           const seatsTaken = await getRegistrationCount(event.id);
           return { ...event, seatsTaken };
         })
@@ -162,6 +164,7 @@ export const appRouter = router({
         venue: z.string().min(1),
         startTime: z.date(),
         maxCapacity: z.number().int().positive().default(10000),
+        visibility: z.enum(["public", "private"]).default("public"),
         hosts: z.array(z.object({ name: z.string(), bio: z.string() })).optional(),
         agenda: z.array(z.object({ time: z.string(), title: z.string() })).optional(),
       }))

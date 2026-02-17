@@ -33,7 +33,7 @@ export default function Privacy() {
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">Information We Collect</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">We collect data to operate effectively and provide you the best experiences. This includes:</p>
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
-                  <li><strong className="text-foreground">Account Information:</strong> Your phone number or email address, chosen username, and optional favorite team.</li>
+                  <li><strong className="text-foreground">Account Information:</strong> Your name, email address, and optional favorite team. Passwords are securely hashed and never stored in plain text.</li>
                   <li><strong className="text-foreground">Usage Data:</strong> Information about the events you register for and attend.</li>
                   <li><strong className="text-foreground">Device Information:</strong> Basic information about the browser and device you use to access our service.</li>
                 </ul>
@@ -43,7 +43,7 @@ export default function Privacy() {
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">How We Use Your Information</h2>
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
                   <li>Provide and manage your account.</li>
-                  <li>Authenticate you and secure your account via OTP.</li>
+                  <li>Authenticate you and secure your account.</li>
                   <li>Send you important notifications about your registered events.</li>
                   <li>Improve our platform and develop new features.</li>
                   <li>Enforce our Community Guidelines and maintain platform safety.</li>
@@ -53,7 +53,7 @@ export default function Privacy() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">Sharing of Your Information</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  We do not sell your personal data to third parties. Your username is visible to others in the community. We may share data with third-party service providers for functions like sending OTPs, but they are bound by strict confidentiality agreements. We may also disclose information if required by law or to protect the rights and safety of our users.
+                  We do not sell your personal data to third parties. Your name is visible to other users when you host or join a party. We may share data with third-party service providers for infrastructure and platform operations, but they are bound by strict confidentiality agreements. We may also disclose information if required by law or to protect the rights and safety of our users.
                 </p>
               </div>
 

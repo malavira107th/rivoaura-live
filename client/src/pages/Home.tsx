@@ -1,18 +1,20 @@
 /*
  * HOME PAGE — Cricket Watch Party
- * Design: Stadium Noir — dark cinematic, saffron accents, Oswald display, broadcast feel
+ * Content: User-hosted watch parties with built-in audio & chat rooms
  */
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Headphones, UserPlus, Search, Shield, Mic2, Quote, Loader2 } from "lucide-react";
+import { ArrowRight, Headphones, UserPlus, Search, Shield, Mic2, Quote, Loader2, Plus, Users, Lock, Globe, Settings } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EventCard from "@/components/EventCard";
 import { HERO_IMAGE, COMMUNITY_IMAGE, AUDIO_ROOM_IMAGE, HOW_IT_WORKS_BG, TESTIMONIALS } from "@/lib/data";
 import { trpc } from "@/lib/trpc";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function Home() {
   const { data: events, isLoading } = trpc.events.list.useQuery();
+  const { isAuthenticated } = useAuth();
   const upcomingEvents = (events ?? []).slice(0, 3);
 
   return (
@@ -21,7 +23,6 @@ export default function Home() {
 
       {/* ===== HERO SECTION ===== */}
       <section className="relative min-h-[90vh] flex items-center justify-start overflow-hidden pt-16">
-        {/* Background Image */}
         <div className="absolute inset-0">
           <img
             src={HERO_IMAGE}
@@ -41,7 +42,7 @@ export default function Home() {
             >
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 mb-6">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-xs font-medium text-primary tracking-wide uppercase">Live Audio Watch Parties</span>
+                <span className="text-xs font-medium text-primary tracking-wide uppercase">Host or Join — It's Free</span>
               </div>
             </motion.div>
 
@@ -51,11 +52,11 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight mb-6"
             >
-              THE ROAR OF
+              HOST YOUR OWN
               <br />
-              THE CROWD.
+              WATCH PARTY.
               <br />
-              <span className="text-gradient-saffron">IN YOUR POCKET.</span>
+              <span className="text-gradient-saffron">INVITE YOUR CREW.</span>
             </motion.h1>
 
             <motion.p
@@ -64,7 +65,7 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg"
             >
-              Join live audio watch parties for every cricket match. Discuss the game with thousands of fans, analyze every play, and feel the pulse of the stadium.
+              Create a watch party for any cricket match. Set the capacity, control who joins, and experience every ball together with built-in live audio and chat rooms. Your party, your rules.
             </motion.p>
 
             <motion.div
@@ -74,17 +75,18 @@ export default function Home() {
               className="flex flex-col sm:flex-row gap-3"
             >
               <Link
-                href="/events"
+                href={isAuthenticated ? "/events/create" : "/login"}
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
               >
-                Explore Upcoming Parties
-                <ArrowRight className="w-4 h-4" />
+                <Plus className="w-4 h-4" />
+                Host a Watch Party
               </Link>
               <Link
-                href="/faq"
+                href="/events"
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg border border-border bg-card/50 text-foreground font-semibold text-sm hover:bg-card transition-all"
               >
-                How It Works
+                Browse Public Parties
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
 
@@ -106,30 +108,97 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-sm text-muted-foreground">
-                <span className="text-foreground font-semibold">10,000+</span> fans from Mumbai to Melbourne
+                <span className="text-foreground font-semibold">Thousands of fans</span> hosting and joining parties worldwide
               </p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ===== UPCOMING EVENTS ===== */}
+      {/* ===== HOW IT WORKS ===== */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={HOW_IT_WORKS_BG} alt="" className="w-full h-full object-cover opacity-40" />
+          <div className="absolute inset-0 bg-background/80" />
+        </div>
+
+        <div className="container relative z-10">
+          <div className="text-center mb-14">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+              HOW IT WORKS
+            </h2>
+            <p className="text-muted-foreground max-w-lg mx-auto">
+              Whether you want to host your own party or join someone else's — it takes less than a minute.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
+            {/* HOST PATH */}
+            <div className="bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl p-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
+                <Plus className="w-3.5 h-3.5 text-primary" />
+                <span className="text-xs font-semibold text-primary uppercase tracking-wide">I Want to Host</span>
+              </div>
+              <div className="space-y-6">
+                {[
+                  { step: "01", title: "Create Your Party", desc: "Pick the match, set your capacity (10 friends or 10,000 fans), and write your party rules." },
+                  { step: "02", title: "Choose Public or Private", desc: "Public parties appear on the listing for anyone. Private parties are invite-only via a shareable link." },
+                  { step: "03", title: "Go Live & Moderate", desc: "When the match starts, your audio room goes live. Control who speaks, mute or remove anyone. It's your party." },
+                ].map((item) => (
+                  <div key={item.step} className="flex gap-4">
+                    <div className="font-display text-2xl font-bold text-primary/30 shrink-0 w-8">{item.step}</div>
+                    <div>
+                      <h4 className="font-display text-sm font-bold mb-1">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* JOIN PATH */}
+            <div className="bg-card/80 backdrop-blur-sm border border-border/60 rounded-xl p-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/50 border border-border/60 mb-6">
+                <Users className="w-3.5 h-3.5 text-foreground" />
+                <span className="text-xs font-semibold text-foreground uppercase tracking-wide">I Want to Join</span>
+              </div>
+              <div className="space-y-6">
+                {[
+                  { step: "01", title: "Browse Public Parties", desc: "Explore upcoming watch parties on the listing page. Filter by match, format, or league." },
+                  { step: "02", title: "Register & Get Ready", desc: "Secure your spot with one click. If it's full, join the waitlist — you'll be notified when a spot opens." },
+                  { step: "03", title: "Join the Room", desc: "When the match starts, join the live audio room. Listen in, chat, or request to speak." },
+                ].map((item) => (
+                  <div key={item.step} className="flex gap-4">
+                    <div className="font-display text-2xl font-bold text-muted-foreground/30 shrink-0 w-8">{item.step}</div>
+                    <div>
+                      <h4 className="font-display text-sm font-bold mb-1">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== PUBLIC PARTIES PREVIEW ===== */}
       <section className="py-20">
         <div className="container">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-10">
             <div>
               <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-2">
-                YOUR FRONT-ROW SEAT
+                PUBLIC WATCH PARTIES
               </h2>
               <p className="text-muted-foreground max-w-md">
-                The next big match is just a click away. Register now to secure your spot.
+                Open to everyone. Find a party for the next big match and jump in.
               </p>
             </div>
             <Link
               href="/events"
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
             >
-              View All Events <ArrowRight className="w-4 h-4" />
+              View All Parties <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -145,61 +214,50 @@ export default function Home() {
             </div>
           ) : (
             <div className="text-center py-16">
-              <p className="text-muted-foreground">No upcoming events yet. Check back soon!</p>
+              <p className="text-muted-foreground mb-4">No public parties yet. Be the first to host one!</p>
+              <Link
+                href={isAuthenticated ? "/events/create" : "/login"}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all"
+              >
+                <Plus className="w-4 h-4" />
+                Create Your First Party
+              </Link>
             </div>
           )}
         </div>
       </section>
 
-      {/* ===== HOW IT WORKS ===== */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={HOW_IT_WORKS_BG} alt="" className="w-full h-full object-cover opacity-40" />
-          <div className="absolute inset-0 bg-background/80" />
-        </div>
-
-        <div className="container relative z-10">
+      {/* ===== FEATURES — WHAT YOU GET ===== */}
+      <section className="py-20 border-y border-border/50">
+        <div className="container">
           <div className="text-center mb-14">
             <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-              YOUR VIRTUAL CRICKET COMMUNITY
+              EVERYTHING YOU NEED.
+              <br />
+              <span className="text-gradient-saffron">NOTHING YOU DON'T.</span>
             </h2>
             <p className="text-muted-foreground max-w-lg mx-auto">
-              Three simple steps to join the world's most passionate cricket conversation.
+              Built for cricket fans, by cricket fans. Every feature is designed to make your watch party unforgettable.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
-              {
-                icon: Search,
-                step: "01",
-                title: "Discover Your Match",
-                desc: "Browse our full schedule of upcoming watch parties for international clashes, league rivalries, and everything in between.",
-              },
-              {
-                icon: UserPlus,
-                step: "02",
-                title: "Register in Seconds",
-                desc: "Secure your spot with a quick sign-in. Once you're in, you're in. Add the event to your calendar with one tap.",
-              },
-              {
-                icon: Headphones,
-                step: "03",
-                title: "Join the Conversation",
-                desc: "When the match goes live, the audio room opens. Join as a listener, or request to speak and share your expert analysis.",
-              },
+              { icon: Headphones, title: "Built-in Audio Rooms", desc: "Every party gets a live audio room. No Zoom links, no third-party apps. Just click and talk." },
+              { icon: Settings, title: "Full Host Control", desc: "Set capacity, write rules, mute or remove users, control who speaks. Your party, your rules." },
+              { icon: Globe, title: "Public Parties", desc: "List your party publicly so any fan can discover and join. Great for building a following." },
+              { icon: Lock, title: "Private Parties", desc: "Keep it exclusive with a private invite link. Perfect for watching with just your friends." },
+              { icon: Users, title: "Waitlist System", desc: "Party full? Fans join the waitlist and get notified automatically when a spot opens up." },
+              { icon: Shield, title: "Safe & Moderated", desc: "Hosts moderate their own parties. Report abusive users with one click. Zero tolerance for toxicity." },
             ].map((item, i) => (
               <motion.div
-                key={item.step}
+                key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="relative bg-card/80 backdrop-blur-sm border border-border/60 rounded-xl p-6 hover:border-primary/30 transition-all group"
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="bg-card/80 backdrop-blur-sm border border-border/60 rounded-xl p-6 hover:border-primary/30 transition-all group"
               >
-                <div className="font-display text-5xl font-bold text-primary/10 absolute top-4 right-4">
-                  {item.step}
-                </div>
                 <div className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <item.icon className="w-6 h-6 text-primary" />
                 </div>
@@ -207,62 +265,6 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== AUDIO ROOM FEATURE ===== */}
-      <section className="py-20">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="rounded-2xl overflow-hidden border border-border/60 glow-saffron">
-                <img
-                  src={AUDIO_ROOM_IMAGE}
-                  alt="Live audio room concept"
-                  className="w-full h-auto"
-                />
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-                LIVE AUDIO ROOMS.
-                <br />
-                <span className="text-gradient-saffron">REAL-TIME PASSION.</span>
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                Our Clubhouse-style audio rooms bring the stadium atmosphere to your phone. Join as a listener, or raise your hand to share your take on every boundary, wicket, and strategic play.
-              </p>
-
-              <div className="space-y-4">
-                {[
-                  { icon: Headphones, title: "Listen In", desc: "Join as a listener by default and enjoy live community commentary." },
-                  { icon: Mic2, title: "Request to Speak", desc: "Tap the button to request the mic. Moderators will bring you on stage." },
-                  { icon: Shield, title: "Safe & Moderated", desc: "Trained moderators ensure a respectful, abuse-free environment." },
-                ].map((item) => (
-                  <div key={item.title} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                      <item.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-display text-sm font-bold mb-0.5">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
@@ -277,10 +279,10 @@ export default function Home() {
         <div className="container relative z-10">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-              WHAT OUR COMMUNITY SAYS
+              FROM OUR COMMUNITY
             </h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Real fans. Real conversations. Real passion for the game.
+              Hosts and fans sharing their experience.
             </p>
           </div>
 
@@ -318,9 +320,9 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { value: "10K+", label: "Active Fans" },
-              { value: String(events?.length ?? 0), label: "Events Hosted" },
-              { value: "6", label: "Formats Covered" },
+              { value: "100%", label: "Free Forever" },
+              { value: String(events?.length ?? 0) + "+", label: "Parties Hosted" },
+              { value: "You", label: "Control Everything" },
               { value: "0", label: "Tolerance for Abuse" },
             ].map((stat) => (
               <div key={stat.label}>
@@ -339,20 +341,29 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5" />
             <div className="relative z-10">
               <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-                READY TO JOIN THE
+                YOUR MATCH. YOUR PARTY.
                 <br />
-                <span className="text-gradient-saffron">ULTIMATE CRICKET COMMUNITY?</span>
+                <span className="text-gradient-saffron">YOUR RULES.</span>
               </h2>
               <p className="text-muted-foreground max-w-md mx-auto mb-8">
-                Don't watch alone. Join thousands of passionate fans and experience every match together.
+                Stop watching alone. Host a party for your crew or join a public one with thousands of fans. It's free, it's live, and it's built for cricket.
               </p>
-              <Link
-                href="/events"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
-              >
-                View All Events
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link
+                  href={isAuthenticated ? "/events/create" : "/login"}
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                >
+                  <Plus className="w-4 h-4" />
+                  Host Your Party
+                </Link>
+                <Link
+                  href="/events"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border border-border bg-card/50 text-foreground font-semibold hover:bg-card transition-all"
+                >
+                  Browse Parties
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

@@ -1,13 +1,12 @@
 import { Link } from "wouter";
 
-
 export default function Footer() {
   return (
     <footer className="border-t border-border/50 bg-card/50">
       {/* Disclaimer Banner */}
       <div className="bg-primary/5 border-b border-primary/10">
         <div className="container py-3 text-center text-xs text-muted-foreground">
-          <strong className="text-primary/80">Disclaimer:</strong> This platform is for community discussion only. Match viewing is separate and available via official broadcasters.
+          <strong className="text-primary/80">Disclaimer:</strong> Cricket Watch Party is a community platform for live discussion. Match viewing requires your own official broadcast provider.
         </div>
       </div>
 
@@ -17,7 +16,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/XsRgERjtFAKleAlN.png"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/EaGClusPGotwPQor.png"
                 alt="Cricket Watch Party Logo"
                 className="w-8 h-8 rounded-lg"
               />
@@ -27,7 +26,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              The ultimate live audio companion for every cricket match. Join the conversation.
+              Host your own cricket watch party or join one. Built-in audio rooms, live chat, and full host control. Free for everyone.
             </p>
           </div>
 
@@ -35,7 +34,8 @@ export default function Footer() {
           <div>
             <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground mb-4">Explore</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/events" className="text-sm text-muted-foreground hover:text-primary transition-colors">Watch Parties</Link>
+              <Link href="/events" className="text-sm text-muted-foreground hover:text-primary transition-colors">Public Parties</Link>
+              <Link href="/events/create" className="text-sm text-muted-foreground hover:text-primary transition-colors">Host a Party</Link>
               <Link href="/faq" className="text-sm text-muted-foreground hover:text-primary transition-colors">FAQ</Link>
               <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact Us</Link>
               <Link href="/guidelines" className="text-sm text-muted-foreground hover:text-primary transition-colors">Community Guidelines</Link>

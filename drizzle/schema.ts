@@ -39,6 +39,8 @@ export const events = mysqlTable("events", {
   startTime: timestamp("startTime").notNull(),
   maxCapacity: int("maxCapacity").notNull().default(10000),
   status: mysqlEnum("status", ["upcoming", "live", "completed", "cancelled"]).default("upcoming").notNull(),
+  /** public = visible on listing, private = invite-link only */
+  visibility: mysqlEnum("visibility", ["public", "private"]).default("public").notNull(),
   /** JSON array of host objects: [{name, bio}] */
   hosts: json("hosts").$type<{ name: string; bio: string }[]>(),
   /** JSON array of agenda items: [{time, title}] */

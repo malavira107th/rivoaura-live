@@ -1,9 +1,9 @@
 /*
  * COMMUNITY GUIDELINES PAGE
- * Design: Stadium Noir
+ * Updated: User-hosted model — hosts moderate their own parties
  */
 import { motion } from "framer-motion";
-import { Shield, Ban, MessageSquareOff, Focus, Gavel } from "lucide-react";
+import { Shield, Ban, MessageSquareOff, Focus, Gavel, Users, Crown } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -11,22 +11,32 @@ const RULES = [
   {
     icon: Ban,
     title: "No Abuse, Harassment, or Hate Speech",
-    body: "There is a zero-tolerance policy for any form of personal attacks, bullying, racism, sexism, or discrimination. Respect your fellow fans, hosts, and moderators at all times."
+    body: "Zero tolerance for personal attacks, bullying, racism, sexism, or discrimination. Respect fellow fans, hosts, and speakers at all times. Violations may result in removal from the party or a permanent platform ban."
   },
   {
     icon: MessageSquareOff,
     title: "No Illegal Links or Spam",
-    body: "Do not share links to illegal streaming sites, unauthorized services, or promotional content. Spamming the chat or audio room with repetitive messages is strictly forbidden."
+    body: "Do not share links to illegal streaming sites, pirated content, or promotional spam. Flooding the chat or audio room with repetitive messages is strictly forbidden."
   },
   {
     icon: Focus,
     title: "Keep it Relevant",
-    body: "While a little off-topic chat is fine, please try to keep the conversation focused on the match and cricket in general. This ensures the best experience for everyone."
+    body: "While friendly banter is welcome, keep the conversation focused on the match and cricket. This ensures the best experience for everyone in the party."
+  },
+  {
+    icon: Crown,
+    title: "Respect the Host",
+    body: "The host sets the rules for their party. If a host asks you to stop a behavior, respect their decision. If you disagree, you're free to leave and join or create a different party."
+  },
+  {
+    icon: Users,
+    title: "For Hosts: Your Party, Your Responsibility",
+    body: "As a host, you are responsible for moderating your party. Use the mute, remove, and ban tools to keep your party safe. Set clear rules when creating your party so attendees know what to expect."
   },
   {
     icon: Gavel,
-    title: "How We Enforce These Rules",
-    body: "Our moderators have the final say. Violating these guidelines may result in being muted, removed from a room, or a permanent ban from the platform. If you see someone breaking the rules, please use the Report button immediately."
+    title: "Platform Enforcement",
+    body: "While hosts moderate their own parties, the Cricket Watch Party team monitors the platform for serious violations. Repeated reports against a user across multiple parties may result in a permanent platform ban. Use the Report button if you see something that crosses the line."
   }
 ];
 
@@ -45,14 +55,14 @@ export default function Guidelines() {
               </h1>
             </div>
             <p className="text-muted-foreground mb-10 max-w-lg">
-              We are committed to creating a welcoming and respectful space for all cricket fans. By participating, you agree to abide by these rules.
+              Cricket Watch Party is a community-driven platform. These guidelines apply to everyone — hosts, speakers, and listeners alike.
             </p>
 
             {/* Spirit of the Game */}
             <div className="bg-card border border-border/60 rounded-xl p-6 mb-6">
               <h2 className="font-display text-xl font-bold mb-3">The Spirit of the Game</h2>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Our community is built on a shared passion for cricket. We encourage healthy debate, insightful analysis, and friendly banter. Treat others as you would want to be treated on and off the field. Remember, we are all here because we love this game.
+                Every watch party is hosted by a fan, for fans. Whether you're hosting for 10 friends or 10,000 strangers, the same spirit applies: respect, passion, and love for cricket. Treat others as you would want to be treated on and off the field.
               </p>
             </div>
 

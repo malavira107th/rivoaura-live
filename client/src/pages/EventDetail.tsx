@@ -279,12 +279,12 @@ function EventDetailContent({ event, isAuthenticated, registerMutation, waitlist
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="bg-card border border-border/60 rounded-xl p-6"
               >
-                <h3 className="font-display text-lg font-bold mb-5">How to Participate</h3>
+                <h3 className="font-display text-lg font-bold mb-5">How It Works</h3>
                 <div className="space-y-4">
                   {[
-                    { icon: Headphones, title: "Listen In", desc: "You join as a listener by default. Enjoy the live commentary and community chat." },
-                    { icon: Mic2, title: "Request to Speak", desc: "Want to share your take? Use the 'Request to Speak' button. Our moderators will bring you on stage." },
-                    { icon: Shield, title: "Be Respectful", desc: "We have a zero-tolerance policy for abuse, spam, or hate speech. See our full Community Guidelines." },
+                    { icon: Headphones, title: "Join the Room", desc: "Once registered, you'll get access to the live audio + chat room when the party starts. Join as a listener by default." },
+                    { icon: Mic2, title: "Request to Speak", desc: "Want to share your take? Use the 'Request to Speak' button. The host will bring you on stage." },
+                    { icon: Shield, title: "Host's Rules Apply", desc: "The host moderates this party. Be respectful, follow their rules, and enjoy the game together." },
                   ].map((rule) => (
                     <div key={rule.title} className="flex gap-4 items-start">
                       <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
@@ -348,9 +348,9 @@ function EventDetailContent({ event, isAuthenticated, registerMutation, waitlist
                   ) : isFull ? (
                     "Join Waitlist"
                   ) : !isAuthenticated ? (
-                    "Sign In to Register"
+                    "Sign In to Join"
                   ) : (
-                    "Register to Join"
+                    "Join This Party"
                   )}
                 </button>
 

@@ -39,3 +39,15 @@
 - [x] Update all protected pages to use custom auth
 - [x] Update tests for new auth and event creation flow (31 tests passing)
 - [x] Regenerate logo with white background for better visibility on dark navbar
+- [x] Generate new professional logo and favicon
+- [x] Rewrite Home page content — emphasize user-hosted parties, built-in rooms, free platform
+- [x] Rewrite Events page — show only public parties, explain public vs private
+- [x] Rewrite EventDetail page — show host info, room concept, join experience
+- [x] Rewrite FAQ page — explain the model clearly
+- [x] Rewrite Community Guidelines — focus on host responsibilities
+- [x] Rewrite Contact, Privacy, Terms, Disclaimer pages
+- [x] Add public/private toggle to Create Event form
+- [x] Update database schema with visibility field (public/private)
+- [x] Update API to filter public-only events on listing, allow private via invite link
+- [x] Update all tests for new features (32 tests passing)
+- [x] Move all images/logo to client/public — no Manus CDN, everything local

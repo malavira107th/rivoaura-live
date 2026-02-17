@@ -31,7 +31,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <img
-            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/XsRgERjtFAKleAlN.png"
+            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/EaGClusPGotwPQor.png"
             alt="Cricket Watch Party Logo"
             className="w-9 h-9 rounded-lg"
           />
