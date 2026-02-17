@@ -63,3 +63,7 @@
 - [x] Add shareable invite link for private parties (copy link, share via WhatsApp/social)
 - [x] Build user profile page (edit name, favorite team, password)
 - [x] Write/update tests for new features (39 tests passing)
+- [x] Add host moderation: kick user from room
+- [x] Add host moderation: mute/unmute other users
+- [x] Add host badge and moderation UI panel in Room page
+- [x] Write tests for moderation features (68 tests total)
