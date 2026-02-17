@@ -38,3 +38,4 @@
 - [x] Update Navbar to use custom auth (no Manus OAuth redirect)
 - [x] Update all protected pages to use custom auth
 - [x] Update tests for new auth and event creation flow (31 tests passing)
+- [x] Regenerate logo with white background for better visibility on dark navbar
