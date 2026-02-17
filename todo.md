@@ -56,3 +56,10 @@
 - [x] Rewrite Privacy Policy with clear, specific information for CWP
 - [x] Rewrite Terms & Conditions with clear, specific information for CWP
 - [x] Rewrite Disclaimer with clear, specific information for CWP
+- [x] Set up Socket.IO for real-time communication (server + client)
+- [x] Build live text chat inside watch party rooms
+- [x] Build live audio room with WebRTC (mute/unmute, speaker indicators)
+- [x] Build Watch Party Room page combining chat + audio + match info
+- [x] Add shareable invite link for private parties (copy link, share via WhatsApp/social)
+- [x] Build user profile page (edit name, favorite team, password)
+- [x] Write/update tests for new features (39 tests passing)

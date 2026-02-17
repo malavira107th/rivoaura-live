@@ -45,6 +45,8 @@ export const events = mysqlTable("events", {
   hosts: json("hosts").$type<{ name: string; bio: string }[]>(),
   /** JSON array of agenda items: [{time, title}] */
   agenda: json("agenda").$type<{ time: string; title: string }[]>(),
+  /** Unique invite code for private parties */
+  inviteCode: varchar("inviteCode", { length: 32 }),
   createdBy: int("createdBy"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),

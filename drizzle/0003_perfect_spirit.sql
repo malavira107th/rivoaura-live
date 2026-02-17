@@ -1,0 +1,1 @@
+ALTER TABLE `events` ADD `inviteCode` varchar(32);

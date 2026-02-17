@@ -354,6 +354,17 @@ function EventDetailContent({ event, isAuthenticated, registerMutation, waitlist
                   )}
                 </button>
 
+                {/* Enter Room Button */}
+                {isAuthenticated && (
+                  <Link
+                    href={`/room/${event.slug}`}
+                    className="w-full py-3 rounded-lg font-medium text-sm border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 transition-all flex items-center justify-center gap-2 mb-3"
+                  >
+                    <Headphones className="w-4 h-4" />
+                    Enter Live Room
+                  </Link>
+                )}
+
                 <button
                   onClick={handleCalendar}
                   className="w-full py-3 rounded-lg font-medium text-sm border border-border bg-card text-foreground hover:bg-accent transition-all flex items-center justify-center gap-2"

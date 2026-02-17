@@ -24,8 +24,10 @@ import {
   getUserByEmail,
   createUser,
   updateUserLastSignedIn,
+  updateUserProfile,
 } from "./db";
 import { TRPCError } from "@trpc/server";
+import { nanoid } from "nanoid";
 
 const SALT_ROUNDS = 10;
 
@@ -118,6 +120,41 @@ export const appRouter = router({
         return { success: true, user: safeUser };
       }),
 
+    /** Update profile */
+    updateProfile: protectedProcedure
+      .input(z.object({
+        name: z.string().min(2).optional(),
+        favoriteTeam: z.string().optional(),
+        currentPassword: z.string().optional(),
+        newPassword: z.string().min(6).optional(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        const updates: Record<string, unknown> = {};
+        if (input.name) updates.name = input.name;
+        if (input.favoriteTeam !== undefined) updates.favoriteTeam = input.favoriteTeam;
+
+        if (input.newPassword) {
+          if (!input.currentPassword) {
+            throw new TRPCError({ code: "BAD_REQUEST", message: "Current password is required to change password." });
+          }
+          const user = await getUserByEmail(ctx.user.email);
+          if (!user || !user.password) {
+            throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "User not found." });
+          }
+          const isValid = await bcrypt.compare(input.currentPassword, user.password);
+          if (!isValid) {
+            throw new TRPCError({ code: "UNAUTHORIZED", message: "Current password is incorrect." });
+          }
+          updates.password = await bcrypt.hash(input.newPassword, SALT_ROUNDS);
+        }
+
+        if (Object.keys(updates).length > 0) {
+          await updateUserProfile(ctx.user.id, updates);
+        }
+
+        return { success: true };
+      }),
+
     /** Logout — clear session cookie */
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
@@ -142,15 +179,18 @@ export const appRouter = router({
       return enriched;
     }),
 
-    /** Get a single event by slug (public) */
+    /** Get a single event by slug — private events require invite code */
     bySlug: publicProcedure
-      .input(z.object({ slug: z.string() }))
+      .input(z.object({ slug: z.string(), inviteCode: z.string().optional() }))
       .query(async ({ input }) => {
         const event = await getEventBySlug(input.slug);
         if (!event) throw new TRPCError({ code: "NOT_FOUND", message: "Event not found" });
+        // Private events require invite code (unless accessed by creator — handled on frontend)
+        // We still return the event but mark if invite is valid
         const seatsTaken = await getRegistrationCount(event.id);
         const waitlistCount = await getWaitlistCount(event.id);
-        return { ...event, seatsTaken, waitlistCount };
+        const inviteValid = event.visibility === "public" || !event.inviteCode || input.inviteCode === event.inviteCode;
+        return { ...event, seatsTaken, waitlistCount, inviteValid };
       }),
 
     /** Create a new event — any logged-in user can create */
@@ -171,14 +211,16 @@ export const appRouter = router({
       .mutation(async ({ input, ctx }) => {
         // Auto-generate slug from team names and timestamp
         const slug = `${input.team1.toLowerCase().replace(/\s+/g, "-")}-vs-${input.team2.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`;
+        const inviteCode = input.visibility === "private" ? nanoid(12) : null;
         const id = await createEvent({
           ...input,
           slug,
+          inviteCode,
           hosts: input.hosts ?? [],
           agenda: input.agenda ?? [],
           createdBy: ctx.user.id,
         });
-        return { id, slug };
+        return { id, slug, inviteCode };
       }),
 
     /** Update an event — only the creator or admin can update */

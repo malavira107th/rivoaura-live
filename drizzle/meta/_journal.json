@@ -22,6 +22,13 @@
       "when": 1771345106911,
       "tag": "0002_far_talisman",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1771347197814,
+      "tag": "0003_perfect_spirit",
+      "breakpoints": true
     }
   ]
 }

@@ -16,6 +16,8 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Disclaimer from "./pages/Disclaimer";
 import CreateEvent from "./pages/CreateEvent";
+import Room from "./pages/Room";
+import Profile from "./pages/Profile";
 import ScrollToTop from "./components/ScrollToTop";
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -25,7 +27,9 @@ function Router() {
       <Route path={"/events"} component={Events} />
       <Route path={"/events/create"} component={CreateEvent} />
       <Route path={"/events/:slug"} component={EventDetail} />
+      <Route path={"/room/:slug"} component={Room} />
       <Route path={"/login"} component={Login} />
+      <Route path={"/profile"} component={Profile} />
       <Route path={"/my-events"} component={MyEvents} />
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/guidelines"} component={Guidelines} />

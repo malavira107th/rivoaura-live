@@ -102,6 +102,7 @@ vi.mock("./db", () => {
     getUserByEmail: vi.fn(() => Promise.resolve(null)),
     createUser: vi.fn(() => Promise.resolve(null)),
     updateUserLastSignedIn: vi.fn(() => Promise.resolve()),
+    updateUserProfile: vi.fn(() => Promise.resolve()),
     // Expose for test assertions
     _registrations: registrations,
     _waitlistEntries: waitlistEntries,
@@ -472,6 +473,83 @@ describe("waitlist.join", () => {
 // ═══════════════════════════════════════════════════════════════════════════════
 // CONTACT
 // ═══════════════════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════════
+// PROFILE
+// ═══════════════════════════════════════════════════════════════════════════════
+describe("auth.updateProfile", () => {
+  it("rejects unauthenticated users", async () => {
+    const caller = appRouter.createCaller(createPublicContext());
+    await expect(
+      caller.auth.updateProfile({ name: "New Name" })
+    ).rejects.toThrow();
+  });
+
+  it("allows authenticated user to update name", async () => {
+    const caller = appRouter.createCaller(createAuthContext());
+    const result = await caller.auth.updateProfile({ name: "Updated Name" });
+    expect(result).toEqual({ success: true });
+  });
+
+  it("allows authenticated user to update favorite team", async () => {
+    const caller = appRouter.createCaller(createAuthContext());
+    const result = await caller.auth.updateProfile({ favoriteTeam: "Australia" });
+    expect(result).toEqual({ success: true });
+  });
+
+  it("rejects password change without current password", async () => {
+    const caller = appRouter.createCaller(createAuthContext());
+    await expect(
+      caller.auth.updateProfile({ newPassword: "newpass123" })
+    ).rejects.toThrow("Current password is required to change password.");
+  });
+
+  it("rejects short new password", async () => {
+    const caller = appRouter.createCaller(createAuthContext());
+    await expect(
+      caller.auth.updateProfile({ currentPassword: "password123", newPassword: "12" })
+    ).rejects.toThrow();
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// INVITE CODE (private events)
+// ═══════════════════════════════════════════════════════════════════════════════
+describe("events.create with invite code", () => {
+  it("generates inviteCode for private events", async () => {
+    const caller = appRouter.createCaller(createAuthContext());
+    const result = await caller.events.create({
+      title: "Private Match",
+      team1: "India",
+      team2: "Pakistan",
+      format: "T20",
+      league: "Asia Cup",
+      venue: "Dubai",
+      startTime: new Date("2026-08-01T10:00:00Z"),
+      visibility: "private",
+    });
+
+    expect(result).toHaveProperty("inviteCode");
+    expect(result.inviteCode).toBeTruthy();
+    expect(typeof result.inviteCode).toBe("string");
+  });
+
+  it("does not generate inviteCode for public events", async () => {
+    const caller = appRouter.createCaller(createAuthContext());
+    const result = await caller.events.create({
+      title: "Public Match",
+      team1: "England",
+      team2: "Australia",
+      format: "ODI",
+      league: "Ashes",
+      venue: "Lord's",
+      startTime: new Date("2026-09-01T10:00:00Z"),
+      visibility: "public",
+    });
+
+    expect(result.inviteCode).toBeNull();
+  });
+});
+
 describe("contact.send", () => {
   it("accepts a valid contact message (public)", async () => {
     const caller = appRouter.createCaller(createPublicContext());

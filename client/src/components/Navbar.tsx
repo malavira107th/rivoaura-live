@@ -80,12 +80,15 @@ export default function Navbar() {
               >
                 My Events
               </Link>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-card/60 border border-border/50">
+              <Link
+                href="/profile"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-card/60 border border-border/50 hover:bg-accent/50 transition-colors"
+              >
                 <User className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-foreground truncate max-w-[120px]">
                   {user?.name || "Fan"}
                 </span>
-              </div>
+              </Link>
               <button
                 onClick={handleLogout}
                 className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"
@@ -160,12 +163,16 @@ export default function Navbar() {
                   >
                     My Events
                   </Link>
-                  <div className="mt-2 flex items-center gap-2 px-4 py-3 rounded-md bg-card/60 border border-border/50">
+                  <Link
+                    href="/profile"
+                    onClick={() => setOpen(false)}
+                    className="mt-2 flex items-center gap-2 px-4 py-3 rounded-md bg-card/60 border border-border/50 hover:bg-accent/50 transition-colors"
+                  >
                     <User className="w-4 h-4 text-primary" />
                     <span className="text-sm font-medium text-foreground">
                       {user?.name || "Fan"}
                     </span>
-                  </div>
+                  </Link>
                   <button
                     onClick={() => { handleLogout(); setOpen(false); }}
                     className="mt-1 px-4 py-3 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors text-left flex items-center gap-2"
