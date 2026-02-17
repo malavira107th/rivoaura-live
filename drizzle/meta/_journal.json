@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1771341375520,
+      "tag": "0000_rare_cassandra_nova",
+      "breakpoints": true
+    }
+  ]
+}

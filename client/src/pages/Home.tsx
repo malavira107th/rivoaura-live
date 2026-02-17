@@ -4,14 +4,16 @@
  */
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Headphones, UserPlus, Search, Shield, Users, Mic2, Quote } from "lucide-react";
+import { ArrowRight, Headphones, UserPlus, Search, Shield, Mic2, Quote, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EventCard from "@/components/EventCard";
-import { HERO_IMAGE, COMMUNITY_IMAGE, AUDIO_ROOM_IMAGE, HOW_IT_WORKS_BG, MOCK_EVENTS, TESTIMONIALS } from "@/lib/data";
+import { HERO_IMAGE, COMMUNITY_IMAGE, AUDIO_ROOM_IMAGE, HOW_IT_WORKS_BG, TESTIMONIALS } from "@/lib/data";
+import { trpc } from "@/lib/trpc";
 
 export default function Home() {
-  const upcomingEvents = MOCK_EVENTS.slice(0, 3);
+  const { data: events, isLoading } = trpc.events.list.useQuery();
+  const upcomingEvents = (events ?? []).slice(0, 3);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -131,11 +133,21 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {upcomingEvents.map((event, i) => (
-              <EventCard key={event.id} event={event} index={i} />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="flex justify-center py-16">
+              <Loader2 className="w-8 h-8 text-primary animate-spin" />
+            </div>
+          ) : upcomingEvents.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {upcomingEvents.map((event, i) => (
+                <EventCard key={event.id} event={event} index={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-muted-foreground">No upcoming events yet. Check back soon!</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -168,7 +180,7 @@ export default function Home() {
                 icon: UserPlus,
                 step: "02",
                 title: "Register in Seconds",
-                desc: "Secure your spot with a quick, OTP-based registration. Once you're in, you're in. Add the event to your calendar with one tap.",
+                desc: "Secure your spot with a quick sign-in. Once you're in, you're in. Add the event to your calendar with one tap.",
               },
               {
                 icon: Headphones,
@@ -307,7 +319,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { value: "10K+", label: "Active Fans" },
-              { value: "50+", label: "Events Hosted" },
+              { value: String(events?.length ?? 0), label: "Events Hosted" },
               { value: "6", label: "Formats Covered" },
               { value: "0", label: "Tolerance for Abuse" },
             ].map((stat) => (

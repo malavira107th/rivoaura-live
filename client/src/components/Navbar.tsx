@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Mic2 } from "lucide-react";
+import { Menu, X, Mic2, User, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { getLoginUrl } from "@/const";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -13,6 +15,15 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [location] = useLocation();
+  const { user, isAuthenticated, logout } = useAuth();
+
+  const handleLogin = () => {
+    window.location.href = getLoginUrl();
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border/50">
@@ -47,12 +58,41 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/login"
-            className="ml-3 px-5 py-2 rounded-md text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            Sign In
-          </Link>
+
+          {isAuthenticated ? (
+            <div className="ml-3 flex items-center gap-2">
+              <Link
+                href="/my-events"
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  location === "/my-events"
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                }`}
+              >
+                My Events
+              </Link>
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-card/60 border border-border/50">
+                <User className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-foreground truncate max-w-[120px]">
+                  {user?.name || "Fan"}
+                </span>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"
+                title="Sign out"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={handleLogin}
+              className="ml-3 px-5 py-2 rounded-md text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Sign In
+            </button>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -89,13 +129,42 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/login"
-                onClick={() => setOpen(false)}
-                className="mt-2 px-5 py-3 rounded-md text-sm font-semibold bg-primary text-primary-foreground text-center hover:bg-primary/90 transition-colors"
-              >
-                Sign In
-              </Link>
+
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    href="/my-events"
+                    onClick={() => setOpen(false)}
+                    className={`px-4 py-3 rounded-md text-sm font-medium transition-colors ${
+                      location === "/my-events"
+                        ? "text-primary bg-primary/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    }`}
+                  >
+                    My Events
+                  </Link>
+                  <div className="mt-2 flex items-center gap-2 px-4 py-3 rounded-md bg-card/60 border border-border/50">
+                    <User className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium text-foreground">
+                      {user?.name || "Fan"}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => { handleLogout(); setOpen(false); }}
+                    className="mt-1 px-4 py-3 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors text-left flex items-center gap-2"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => { handleLogin(); setOpen(false); }}
+                  className="mt-2 px-5 py-3 rounded-md text-sm font-semibold bg-primary text-primary-foreground text-center hover:bg-primary/90 transition-colors"
+                >
+                  Sign In
+                </button>
+              )}
             </div>
           </motion.div>
         )}

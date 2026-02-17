@@ -4,18 +4,63 @@
  */
 import { useParams, Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, Users, MapPin, CalendarPlus, Headphones, Mic2, Shield, AlertTriangle, User } from "lucide-react";
+import { ArrowLeft, Clock, Users, MapPin, CalendarPlus, Headphones, Mic2, Shield, AlertTriangle, User, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCountdown } from "@/hooks/useCountdown";
-import { MOCK_EVENTS, CRICKET_ACTION_IMAGE } from "@/lib/data";
+import { CRICKET_ACTION_IMAGE } from "@/lib/data";
+import { trpc } from "@/lib/trpc";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { getLoginUrl } from "@/const";
 
 export default function EventDetail() {
-  const params = useParams<{ id: string }>();
-  const event = MOCK_EVENTS.find((e) => e.id === params.id);
+  const params = useParams<{ slug: string }>();
+  const { data: event, isLoading, error } = trpc.events.bySlug.useQuery({ slug: params.slug ?? "" });
+  const { isAuthenticated } = useAuth();
+  const utils = trpc.useUtils();
 
-  if (!event) {
+  const registerMutation = trpc.registration.register.useMutation({
+    onSuccess: () => {
+      toast.success(`You're registered! We'll remind you before it starts.`);
+      utils.events.bySlug.invalidate({ slug: params.slug ?? "" });
+    },
+    onError: (err: { message: string }) => {
+      if (err.message.includes("login")) {
+        toast.error("Please sign in to register for events.");
+      } else {
+        toast.error(err.message);
+      }
+    },
+  });
+
+  const waitlistMutation = trpc.waitlist.join.useMutation({
+    onSuccess: () => {
+      toast.info("You've joined the waitlist. We'll notify you if a spot becomes available.");
+      utils.events.bySlug.invalidate({ slug: params.slug ?? "" });
+    },
+    onError: (err) => {
+      if (err.message.includes("login")) {
+        toast.error("Please sign in to join the waitlist.");
+      } else {
+        toast.error(err.message);
+      }
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center pt-16">
+          <Loader2 className="w-8 h-8 text-primary animate-spin" />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!event || error) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
         <Navbar />
@@ -31,20 +76,54 @@ export default function EventDetail() {
     );
   }
 
-  const { days, hours, minutes, seconds } = useCountdown(event.startTime);
+  return <EventDetailContent event={event} isAuthenticated={isAuthenticated} registerMutation={registerMutation} waitlistMutation={waitlistMutation} />;
+}
+
+function EventDetailContent({ event, isAuthenticated, registerMutation, waitlistMutation }: {
+  event: {
+    id: number;
+    slug: string;
+    title: string;
+    team1: string;
+    team2: string;
+    format: string;
+    league: string;
+    venue: string;
+    startTime: Date;
+    maxCapacity: number;
+    seatsTaken: number;
+    status: string;
+    hosts: { name: string; bio: string }[] | null;
+    agenda: { time: string; title: string }[] | null;
+  };
+  isAuthenticated: boolean;
+  registerMutation: { mutate: (data: { eventId: number }) => void; isPending: boolean };
+  waitlistMutation: { mutate: (data: { eventId: number }) => void; isPending: boolean };
+}) {
+  const startTimeStr = event.startTime instanceof Date ? event.startTime.toISOString() : String(event.startTime);
+  const { days, hours, minutes, seconds } = useCountdown(startTimeStr);
   const capacityPercent = (event.seatsTaken / event.maxCapacity) * 100;
   const isFull = event.seatsTaken >= event.maxCapacity;
 
   const handleRegister = () => {
+    if (!isAuthenticated) {
+      window.location.href = getLoginUrl();
+      return;
+    }
     if (isFull) {
-      toast.info("You've joined the waitlist. We'll notify you if a spot becomes available.");
+      waitlistMutation.mutate({ eventId: event.id });
     } else {
-      toast.success(`Success! You're registered for ${event.team1} vs ${event.team2}. We'll remind you before it starts.`);
+      registerMutation.mutate({ eventId: event.id });
     }
   };
 
   const handleCalendar = () => {
-    toast.success("Event added to your calendar!");
+    const start = new Date(event.startTime);
+    const end = new Date(start.getTime() + 4 * 60 * 60 * 1000);
+    const formatDate = (d: Date) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Cricket Watch Party: ${event.team1} vs ${event.team2}`)}&dates=${formatDate(start)}/${formatDate(end)}&details=${encodeURIComponent(`Join the live audio watch party on Cricket Watch Party!`)}&location=${encodeURIComponent(event.venue)}`;
+    window.open(url, "_blank");
+    toast.success("Opening Google Calendar...");
   };
 
   const startDate = new Date(event.startTime);
@@ -59,6 +138,9 @@ export default function EventDetail() {
     minute: "2-digit",
     hour12: true,
   });
+
+  const hosts = Array.isArray(event.hosts) ? event.hosts : [];
+  const agenda = Array.isArray(event.agenda) ? event.agenda : [];
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -140,51 +222,55 @@ export default function EventDetail() {
               </motion.div>
 
               {/* Agenda */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-card border border-border/60 rounded-xl p-6"
-              >
-                <h3 className="font-display text-lg font-bold mb-5">Today's Watch Party Schedule</h3>
-                <div className="space-y-0">
-                  {event.agenda.map((item, i) => (
-                    <div key={i} className="flex gap-4 items-start relative">
-                      {i < event.agenda.length - 1 && (
-                        <div className="absolute left-[7px] top-6 bottom-0 w-px bg-border" />
-                      )}
-                      <div className="w-4 h-4 rounded-full border-2 border-primary bg-background shrink-0 mt-0.5 relative z-10" />
-                      <div className="pb-6">
-                        <p className="font-mono-stat text-xs text-primary font-bold">{item.time}</p>
-                        <p className="text-sm text-foreground font-medium mt-0.5">{item.title}</p>
+              {agenda.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="bg-card border border-border/60 rounded-xl p-6"
+                >
+                  <h3 className="font-display text-lg font-bold mb-5">Watch Party Schedule</h3>
+                  <div className="space-y-0">
+                    {agenda.map((item, i) => (
+                      <div key={i} className="flex gap-4 items-start relative">
+                        {i < agenda.length - 1 && (
+                          <div className="absolute left-[7px] top-6 bottom-0 w-px bg-border" />
+                        )}
+                        <div className="w-4 h-4 rounded-full border-2 border-primary bg-background shrink-0 mt-0.5 relative z-10" />
+                        <div className="pb-6">
+                          <p className="font-mono-stat text-xs text-primary font-bold">{item.time}</p>
+                          <p className="text-sm text-foreground font-medium mt-0.5">{item.title}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
 
               {/* Hosts */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="bg-card border border-border/60 rounded-xl p-6"
-              >
-                <h3 className="font-display text-lg font-bold mb-5">Your Hosts for Today</h3>
-                <div className="space-y-4">
-                  {event.hosts.map((host) => (
-                    <div key={host.name} className="flex gap-4 items-start">
-                      <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center shrink-0">
-                        <User className="w-6 h-6 text-primary" />
+              {hosts.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="bg-card border border-border/60 rounded-xl p-6"
+                >
+                  <h3 className="font-display text-lg font-bold mb-5">Your Hosts</h3>
+                  <div className="space-y-4">
+                    {hosts.map((host) => (
+                      <div key={host.name} className="flex gap-4 items-start">
+                        <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center shrink-0">
+                          <User className="w-6 h-6 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-foreground">{host.name}</p>
+                          <p className="text-sm text-muted-foreground">{host.bio}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-semibold text-foreground">{host.name}</p>
-                        <p className="text-sm text-muted-foreground">{host.bio}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
 
               {/* Rules */}
               <motion.div
@@ -250,13 +336,22 @@ export default function EventDetail() {
                 {/* CTA Buttons */}
                 <button
                   onClick={handleRegister}
-                  className={`w-full py-3.5 rounded-lg font-semibold text-sm transition-all mb-3 ${
+                  disabled={registerMutation.isPending || waitlistMutation.isPending}
+                  className={`w-full py-3.5 rounded-lg font-semibold text-sm transition-all mb-3 disabled:opacity-50 ${
                     isFull
                       ? "bg-secondary text-secondary-foreground border border-border hover:bg-accent"
                       : "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
                   }`}
                 >
-                  {isFull ? "Join Waitlist" : "Register to Join"}
+                  {registerMutation.isPending || waitlistMutation.isPending ? (
+                    <Loader2 className="w-4 h-4 animate-spin mx-auto" />
+                  ) : isFull ? (
+                    "Join Waitlist"
+                  ) : !isAuthenticated ? (
+                    "Sign In to Register"
+                  ) : (
+                    "Register to Join"
+                  )}
                 </button>
 
                 <button

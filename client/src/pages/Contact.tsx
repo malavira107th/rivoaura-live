@@ -4,15 +4,28 @@
  */
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Send, MessageCircle } from "lucide-react";
+import { Mail, Send, MessageCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { trpc } from "@/lib/trpc";
 
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  const sendMutation = trpc.contact.send.useMutation({
+    onSuccess: () => {
+      toast.success("Message sent! We'll get back to you shortly.");
+      setName("");
+      setEmail("");
+      setMessage("");
+    },
+    onError: (err: { message: string }) => {
+      toast.error(err.message || "Failed to send message. Please try again.");
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,10 +33,7 @@ export default function Contact() {
       toast.error("Please fill in all fields.");
       return;
     }
-    toast.success("Message sent! We'll get back to you shortly.");
-    setName("");
-    setEmail("");
-    setMessage("");
+    sendMutation.mutate({ name: name.trim(), email: email.trim(), message: message.trim() });
   };
 
   return (
@@ -77,10 +87,15 @@ export default function Contact() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
+                    disabled={sendMutation.isPending}
+                    className="w-full py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                   >
-                    <Send className="w-4 h-4" />
-                    Send Message
+                    {sendMutation.isPending ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Send className="w-4 h-4" />
+                    )}
+                    {sendMutation.isPending ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               </div>

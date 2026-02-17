@@ -8,7 +8,7 @@ interface CountdownResult {
   isExpired: boolean;
 }
 
-export function useCountdown(targetDate: string): CountdownResult {
+export function useCountdown(targetDate: string | Date): CountdownResult {
   const [timeLeft, setTimeLeft] = useState<CountdownResult>(
     calculateTimeLeft(targetDate)
   );
@@ -24,8 +24,9 @@ export function useCountdown(targetDate: string): CountdownResult {
   return timeLeft;
 }
 
-function calculateTimeLeft(targetDate: string): CountdownResult {
-  const difference = new Date(targetDate).getTime() - new Date().getTime();
+function calculateTimeLeft(targetDate: string | Date): CountdownResult {
+  const target = typeof targetDate === "string" ? new Date(targetDate) : targetDate;
+  const difference = target.getTime() - new Date().getTime();
 
   if (difference <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true };

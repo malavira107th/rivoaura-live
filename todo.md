@@ -1,0 +1,30 @@
+# Project TODO
+
+- [x] Basic homepage layout (Stadium Noir)
+- [x] Navigation menu (Navbar)
+- [x] Watch Parties listing page with filters
+- [x] Event Details page with countdown, capacity, agenda
+- [x] Login/Register page with OTP flow
+- [x] My Events dashboard
+- [x] FAQ page
+- [x] Community Guidelines page
+- [x] Contact Us page
+- [x] Privacy Policy page
+- [x] Terms & Conditions page
+- [x] Disclaimer page
+- [x] Footer component
+- [x] EventCard component
+- [x] ScrollToTop component
+- [x] 404 Not Found page
+- [x] Upgrade to web-db-user (full-stack)
+- [x] Resolve merge conflicts from upgrade (Home.tsx, NotFound.tsx)
+- [x] Database schema for events, registrations, waitlist
+- [x] API routes (tRPC) for events CRUD
+- [x] API routes for user registration to events
+- [x] API routes for waitlist functionality
+- [x] Update frontend to use real API data
+- [x] Generate favicon and upload to S3
+- [x] Generate OG image and upload to S3
+- [x] Add Open Graph meta tags
+- [x] Write vitest tests (21 tests passing)
+- [x] Ensure Vercel compatibility

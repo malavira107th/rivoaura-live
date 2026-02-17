@@ -2,23 +2,41 @@ import { Link } from "wouter";
 import { Clock, Users, MapPin, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCountdown } from "@/hooks/useCountdown";
-import type { WatchPartyEvent } from "@/lib/data";
+
+export interface EventCardData {
+  id: number | string;
+  slug?: string;
+  title: string;
+  team1: string;
+  team2: string;
+  format: "T20" | "ODI" | "Test";
+  league: string;
+  venue: string;
+  startTime: string | Date;
+  seatsTaken: number;
+  maxCapacity: number;
+  status: string;
+}
 
 interface EventCardProps {
-  event: WatchPartyEvent;
+  event: EventCardData;
   index?: number;
 }
 
 export default function EventCard({ event, index = 0 }: EventCardProps) {
-  const { days, hours, minutes, seconds } = useCountdown(event.startTime);
+  const startTimeStr = typeof event.startTime === "string" ? event.startTime : event.startTime.toISOString();
+  const { days, hours, minutes, seconds } = useCountdown(startTimeStr);
   const capacityPercent = (event.seatsTaken / event.maxCapacity) * 100;
   const isFull = event.seatsTaken >= event.maxCapacity;
 
-  const formatBadgeColor = {
+  const formatBadgeColor: Record<string, string> = {
     T20: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
     ODI: "bg-blue-500/20 text-blue-400 border-blue-500/30",
     Test: "bg-orange-500/20 text-orange-400 border-orange-500/30",
   };
+
+  // Use slug if available, otherwise fall back to id
+  const eventLink = event.slug ? `/events/${event.slug}` : `/events/${event.id}`;
 
   return (
     <motion.div
@@ -26,7 +44,7 @@ export default function EventCard({ event, index = 0 }: EventCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
     >
-      <Link href={`/events/${event.id}`}>
+      <Link href={eventLink}>
         <div className="group relative bg-card border border-border/60 rounded-xl overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
           {/* Top accent line */}
           <div className="h-0.5 bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
@@ -34,7 +52,7 @@ export default function EventCard({ event, index = 0 }: EventCardProps) {
           <div className="p-5">
             {/* Badges */}
             <div className="flex items-center gap-2 mb-3">
-              <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border ${formatBadgeColor[event.format]}`}>
+              <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border ${formatBadgeColor[event.format] || "border-border text-muted-foreground"}`}>
                 {event.format}
               </span>
               <span className="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded border border-border text-muted-foreground">

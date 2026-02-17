@@ -16,13 +16,13 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Disclaimer from "./pages/Disclaimer";
 import ScrollToTop from "./components/ScrollToTop";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/events"} component={Events} />
-      <Route path={"/events/:id"} component={EventDetail} />
+      <Route path={"/events/:slug"} component={EventDetail} />
       <Route path={"/login"} component={Login} />
       <Route path={"/my-events"} component={MyEvents} />
       <Route path={"/faq"} component={FAQ} />
