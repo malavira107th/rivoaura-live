@@ -53,3 +53,6 @@
 - [x] Move all images/logo to client/public — no Manus CDN, everything local
 - [x] Add visual element to right side of hero section (live watch party card mockup)
 - [x] Replace fake mockup card in hero with real dynamic content (upcoming parties from DB)
+- [x] Rewrite Privacy Policy with clear, specific information for CWP
+- [x] Rewrite Terms & Conditions with clear, specific information for CWP
+- [x] Rewrite Disclaimer with clear, specific information for CWP
