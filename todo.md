@@ -28,3 +28,4 @@
 - [x] Add Open Graph meta tags
 - [x] Write vitest tests (21 tests passing)
 - [x] Ensure Vercel compatibility
+- [x] Add Cricket Watch Party logo to navbar and site-wide

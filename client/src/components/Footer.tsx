@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Mic2 } from "lucide-react";
+
 
 export default function Footer() {
   return (
@@ -16,9 +16,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center">
-                <Mic2 className="w-4 h-4 text-primary" />
-              </div>
+              <img
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/vGvxfRlsaAoMtCnO.png"
+                alt="Cricket Watch Party Logo"
+                className="w-8 h-8 rounded-lg"
+              />
               <div className="flex flex-col leading-none">
                 <span className="font-display text-base font-bold tracking-wide">CRICKET</span>
                 <span className="font-display text-[9px] font-medium tracking-[0.2em] text-primary">WATCH PARTY</span>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Mic2, User, LogOut } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
@@ -30,9 +30,11 @@ export default function Navbar() {
       <div className="container flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-            <Mic2 className="w-5 h-5 text-primary" />
-          </div>
+          <img
+            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/vGvxfRlsaAoMtCnO.png"
+            alt="Cricket Watch Party Logo"
+            className="w-9 h-9 rounded-lg"
+          />
           <div className="flex flex-col leading-none">
             <span className="font-display text-lg font-bold tracking-wide text-foreground">
               CRICKET
