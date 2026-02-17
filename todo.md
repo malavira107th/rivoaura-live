@@ -51,3 +51,4 @@
 - [x] Update API to filter public-only events on listing, allow private via invite link
 - [x] Update all tests for new features (32 tests passing)
 - [x] Move all images/logo to client/public — no Manus CDN, everything local
+- [x] Add visual element to right side of hero section (live watch party card mockup)
