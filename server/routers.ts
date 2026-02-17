@@ -1,8 +1,10 @@
-import { COOKIE_NAME } from "@shared/const";
+import { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, protectedProcedure, adminProcedure, router } from "./_core/trpc";
+import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { z } from "zod";
+import bcrypt from "bcryptjs";
+import { sdk } from "./_core/sdk";
 import {
   getAllEvents,
   getEventBySlug,
@@ -19,14 +21,104 @@ import {
   getUserWaitlistEntry,
   joinWaitlist,
   createContactMessage,
+  getUserByEmail,
+  createUser,
+  updateUserLastSignedIn,
 } from "./db";
 import { TRPCError } from "@trpc/server";
+
+const SALT_ROUNDS = 10;
 
 export const appRouter = router({
   system: systemRouter,
 
   auth: router({
-    me: publicProcedure.query(opts => opts.ctx.user),
+    /** Get current user (strips password) */
+    me: publicProcedure.query(opts => {
+      if (!opts.ctx.user) return null;
+      const { password, ...safeUser } = opts.ctx.user;
+      return safeUser;
+    }),
+
+    /** Custom signup with email + password */
+    signup: publicProcedure
+      .input(z.object({
+        name: z.string().min(2, "Name must be at least 2 characters"),
+        email: z.string().email("Invalid email address"),
+        password: z.string().min(6, "Password must be at least 6 characters"),
+        favoriteTeam: z.string().optional(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        // Check if email already exists
+        const existing = await getUserByEmail(input.email);
+        if (existing) {
+          throw new TRPCError({ code: "CONFLICT", message: "An account with this email already exists." });
+        }
+
+        // Hash password
+        const hashedPassword = await bcrypt.hash(input.password, SALT_ROUNDS);
+
+        // Create user
+        const user = await createUser({
+          name: input.name,
+          email: input.email,
+          password: hashedPassword,
+          favoriteTeam: input.favoriteTeam,
+        });
+
+        if (!user) {
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to create account." });
+        }
+
+        // Create session token
+        const sessionToken = await sdk.createSessionToken(user.openId, {
+          name: user.name || "",
+          expiresInMs: ONE_YEAR_MS,
+        });
+
+        // Set cookie
+        const cookieOptions = getSessionCookieOptions(ctx.req);
+        ctx.res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+
+        const { password, ...safeUser } = user;
+        return { success: true, user: safeUser };
+      }),
+
+    /** Custom login with email + password */
+    login: publicProcedure
+      .input(z.object({
+        email: z.string().email("Invalid email address"),
+        password: z.string().min(1, "Password is required"),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        const user = await getUserByEmail(input.email);
+        if (!user || !user.password) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid email or password." });
+        }
+
+        const isValid = await bcrypt.compare(input.password, user.password);
+        if (!isValid) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid email or password." });
+        }
+
+        // Update last signed in
+        await updateUserLastSignedIn(user.id);
+
+        // Create session token
+        const sessionToken = await sdk.createSessionToken(user.openId, {
+          name: user.name || "",
+          expiresInMs: ONE_YEAR_MS,
+        });
+
+        // Set cookie
+        const cookieOptions = getSessionCookieOptions(ctx.req);
+        ctx.res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+
+        const { password, ...safeUser } = user;
+        return { success: true, user: safeUser };
+      }),
+
+    /** Logout — clear session cookie */
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
@@ -39,7 +131,6 @@ export const appRouter = router({
     /** List all events (public) */
     list: publicProcedure.query(async () => {
       const allEvents = await getAllEvents();
-      // Enrich each event with its registration count
       const enriched = await Promise.all(
         allEvents.map(async (event) => {
           const seatsTaken = await getRegistrationCount(event.id);
@@ -60,10 +151,9 @@ export const appRouter = router({
         return { ...event, seatsTaken, waitlistCount };
       }),
 
-    /** Create a new event (admin only) */
-    create: adminProcedure
+    /** Create a new event — any logged-in user can create */
+    create: protectedProcedure
       .input(z.object({
-        slug: z.string().min(1),
         title: z.string().min(1),
         team1: z.string().min(1),
         team2: z.string().min(1),
@@ -76,20 +166,22 @@ export const appRouter = router({
         agenda: z.array(z.object({ time: z.string(), title: z.string() })).optional(),
       }))
       .mutation(async ({ input, ctx }) => {
+        // Auto-generate slug from team names and timestamp
+        const slug = `${input.team1.toLowerCase().replace(/\s+/g, "-")}-vs-${input.team2.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`;
         const id = await createEvent({
           ...input,
+          slug,
           hosts: input.hosts ?? [],
           agenda: input.agenda ?? [],
           createdBy: ctx.user.id,
         });
-        return { id };
+        return { id, slug };
       }),
 
-    /** Update an event (admin only) */
-    update: adminProcedure
+    /** Update an event — only the creator or admin can update */
+    update: protectedProcedure
       .input(z.object({
         id: z.number(),
-        slug: z.string().min(1).optional(),
         title: z.string().min(1).optional(),
         team1: z.string().min(1).optional(),
         team2: z.string().min(1).optional(),
@@ -102,16 +194,26 @@ export const appRouter = router({
         hosts: z.array(z.object({ name: z.string(), bio: z.string() })).optional(),
         agenda: z.array(z.object({ time: z.string(), title: z.string() })).optional(),
       }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ input, ctx }) => {
+        const event = await getEventById(input.id);
+        if (!event) throw new TRPCError({ code: "NOT_FOUND", message: "Event not found" });
+        if (event.createdBy !== ctx.user.id && ctx.user.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "You can only edit events you created." });
+        }
         const { id, ...data } = input;
         await updateEvent(id, data);
         return { success: true };
       }),
 
-    /** Delete an event (admin only) */
-    delete: adminProcedure
+    /** Delete an event — only the creator or admin */
+    delete: protectedProcedure
       .input(z.object({ id: z.number() }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ input, ctx }) => {
+        const event = await getEventById(input.id);
+        if (!event) throw new TRPCError({ code: "NOT_FOUND", message: "Event not found" });
+        if (event.createdBy !== ctx.user.id && ctx.user.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "You can only delete events you created." });
+        }
         await deleteEvent(input.id);
         return { success: true };
       }),
@@ -135,21 +237,16 @@ export const appRouter = router({
     register: protectedProcedure
       .input(z.object({ eventId: z.number() }))
       .mutation(async ({ input, ctx }) => {
-        // Check if already registered
         const existing = await getUserRegistration(ctx.user.id, input.eventId);
         if (existing) {
           throw new TRPCError({ code: "CONFLICT", message: "You are already registered for this event." });
         }
-
-        // Check capacity
         const event = await getEventById(input.eventId);
         if (!event) throw new TRPCError({ code: "NOT_FOUND", message: "Event not found" });
-
         const seatsTaken = await getRegistrationCount(input.eventId);
         if (seatsTaken >= event.maxCapacity) {
           throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Event is full. Please join the waitlist." });
         }
-
         await registerForEvent(ctx.user.id, input.eventId);
         return { success: true, message: "You are registered!" };
       }),

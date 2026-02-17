@@ -1,13 +1,16 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, boolean, json } from "drizzle-orm/mysql-core";
+import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, json } from "drizzle-orm/mysql-core";
 
 /**
- * Core user table backing auth flow.
+ * Core user table — custom email/password auth.
  */
 export const users = mysqlTable("users", {
   id: int("id").autoincrement().primaryKey(),
+  /** Unique identifier — we use email as the primary lookup */
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
-  email: varchar("email", { length: 320 }),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  /** bcrypt-hashed password */
+  password: varchar("password", { length: 256 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
   role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
   favoriteTeam: varchar("favoriteTeam", { length: 128 }),
@@ -32,7 +35,7 @@ export const events = mysqlTable("events", {
   format: mysqlEnum("format", ["T20", "ODI", "Test"]).notNull(),
   league: varchar("league", { length: 64 }).notNull(),
   venue: varchar("venue", { length: 256 }).notNull(),
-  /** Stored as UTC timestamp (milliseconds) */
+  /** Stored as UTC timestamp */
   startTime: timestamp("startTime").notNull(),
   maxCapacity: int("maxCapacity").notNull().default(10000),
   status: mysqlEnum("status", ["upcoming", "live", "completed", "cancelled"]).default("upcoming").notNull(),
@@ -50,7 +53,6 @@ export type InsertEvent = typeof events.$inferInsert;
 
 /**
  * Registrations table.
- * Tracks which users have registered for which events.
  */
 export const registrations = mysqlTable("registrations", {
   id: int("id").autoincrement().primaryKey(),
@@ -65,7 +67,6 @@ export type InsertRegistration = typeof registrations.$inferInsert;
 
 /**
  * Waitlist table.
- * Tracks users waiting for a spot when an event is full.
  */
 export const waitlist = mysqlTable("waitlist", {
   id: int("id").autoincrement().primaryKey(),
@@ -80,7 +81,6 @@ export type InsertWaitlistEntry = typeof waitlist.$inferInsert;
 
 /**
  * Contact messages table.
- * Stores messages from the contact form.
  */
 export const contactMessages = mysqlTable("contactMessages", {
   id: int("id").autoincrement().primaryKey(),

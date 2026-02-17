@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { getLoginUrl } from "@/const";
+
 import { trpc } from "@/lib/trpc";
 
 export default function MyEvents() {
@@ -61,7 +61,7 @@ export default function MyEvents() {
             <h1 className="font-display text-3xl font-bold mb-4">Sign In Required</h1>
             <p className="text-muted-foreground mb-6">Please sign in to view your registered events.</p>
             <a
-              href={getLoginUrl()}
+              href="/login?returnTo=/my-events"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all"
             >
               Sign In

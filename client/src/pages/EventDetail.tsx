@@ -12,7 +12,7 @@ import { useCountdown } from "@/hooks/useCountdown";
 import { CRICKET_ACTION_IMAGE } from "@/lib/data";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { getLoginUrl } from "@/const";
+
 
 export default function EventDetail() {
   const params = useParams<{ slug: string }>();
@@ -107,7 +107,7 @@ function EventDetailContent({ event, isAuthenticated, registerMutation, waitlist
 
   const handleRegister = () => {
     if (!isAuthenticated) {
-      window.location.href = getLoginUrl();
+      window.location.href = `/login?returnTo=${encodeURIComponent(window.location.pathname)}`;
       return;
     }
     if (isFull) {

@@ -97,12 +97,30 @@ vi.mock("./db", () => {
       contactMessages.push(data);
       return Promise.resolve();
     }),
+    getUserByEmail: vi.fn(() => Promise.resolve(null)),
+    createUser: vi.fn(() => Promise.resolve(null)),
+    updateUserLastSignedIn: vi.fn(() => Promise.resolve()),
     // Expose for test assertions
     _registrations: registrations,
     _waitlistEntries: waitlistEntries,
     _contactMessages: contactMessages,
   };
 });
+
+// Mock bcryptjs
+vi.mock("bcryptjs", () => ({
+  default: {
+    hash: vi.fn((pw: string) => Promise.resolve(`hashed_${pw}`)),
+    compare: vi.fn((pw: string, hash: string) => Promise.resolve(hash === `hashed_${pw}`)),
+  },
+}));
+
+// Mock sdk
+vi.mock("./_core/sdk", () => ({
+  sdk: {
+    createSessionToken: vi.fn(() => Promise.resolve("mock-session-token")),
+  },
+}));
 
 // ─── Helper: create mock context ─────────────────────────────────────────────
 type AuthenticatedUser = NonNullable<TrpcContext["user"]>;
@@ -111,7 +129,7 @@ function createPublicContext(): TrpcContext {
   return {
     user: null,
     req: { protocol: "https", headers: {} } as TrpcContext["req"],
-    res: { clearCookie: vi.fn() } as unknown as TrpcContext["res"],
+    res: { clearCookie: vi.fn(), cookie: vi.fn() } as unknown as TrpcContext["res"],
   };
 }
 
@@ -121,8 +139,10 @@ function createAuthContext(overrides?: Partial<AuthenticatedUser>): TrpcContext 
     openId: "test-user-001",
     email: "test@example.com",
     name: "Test User",
-    loginMethod: "manus",
+    password: "hashed_password123",
+    loginMethod: "custom",
     role: "user",
+    favoriteTeam: "India",
     createdAt: new Date(),
     updatedAt: new Date(),
     lastSignedIn: new Date(),
@@ -132,7 +152,7 @@ function createAuthContext(overrides?: Partial<AuthenticatedUser>): TrpcContext 
   return {
     user,
     req: { protocol: "https", headers: {} } as TrpcContext["req"],
-    res: { clearCookie: vi.fn() } as unknown as TrpcContext["res"],
+    res: { clearCookie: vi.fn(), cookie: vi.fn() } as unknown as TrpcContext["res"],
   };
 }
 
@@ -147,6 +167,95 @@ beforeEach(async () => {
   (db as any)._waitlistEntries.length = 0;
   (db as any)._contactMessages.length = 0;
   vi.clearAllMocks();
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════════════════════════════════════════════
+describe("auth.me", () => {
+  it("returns null for unauthenticated users", async () => {
+    const caller = appRouter.createCaller(createPublicContext());
+    const result = await caller.auth.me();
+    expect(result).toBeNull();
+  });
+
+  it("returns user without password for authenticated users", async () => {
+    const caller = appRouter.createCaller(createAuthContext());
+    const result = await caller.auth.me();
+
+    expect(result).toHaveProperty("name", "Test User");
+    expect(result).toHaveProperty("email", "test@example.com");
+    // Password should be stripped
+    expect(result).not.toHaveProperty("password");
+  });
+});
+
+describe("auth.signup", () => {
+  it("rejects signup with invalid email", async () => {
+    const caller = appRouter.createCaller(createPublicContext());
+    await expect(
+      caller.auth.signup({
+        name: "Test",
+        email: "not-an-email",
+        password: "password123",
+      })
+    ).rejects.toThrow();
+  });
+
+  it("rejects signup with short password", async () => {
+    const caller = appRouter.createCaller(createPublicContext());
+    await expect(
+      caller.auth.signup({
+        name: "Test",
+        email: "test@example.com",
+        password: "123",
+      })
+    ).rejects.toThrow();
+  });
+
+  it("rejects signup with short name", async () => {
+    const caller = appRouter.createCaller(createPublicContext());
+    await expect(
+      caller.auth.signup({
+        name: "T",
+        email: "test@example.com",
+        password: "password123",
+      })
+    ).rejects.toThrow();
+  });
+});
+
+describe("auth.login", () => {
+  it("rejects login with invalid email format", async () => {
+    const caller = appRouter.createCaller(createPublicContext());
+    await expect(
+      caller.auth.login({
+        email: "not-an-email",
+        password: "password123",
+      })
+    ).rejects.toThrow();
+  });
+
+  it("rejects login with empty password", async () => {
+    const caller = appRouter.createCaller(createPublicContext());
+    await expect(
+      caller.auth.login({
+        email: "test@example.com",
+        password: "",
+      })
+    ).rejects.toThrow();
+  });
+});
+
+describe("auth.logout", () => {
+  it("clears the session cookie", async () => {
+    const ctx = createAuthContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.auth.logout();
+
+    expect(result).toEqual({ success: true });
+    expect(ctx.res.clearCookie).toHaveBeenCalled();
+  });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -182,12 +291,11 @@ describe("events.bySlug", () => {
   });
 });
 
-describe("events.create (admin only)", () => {
+describe("events.create (any authenticated user)", () => {
   it("rejects unauthenticated users", async () => {
     const caller = appRouter.createCaller(createPublicContext());
     await expect(
       caller.events.create({
-        slug: "test-event",
         title: "Test",
         team1: "A",
         team2: "B",
@@ -199,26 +307,9 @@ describe("events.create (admin only)", () => {
     ).rejects.toThrow();
   });
 
-  it("rejects non-admin users", async () => {
+  it("allows any authenticated user to create an event", async () => {
     const caller = appRouter.createCaller(createAuthContext());
-    await expect(
-      caller.events.create({
-        slug: "test-event",
-        title: "Test",
-        team1: "A",
-        team2: "B",
-        format: "T20",
-        league: "Test League",
-        venue: "Test Venue",
-        startTime: new Date(),
-      })
-    ).rejects.toThrow();
-  });
-
-  it("allows admin to create an event", async () => {
-    const caller = appRouter.createCaller(createAdminContext());
     const result = await caller.events.create({
-      slug: "new-event",
       title: "New Event",
       team1: "Team A",
       team2: "Team B",
@@ -229,6 +320,52 @@ describe("events.create (admin only)", () => {
     });
 
     expect(result).toHaveProperty("id", 3);
+    expect(result).toHaveProperty("slug");
+    expect(result.slug).toContain("team-a-vs-team-b");
+  });
+});
+
+describe("events.update", () => {
+  it("allows the creator to update their event", async () => {
+    const caller = appRouter.createCaller(createAuthContext({ id: 1 }));
+    const result = await caller.events.update({
+      id: 1,
+      title: "Updated Title",
+    });
+
+    expect(result).toEqual({ success: true });
+  });
+
+  it("allows admin to update any event", async () => {
+    const caller = appRouter.createCaller(createAdminContext());
+    const result = await caller.events.update({
+      id: 1,
+      title: "Admin Updated",
+    });
+
+    expect(result).toEqual({ success: true });
+  });
+
+  it("rejects non-creator non-admin from updating", async () => {
+    const caller = appRouter.createCaller(createAuthContext({ id: 999 }));
+    await expect(
+      caller.events.update({ id: 1, title: "Hacked" })
+    ).rejects.toThrow("You can only edit events you created.");
+  });
+});
+
+describe("events.delete", () => {
+  it("allows the creator to delete their event", async () => {
+    const caller = appRouter.createCaller(createAuthContext({ id: 1 }));
+    const result = await caller.events.delete({ id: 1 });
+    expect(result).toEqual({ success: true });
+  });
+
+  it("rejects non-creator non-admin from deleting", async () => {
+    const caller = appRouter.createCaller(createAuthContext({ id: 999 }));
+    await expect(caller.events.delete({ id: 1 })).rejects.toThrow(
+      "You can only delete events you created."
+    );
   });
 });
 
@@ -244,14 +381,12 @@ describe("registration.register", () => {
   it("allows authenticated user to register for an event", async () => {
     const caller = appRouter.createCaller(createAuthContext());
     const result = await caller.registration.register({ eventId: 1 });
-
     expect(result).toEqual({ success: true, message: "You are registered!" });
   });
 
   it("prevents duplicate registration", async () => {
     const ctx = createAuthContext();
     const caller = appRouter.createCaller(ctx);
-
     await caller.registration.register({ eventId: 1 });
     await expect(caller.registration.register({ eventId: 1 })).rejects.toThrow(
       "You are already registered for this event."
@@ -263,10 +398,8 @@ describe("registration.cancel", () => {
   it("allows user to cancel their registration", async () => {
     const ctx = createAuthContext();
     const caller = appRouter.createCaller(ctx);
-
     await caller.registration.register({ eventId: 1 });
     const result = await caller.registration.cancel({ eventId: 1 });
-
     expect(result).toEqual({ success: true });
   });
 });
@@ -275,7 +408,6 @@ describe("registration.myEvents", () => {
   it("returns the user's registered events", async () => {
     const ctx = createAuthContext();
     const caller = appRouter.createCaller(ctx);
-
     await caller.registration.register({ eventId: 1 });
     const myEvents = await caller.registration.myEvents();
 
@@ -287,7 +419,6 @@ describe("registration.myEvents", () => {
   it("returns empty array when user has no registrations", async () => {
     const caller = appRouter.createCaller(createAuthContext({ id: 999 }));
     const myEvents = await caller.registration.myEvents();
-
     expect(myEvents).toHaveLength(0);
   });
 });
@@ -304,14 +435,12 @@ describe("waitlist.join", () => {
   it("allows authenticated user to join the waitlist", async () => {
     const caller = appRouter.createCaller(createAuthContext());
     const result = await caller.waitlist.join({ eventId: 1 });
-
     expect(result).toEqual({ success: true, message: "You've joined the waitlist!" });
   });
 
   it("prevents duplicate waitlist entry", async () => {
     const ctx = createAuthContext();
     const caller = appRouter.createCaller(ctx);
-
     await caller.waitlist.join({ eventId: 1 });
     await expect(caller.waitlist.join({ eventId: 1 })).rejects.toThrow(
       "You are already on the waitlist."
@@ -330,7 +459,6 @@ describe("contact.send", () => {
       email: "john@example.com",
       message: "Great platform!",
     });
-
     expect(result).toEqual({ success: true });
   });
 
@@ -354,25 +482,5 @@ describe("contact.send", () => {
         message: "Hello",
       })
     ).rejects.toThrow();
-  });
-});
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// AUTH
-// ═══════════════════════════════════════════════════════════════════════════════
-describe("auth.me", () => {
-  it("returns null for unauthenticated users", async () => {
-    const caller = appRouter.createCaller(createPublicContext());
-    const result = await caller.auth.me();
-
-    expect(result).toBeNull();
-  });
-
-  it("returns user for authenticated users", async () => {
-    const caller = appRouter.createCaller(createAuthContext());
-    const result = await caller.auth.me();
-
-    expect(result).toHaveProperty("openId", "test-user-001");
-    expect(result).toHaveProperty("name", "Test User");
   });
 });

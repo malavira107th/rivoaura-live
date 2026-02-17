@@ -26,6 +26,15 @@
 - [x] Generate favicon and upload to S3
 - [x] Generate OG image and upload to S3
 - [x] Add Open Graph meta tags
-- [x] Write vitest tests (21 tests passing)
+- [x] Write vitest tests (31 tests passing)
 - [x] Ensure Vercel compatibility
 - [x] Add Cricket Watch Party logo to navbar and site-wide
+- [x] Remove Manus OAuth — replace with custom email/password auth
+- [x] Add password hashing (bcrypt) and JWT token sessions
+- [x] Build custom Signup page (name, email, password, favorite team)
+- [x] Build custom Login page (email + password)
+- [x] Allow any logged-in user to create events (not just admin)
+- [x] Build Create Event page/form for users
+- [x] Update Navbar to use custom auth (no Manus OAuth redirect)
+- [x] Update all protected pages to use custom auth
+- [x] Update tests for new auth and event creation flow (31 tests passing)

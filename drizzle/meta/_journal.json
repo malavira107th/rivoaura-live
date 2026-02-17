@@ -8,6 +8,13 @@
       "when": 1771341375520,
       "tag": "0000_rare_cassandra_nova",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1771343585506,
+      "tag": "0001_wide_carmella_unuscione",
+      "breakpoints": true
     }
   ]
 }

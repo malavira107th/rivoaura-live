@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, User, LogOut } from "lucide-react";
+import { Menu, X, User, LogOut, Plus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { getLoginUrl } from "@/const";
+
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -18,7 +18,7 @@ export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
 
   const handleLogin = () => {
-    window.location.href = getLoginUrl();
+    window.location.href = "/login";
   };
 
   const handleLogout = () => {
@@ -63,6 +63,13 @@ export default function Navbar() {
 
           {isAuthenticated ? (
             <div className="ml-3 flex items-center gap-2">
+              <Link
+                href="/events/create"
+                className="px-4 py-2 rounded-md text-sm font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors flex items-center gap-1.5"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Create Party
+              </Link>
               <Link
                 href="/my-events"
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
@@ -134,6 +141,14 @@ export default function Navbar() {
 
               {isAuthenticated ? (
                 <>
+                  <Link
+                    href="/events/create"
+                    onClick={() => setOpen(false)}
+                    className="px-4 py-3 rounded-md text-sm font-semibold bg-primary/10 text-primary border border-primary/20 flex items-center gap-1.5"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    Create Party
+                  </Link>
                   <Link
                     href="/my-events"
                     onClick={() => setOpen(false)}
