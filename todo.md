@@ -52,3 +52,4 @@
 - [x] Update all tests for new features (32 tests passing)
 - [x] Move all images/logo to client/public — no Manus CDN, everything local
 - [x] Add visual element to right side of hero section (live watch party card mockup)
+- [x] Replace fake mockup card in hero with real dynamic content (upcoming parties from DB)

@@ -4,7 +4,7 @@
  */
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Headphones, UserPlus, Search, Shield, Mic2, Quote, Loader2, Plus, Users, Lock, Globe, Settings } from "lucide-react";
+import { ArrowRight, Headphones, UserPlus, Search, Shield, Mic2, Quote, Loader2, Plus, Users, Lock, Globe, Settings, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EventCard from "@/components/EventCard";
@@ -115,7 +115,7 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* RIGHT — Live Watch Party Card Mockup */}
+            {/* RIGHT — Upcoming Watch Parties (Real Data) */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
@@ -123,161 +123,161 @@ export default function Home() {
               className="hidden lg:block"
             >
               <div className="relative">
-                {/* Glow effect behind card */}
-                <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl" />
+                {/* Glow effect */}
+                <div className="absolute -inset-4 bg-primary/8 rounded-3xl blur-2xl" />
 
-                {/* Main Card */}
-                <div className="relative bg-card/90 backdrop-blur-xl border border-border/60 rounded-2xl overflow-hidden shadow-2xl">
-                  {/* Card Header — Live Badge */}
-                  <div className="px-5 py-3 border-b border-border/40 flex items-center justify-between bg-card/60">
+                <div className="relative space-y-3">
+                  {/* Section Label */}
+                  <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-                      <span className="text-xs font-bold text-red-400 uppercase tracking-wider">Live Now</span>
+                      <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                      <span className="text-xs font-semibold text-primary uppercase tracking-wider">Upcoming Parties</span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Globe className="w-3.5 h-3.5 text-primary/70" />
-                      <span className="text-xs text-muted-foreground">Public Party</span>
-                    </div>
+                    <Link href="/events" className="text-[11px] text-muted-foreground hover:text-primary transition-colors">
+                      View all →
+                    </Link>
                   </div>
 
-                  {/* Match Info */}
-                  <div className="px-5 py-4">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="text-center flex-1">
-                        <div className="w-12 h-12 mx-auto rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-1.5">
-                          <span className="font-display font-bold text-blue-400 text-sm">IND</span>
+                  {/* Real Event Cards from DB */}
+                  {isLoading ? (
+                    <div className="space-y-3">
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="bg-card/70 backdrop-blur-sm border border-border/40 rounded-xl p-4 animate-pulse">
+                          <div className="h-4 bg-secondary rounded w-3/4 mb-3" />
+                          <div className="h-3 bg-secondary rounded w-1/2 mb-2" />
+                          <div className="h-2 bg-secondary rounded w-full" />
                         </div>
-                        <p className="text-xs font-semibold text-foreground">India</p>
-                        <p className="text-lg font-display font-bold text-primary">186/3</p>
-                        <p className="text-[10px] text-muted-foreground">32.4 ov</p>
-                      </div>
-                      <div className="px-3">
-                        <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
-                          <span className="text-xs font-bold text-primary">VS</span>
-                        </div>
-                      </div>
-                      <div className="text-center flex-1">
-                        <div className="w-12 h-12 mx-auto rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-1.5">
-                          <span className="font-display font-bold text-green-400 text-sm">AUS</span>
-                        </div>
-                        <p className="text-xs font-semibold text-foreground">Australia</p>
-                        <p className="text-lg font-display font-bold text-muted-foreground">Yet to bat</p>
-                        <p className="text-[10px] text-muted-foreground">&nbsp;</p>
-                      </div>
+                      ))}
                     </div>
+                  ) : upcomingEvents.length > 0 ? (
+                    upcomingEvents.map((event, i) => {
+                      const capacityPercent = (event.seatsTaken / event.maxCapacity) * 100;
+                      const isFull = event.seatsTaken >= event.maxCapacity;
+                      const startDate = new Date(event.startTime);
+                      const now = new Date();
+                      const diffMs = startDate.getTime() - now.getTime();
+                      const diffDays = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+                      const diffHours = Math.max(0, Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+                      const eventLink = event.slug ? `/events/${event.slug}` : `/events/${event.id}`;
 
-                    {/* Party Stats */}
-                    <div className="bg-background/60 rounded-lg p-3 mb-4">
-                      <div className="flex items-center justify-between text-xs mb-2">
-                        <span className="text-muted-foreground">Party Capacity</span>
-                        <span className="text-foreground font-semibold">847 / 1,000</span>
-                      </div>
-                      <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-primary to-amber-400 rounded-full" style={{ width: '84.7%' }} />
-                      </div>
-                    </div>
+                      const formatColors: Record<string, string> = {
+                        T20: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+                        ODI: "text-blue-400 border-blue-500/30 bg-blue-500/10",
+                        Test: "text-orange-400 border-orange-500/30 bg-orange-500/10",
+                      };
 
-                    {/* Audio Room Participants */}
-                    <div className="mb-4">
-                      <div className="flex items-center gap-1.5 mb-2.5">
-                        <Headphones className="w-3.5 h-3.5 text-primary" />
-                        <span className="text-xs font-semibold text-foreground">Live Audio Room</span>
-                      </div>
-                      <div className="grid grid-cols-5 gap-2">
-                        {[
-                          { name: "Rahul", speaking: true },
-                          { name: "Priya", speaking: false },
-                          { name: "Arjun", speaking: true },
-                          { name: "Sneha", speaking: false },
-                          { name: "Vikram", speaking: false },
-                        ].map((person, i) => (
-                          <div key={i} className="text-center">
-                            <div className={`w-10 h-10 mx-auto rounded-full flex items-center justify-center text-xs font-bold mb-1 ${
-                              person.speaking
-                                ? 'bg-primary/20 border-2 border-primary text-primary ring-2 ring-primary/30 ring-offset-1 ring-offset-card'
-                                : 'bg-secondary border border-border/50 text-muted-foreground'
-                            }`}>
-                              {person.name.slice(0, 2).toUpperCase()}
-                            </div>
-                            <p className="text-[10px] text-muted-foreground truncate">{person.name}</p>
-                            {person.speaking && (
-                              <div className="flex items-center justify-center gap-[2px] mt-0.5">
-                                <span className="w-[2px] h-2 bg-primary rounded-full animate-pulse" />
-                                <span className="w-[2px] h-3 bg-primary rounded-full animate-pulse" style={{ animationDelay: '0.15s' }} />
-                                <span className="w-[2px] h-1.5 bg-primary rounded-full animate-pulse" style={{ animationDelay: '0.3s' }} />
+                      return (
+                        <motion.div
+                          key={event.id}
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: 0.5 + i * 0.15 }}
+                        >
+                          <Link href={eventLink}>
+                            <div className="group bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-4 hover:border-primary/40 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 cursor-pointer">
+                              <div className="flex items-start justify-between gap-3">
+                                <div className="flex-1 min-w-0">
+                                  {/* Format + League badges */}
+                                  <div className="flex items-center gap-1.5 mb-2">
+                                    <span className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border ${formatColors[event.format] || 'text-muted-foreground border-border'}`}>
+                                      {event.format}
+                                    </span>
+                                    <span className="text-[9px] font-medium text-muted-foreground uppercase tracking-wider">
+                                      {event.league}
+                                    </span>
+                                  </div>
+
+                                  {/* Match title */}
+                                  <h4 className="font-display text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
+                                    {event.team1} vs {event.team2}
+                                  </h4>
+
+                                  {/* Venue */}
+                                  <div className="flex items-center gap-1 mt-1">
+                                    <MapPin className="w-2.5 h-2.5 text-muted-foreground/60" />
+                                    <span className="text-[10px] text-muted-foreground truncate">{event.venue}</span>
+                                  </div>
+                                </div>
+
+                                {/* Countdown badge */}
+                                <div className="shrink-0 text-right">
+                                  <div className="bg-primary/10 border border-primary/20 rounded-lg px-2.5 py-1.5">
+                                    <p className="font-mono-stat text-sm font-bold text-primary leading-none">
+                                      {diffDays > 0 ? `${diffDays}d ${diffHours}h` : `${diffHours}h`}
+                                    </p>
+                                    <p className="text-[8px] text-primary/60 uppercase tracking-wider mt-0.5">to go</p>
+                                  </div>
+                                </div>
                               </div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
 
-                    {/* Live Chat Preview */}
-                    <div className="bg-background/60 rounded-lg p-3">
-                      <div className="flex items-center gap-1.5 mb-2">
-                        <Mic2 className="w-3.5 h-3.5 text-primary" />
-                        <span className="text-xs font-semibold text-foreground">Live Chat</span>
-                      </div>
-                      <div className="space-y-1.5">
-                        <div className="flex gap-2">
-                          <span className="text-[10px] font-semibold text-primary shrink-0">Rahul:</span>
-                          <span className="text-[10px] text-muted-foreground">What a shot by Kohli! 🔥</span>
-                        </div>
-                        <div className="flex gap-2">
-                          <span className="text-[10px] font-semibold text-blue-400 shrink-0">Priya:</span>
-                          <span className="text-[10px] text-muted-foreground">That cover drive was pure class</span>
-                        </div>
-                        <div className="flex gap-2">
-                          <span className="text-[10px] font-semibold text-green-400 shrink-0">Arjun:</span>
-                          <span className="text-[10px] text-muted-foreground">Need 115 more from 17 overs 💪</span>
-                        </div>
-                      </div>
+                              {/* Capacity bar */}
+                              <div className="mt-3">
+                                <div className="flex items-center justify-between mb-1">
+                                  <div className="flex items-center gap-1">
+                                    <Users className="w-2.5 h-2.5 text-muted-foreground/60" />
+                                    <span className="text-[10px] text-muted-foreground">
+                                      {event.seatsTaken} / {event.maxCapacity} fans
+                                    </span>
+                                  </div>
+                                  {isFull ? (
+                                    <span className="text-[9px] font-semibold text-red-400">Full — Waitlist</span>
+                                  ) : (
+                                    <span className="text-[9px] font-semibold text-primary">Join →</span>
+                                  )}
+                                </div>
+                                <div className="h-1 bg-secondary rounded-full overflow-hidden">
+                                  <div
+                                    className={`h-full rounded-full transition-all duration-700 ${isFull ? 'bg-red-500' : 'bg-gradient-to-r from-primary to-amber-400'}`}
+                                    style={{ width: `${Math.min(capacityPercent, 100)}%` }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </Link>
+                        </motion.div>
+                      );
+                    })
+                  ) : (
+                    /* Empty state — no events yet */
+                    <div className="bg-card/70 backdrop-blur-sm border border-dashed border-border/60 rounded-xl p-6 text-center">
+                      <Headphones className="w-8 h-8 text-primary/40 mx-auto mb-3" />
+                      <p className="text-sm font-semibold text-foreground mb-1">No parties yet</p>
+                      <p className="text-xs text-muted-foreground mb-3">Be the first to host a watch party!</p>
+                      <Link
+                        href={isAuthenticated ? "/events/create" : "/login"}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                      >
+                        <Plus className="w-3 h-3" />
+                        Create Party
+                      </Link>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Card Footer */}
-                  <div className="px-5 py-3 border-t border-border/40 bg-primary/5">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1.5">
-                        <Users className="w-3.5 h-3.5 text-primary" />
-                        <span className="text-xs text-muted-foreground"><span className="text-foreground font-semibold">847</span> fans watching</span>
-                      </div>
-                      <span className="text-[10px] px-2.5 py-1 rounded-full bg-primary text-primary-foreground font-semibold">Join Party</span>
+                  {/* Platform stats bar */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 1 }}
+                    className="bg-card/60 backdrop-blur-sm border border-border/30 rounded-lg px-4 py-2.5 flex items-center justify-between"
+                  >
+                    <div className="text-center">
+                      <p className="font-mono-stat text-sm font-bold text-primary">{events?.length ?? 0}</p>
+                      <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Parties</p>
                     </div>
-                  </div>
+                    <div className="w-px h-6 bg-border/40" />
+                    <div className="text-center">
+                      <p className="font-mono-stat text-sm font-bold text-foreground">
+                        {(events ?? []).reduce((sum, e) => sum + e.seatsTaken, 0)}
+                      </p>
+                      <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Fans Joined</p>
+                    </div>
+                    <div className="w-px h-6 bg-border/40" />
+                    <div className="text-center">
+                      <p className="font-mono-stat text-sm font-bold text-foreground">100%</p>
+                      <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Free</p>
+                    </div>
+                  </motion.div>
                 </div>
-
-                {/* Floating notification */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 1.2 }}
-                  className="absolute -bottom-4 -left-4 bg-card border border-border/60 rounded-lg px-3 py-2 shadow-xl flex items-center gap-2"
-                >
-                  <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <UserPlus className="w-3 h-3 text-green-400" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-semibold text-foreground">Sneha just joined!</p>
-                    <p className="text-[9px] text-muted-foreground">2 seconds ago</p>
-                  </div>
-                </motion.div>
-
-                {/* Floating host badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 1.5 }}
-                  className="absolute -top-3 -right-3 bg-card border border-primary/30 rounded-lg px-3 py-2 shadow-xl flex items-center gap-2"
-                >
-                  <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Settings className="w-3 h-3 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-semibold text-foreground">Hosted by Rahul</p>
-                    <p className="text-[9px] text-primary">Party Admin</p>
-                  </div>
-                </motion.div>
               </div>
             </motion.div>
           </div>
