@@ -28,14 +28,14 @@
 - [x] Add Open Graph meta tags
 - [x] Write vitest tests (31 tests passing)
 - [x] Ensure Vercel compatibility
-- [x] Add Cricket Watch Party logo to navbar and site-wide
-- [x] Remove Manus OAuth — replace with custom email/password auth
+- [x] Add Brand Pixel Studio logo to navbar and site-wide
+- [x] Replace OAuth with custom email/password auth
 - [x] Add password hashing (bcrypt) and JWT token sessions
 - [x] Build custom Signup page (name, email, password, favorite team)
 - [x] Build custom Login page (email + password)
 - [x] Allow any logged-in user to create events (not just admin)
 - [x] Build Create Event page/form for users
-- [x] Update Navbar to use custom auth (no Manus OAuth redirect)
+- [x] Update Navbar to use custom auth
 - [x] Update all protected pages to use custom auth
 - [x] Update tests for new auth and event creation flow (31 tests passing)
 - [x] Regenerate logo with white background for better visibility on dark navbar
@@ -50,12 +50,12 @@
 - [x] Update database schema with visibility field (public/private)
 - [x] Update API to filter public-only events on listing, allow private via invite link
 - [x] Update all tests for new features (32 tests passing)
-- [x] Move all images/logo to client/public — no Manus CDN, everything local
+- [x] Move all images/logo to client/public
 - [x] Add visual element to right side of hero section (live watch party card mockup)
 - [x] Replace fake mockup card in hero with real dynamic content (upcoming parties from DB)
-- [x] Rewrite Privacy Policy with clear, specific information for CWP
-- [x] Rewrite Terms & Conditions with clear, specific information for CWP
-- [x] Rewrite Disclaimer with clear, specific information for CWP
+- [x] Rewrite Privacy Policy with clear, specific information
+- [x] Rewrite Terms & Conditions with clear, specific information
+- [x] Rewrite Disclaimer with clear, specific information
 - [x] Set up Socket.IO for real-time communication (server + client)
 - [x] Build live text chat inside watch party rooms
 - [x] Build live audio room with WebRTC (mute/unmute, speaker indicators)
@@ -67,11 +67,9 @@
 - [x] Add host moderation: mute/unmute other users
 - [x] Add host badge and moderation UI panel in Room page
 - [x] Write tests for moderation features (68 tests total)
-- [x] Update domain references from cricketwatchparty.com to brandpixelstudio.site
-- [x] Update meta tags, OG tags, and legal pages with new domain
-- [x] Ensure branding is cohesive — no mismatched or confusing references
-- [x] Rebrand from "Cricket Watch Party" to "Brand Pixel Studio" across entire site
-- [x] Update all email addresses from @cricketwatchparty.com to @brandpixelstudio.site
-- [x] Update navbar, footer, meta tags, page titles with new brand name
+- [x] Rebrand to Brand Pixel Studio with domain brandpixelstudio.site
+- [x] Update all email addresses to @brandpixelstudio.site
+- [x] Update navbar, footer, meta tags, page titles with Brand Pixel Studio branding
 - [x] Update legal pages (Privacy, Terms, Disclaimer) with new brand
 - [x] Update FAQ and other content pages with new brand
+- [x] Ensure branding is cohesive — no mismatched or confusing references
