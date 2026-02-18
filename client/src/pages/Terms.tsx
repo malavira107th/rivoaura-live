@@ -1,7 +1,7 @@
 /*
  * TERMS & CONDITIONS PAGE
  * Design: Stadium Noir
- * Clear, specific terms for Cricket Watch Party
+ * Clear, specific terms for Brand Pixel Studio
  */
 import { motion } from "framer-motion";
 import { FileText } from "lucide-react";
@@ -28,15 +28,15 @@ export default function Terms() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">1. Acceptance of Terms</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  By creating an account on, accessing, or using Cricket Watch Party at <strong className="text-foreground">cricketwatchparty.com</strong> (the "Platform"), you agree to be bound by these Terms & Conditions ("Terms"). If you do not agree to any part of these Terms, you must not use the Platform. We may update these Terms from time to time — we will notify registered users via email when significant changes are made. Continued use after changes constitutes acceptance.
+                  By creating an account on, accessing, or using Brand Pixel Studio at <strong className="text-foreground">brandpixelstudio.site</strong> (the "Platform"), you agree to be bound by these Terms & Conditions ("Terms"). If you do not agree to any part of these Terms, you must not use the Platform. We may update these Terms from time to time — we will notify registered users via email when significant changes are made. Continued use after changes constitutes acceptance.
                 </p>
               </div>
 
               {/* 2. What the Platform Is */}
               <div className="bg-card border border-border/60 rounded-xl p-6">
-                <h2 className="font-display text-lg font-bold mb-3 text-foreground">2. What Cricket Watch Party Is</h2>
+                <h2 className="font-display text-lg font-bold mb-3 text-foreground">2. What Brand Pixel Studio Is</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                  Cricket Watch Party is a free, community-driven platform that allows cricket fans to:
+                  Brand Pixel Studio is a free, community-driven platform that allows cricket fans to:
                 </p>
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside mb-3">
                   <li><strong className="text-foreground">Host watch parties</strong> — Create a party for any cricket match, set the capacity (how many fans can join), define rules, and choose whether the party is public (visible to everyone) or private (accessible only via a shareable invite link).</li>
@@ -46,7 +46,7 @@ export default function Terms() {
                 <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mt-4">
                   <p className="text-sm text-foreground font-semibold mb-1">Important Clarification</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Cricket Watch Party is a <strong className="text-foreground">second-screen companion service</strong>. We do not broadcast, stream, rebroadcast, or provide access to any live cricket match footage, video, or audio commentary. Users must have their own subscription to an official broadcaster (e.g., Disney+ Hotstar, Willow TV, Sky Sports) to watch the actual match. Our platform provides the social experience alongside the match — not the match itself.
+                    Brand Pixel Studio is a <strong className="text-foreground">second-screen companion service</strong>. We do not broadcast, stream, rebroadcast, or provide access to any live cricket match footage, video, or audio commentary. Users must have their own subscription to an official broadcaster (e.g., Disney+ Hotstar, Willow TV, Sky Sports) to watch the actual match. Our platform provides the social experience alongside the match — not the match itself.
                   </p>
                 </div>
               </div>
@@ -67,7 +67,7 @@ export default function Terms() {
                   <li>Provide accurate and truthful information (your real name and a valid email address).</li>
                   <li>Keep your password confidential and not share it with anyone.</li>
                   <li>Use only one account per person — creating multiple accounts is not allowed.</li>
-                  <li>Notify us immediately at <a href="mailto:support@cricketwatchparty.com" className="text-primary hover:underline">support@cricketwatchparty.com</a> if you suspect unauthorized access to your account.</li>
+                  <li>Notify us immediately at <a href="mailto:support@brandpixelstudio.site" className="text-primary hover:underline">support@brandpixelstudio.site</a> if you suspect unauthorized access to your account.</li>
                 </ul>
                 <p className="text-sm text-muted-foreground leading-relaxed mt-3">
                   You are solely responsible for all activity that occurs under your account. We are not liable for any loss or damage arising from unauthorized use of your account.
@@ -82,7 +82,7 @@ export default function Terms() {
                   <li><strong className="text-foreground">Moderate your party responsibly.</strong> You are the admin of your party. You are responsible for maintaining a respectful environment within your party's audio and chat rooms.</li>
                   <li><strong className="text-foreground">Set accurate information.</strong> The match, teams, venue, date/time, and capacity you provide must be truthful.</li>
                   <li><strong className="text-foreground">Not use parties for illegal purposes.</strong> Parties must not be used for illegal streaming, gambling, hate speech, or any activity that violates applicable laws.</li>
-                  <li><strong className="text-foreground">Not charge participants.</strong> Cricket Watch Party is a free platform. You may not charge users to join your party or solicit payments through the Platform.</li>
+                  <li><strong className="text-foreground">Not charge participants.</strong> Brand Pixel Studio is a free platform. You may not charge users to join your party or solicit payments through the Platform.</li>
                   <li><strong className="text-foreground">Follow Community Guidelines.</strong> All parties must comply with our <a href="/guidelines" className="text-primary hover:underline">Community Guidelines</a>.</li>
                 </ul>
                 <p className="text-sm text-muted-foreground leading-relaxed mt-3">
@@ -145,7 +145,7 @@ export default function Terms() {
                   <li>Hate speech, discrimination, or harassment based on race, religion, gender, nationality, or any other characteristic.</li>
                   <li>Threats of violence, doxxing, or sharing personal information of others without consent.</li>
                   <li>Spam, phishing, or distributing malware.</li>
-                  <li>Impersonating other users, public figures, or Cricket Watch Party staff.</li>
+                  <li>Impersonating other users, public figures, or Brand Pixel Studio staff.</li>
                   <li>Creating parties for non-cricket purposes or misleading events.</li>
                   <li>Any activity that violates applicable local, national, or international laws.</li>
                 </ul>
@@ -158,7 +158,7 @@ export default function Terms() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">9. Intellectual Property</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  The Cricket Watch Party name, logo, website design, and all original content on the Platform are owned by Cricket Watch Party. You may not copy, reproduce, distribute, or create derivative works from any part of the Platform without our prior written consent. Cricket team names, logos, and match data referenced on the Platform belong to their respective owners (ICC, BCCI, IPL, etc.) and are used for informational purposes only.
+                  The Brand Pixel Studio name, logo, website design, and all original content on the Platform are owned by Brand Pixel Studio. You may not copy, reproduce, distribute, or create derivative works from any part of the Platform without our prior written consent. Cricket team names, logos, and match data referenced on the Platform belong to their respective owners (ICC, BCCI, IPL, etc.) and are used for informational purposes only.
                 </p>
               </div>
 
@@ -166,7 +166,7 @@ export default function Terms() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">10. Pricing & Payment</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Cricket Watch Party is currently <strong className="text-foreground">100% free</strong> for all users — both hosting and joining parties. We may introduce optional premium features in the future. If we do, we will clearly communicate pricing before you are asked to pay anything. Free features available today will remain free.
+                  Brand Pixel Studio is currently <strong className="text-foreground">100% free</strong> for all users — both hosting and joining parties. We may introduce optional premium features in the future. If we do, we will clearly communicate pricing before you are asked to pay anything. Free features available today will remain free.
                 </p>
               </div>
 
@@ -174,7 +174,7 @@ export default function Terms() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">11. Account Termination</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                  <strong className="text-foreground">By you:</strong> You can request deletion of your account at any time by emailing <a href="mailto:support@cricketwatchparty.com" className="text-primary hover:underline">support@cricketwatchparty.com</a>. Upon deletion, your personal data will be removed from our active systems within 30 days. Events you created will be removed or anonymized.
+                  <strong className="text-foreground">By you:</strong> You can request deletion of your account at any time by emailing <a href="mailto:support@brandpixelstudio.site" className="text-primary hover:underline">support@brandpixelstudio.site</a>. Upon deletion, your personal data will be removed from our active systems within 30 days. Events you created will be removed or anonymized.
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   <strong className="text-foreground">By us:</strong> We may suspend or terminate your account if you violate these Terms, our Community Guidelines, or applicable laws. We will notify you via email with the reason for termination. You may appeal by contacting us within 14 days.
@@ -211,9 +211,9 @@ export default function Terms() {
                   For questions, concerns, or disputes regarding these Terms:
                 </p>
                 <div className="mt-3 bg-background/60 rounded-lg p-4">
-                  <p className="text-sm text-foreground font-semibold">Cricket Watch Party — Legal</p>
-                  <p className="text-sm text-muted-foreground mt-1">Email: <a href="mailto:legal@cricketwatchparty.com" className="text-primary hover:underline">legal@cricketwatchparty.com</a></p>
-                  <p className="text-sm text-muted-foreground">Website: <a href="https://cricketwatchparty.com/contact" className="text-primary hover:underline">cricketwatchparty.com/contact</a></p>
+                  <p className="text-sm text-foreground font-semibold">Brand Pixel Studio — Legal</p>
+                  <p className="text-sm text-muted-foreground mt-1">Email: <a href="mailto:legal@brandpixelstudio.site" className="text-primary hover:underline">legal@brandpixelstudio.site</a></p>
+                  <p className="text-sm text-muted-foreground">Website: <a href="https://brandpixelstudio.site/contact" className="text-primary hover:underline">brandpixelstudio.site/contact</a></p>
                 </div>
               </div>
 

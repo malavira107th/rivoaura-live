@@ -121,7 +121,7 @@ function EventDetailContent({ event, isAuthenticated, registerMutation, waitlist
     const start = new Date(event.startTime);
     const end = new Date(start.getTime() + 4 * 60 * 60 * 1000);
     const formatDate = (d: Date) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Cricket Watch Party: ${event.team1} vs ${event.team2}`)}&dates=${formatDate(start)}/${formatDate(end)}&details=${encodeURIComponent(`Join the live audio watch party on Cricket Watch Party!`)}&location=${encodeURIComponent(event.venue)}`;
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Brand Pixel Studio: ${event.team1} vs ${event.team2}`)}&dates=${formatDate(start)}/${formatDate(end)}&details=${encodeURIComponent(`Join the live audio watch party on Brand Pixel Studio!`)}&location=${encodeURIComponent(event.venue)}`;
     window.open(url, "_blank");
     toast.success("Opening Google Calendar...");
   };

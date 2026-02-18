@@ -6,7 +6,7 @@ export default function Footer() {
       {/* Disclaimer Banner */}
       <div className="bg-primary/5 border-b border-primary/10">
         <div className="container py-3 text-center text-xs text-muted-foreground">
-          <strong className="text-primary/80">Disclaimer:</strong> Cricket Watch Party is a community platform for live discussion. Match viewing requires your own official broadcast provider.
+          <strong className="text-primary/80">Disclaimer:</strong> Brand Pixel Studio is a community platform for live discussion. Match viewing requires your own official broadcast provider.
         </div>
       </div>
 
@@ -17,12 +17,12 @@ export default function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <img
                 src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/EaGClusPGotwPQor.png"
-                alt="Cricket Watch Party Logo"
+                alt="Brand Pixel Studio Logo"
                 className="w-8 h-8 rounded-lg"
               />
               <div className="flex flex-col leading-none">
-                <span className="font-display text-base font-bold tracking-wide">CRICKET</span>
-                <span className="font-display text-[9px] font-medium tracking-[0.2em] text-primary">WATCH PARTY</span>
+                <span className="font-display text-base font-bold tracking-wide">BRAND PIXEL</span>
+                <span className="font-display text-[9px] font-medium tracking-[0.2em] text-primary">STUDIO</span>
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -56,15 +56,15 @@ export default function Footer() {
           <div>
             <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground mb-4">Connect</h4>
             <div className="flex flex-col gap-2">
-              <a href="mailto:support@cricketwatchparty.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">support@cricketwatchparty.com</a>
-              <a href="mailto:partners@cricketwatchparty.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">partners@cricketwatchparty.com</a>
+              <a href="mailto:support@brandpixelstudio.site" className="text-sm text-muted-foreground hover:text-primary transition-colors">support@brandpixelstudio.site</a>
+              <a href="mailto:partners@brandpixelstudio.site" className="text-sm text-muted-foreground hover:text-primary transition-colors">partners@brandpixelstudio.site</a>
             </div>
           </div>
         </div>
 
         <div className="mt-10 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Cricket Watch Party. All rights reserved.
+            &copy; {new Date().getFullYear()} Brand Pixel Studio. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground">
             Made with passion for cricket fans worldwide.

@@ -1,7 +1,7 @@
 /*
  * PRIVACY POLICY PAGE
  * Design: Stadium Noir
- * Clear, specific privacy information for Cricket Watch Party
+ * Clear, specific privacy information for Brand Pixel Studio
  */
 import { motion } from "framer-motion";
 import { Lock } from "lucide-react";
@@ -28,10 +28,10 @@ export default function Privacy() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">1. Introduction</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                  Cricket Watch Party ("we," "us," or "our") operates the website at <strong className="text-foreground">cricketwatchparty.com</strong> (the "Platform"). This Privacy Policy explains exactly what personal data we collect, why we collect it, how we store and protect it, and your rights regarding that data.
+                  Brand Pixel Studio ("we," "us," or "our") operates the website at <strong className="text-foreground">brandpixelstudio.site</strong> (the "Platform"). This Privacy Policy explains exactly what personal data we collect, why we collect it, how we store and protect it, and your rights regarding that data.
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Cricket Watch Party is a free, community-driven platform where cricket fans host and join live watch parties with built-in audio and chat rooms. By creating an account or using the Platform, you agree to the data practices described below.
+                  Brand Pixel Studio is a free, community-driven platform where cricket fans host and join live watch parties with built-in audio and chat rooms. By creating an account or using the Platform, you agree to the data practices described below.
                 </p>
               </div>
 
@@ -157,7 +157,7 @@ export default function Privacy() {
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
                   <li><strong className="text-foreground">Access:</strong> Request a copy of all personal data we hold about you.</li>
                   <li><strong className="text-foreground">Correction:</strong> Update or correct your name, email, or favorite team from your account settings.</li>
-                  <li><strong className="text-foreground">Deletion:</strong> Request permanent deletion of your account and all associated data. Email us at <a href="mailto:privacy@cricketwatchparty.com" className="text-primary hover:underline">privacy@cricketwatchparty.com</a> and we will process your request within 30 days.</li>
+                  <li><strong className="text-foreground">Deletion:</strong> Request permanent deletion of your account and all associated data. Email us at <a href="mailto:privacy@brandpixelstudio.site" className="text-primary hover:underline">privacy@brandpixelstudio.site</a> and we will process your request within 30 days.</li>
                   <li><strong className="text-foreground">Data Portability:</strong> Request an export of your data in a machine-readable format (JSON).</li>
                   <li><strong className="text-foreground">Withdraw Consent:</strong> You can delete your account at any time, which removes your data from our active systems.</li>
                 </ul>
@@ -167,7 +167,7 @@ export default function Privacy() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">9. Children's Privacy</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Cricket Watch Party is not intended for users under the age of 13. We do not knowingly collect personal data from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us at <a href="mailto:privacy@cricketwatchparty.com" className="text-primary hover:underline">privacy@cricketwatchparty.com</a> and we will delete the data promptly.
+                  Brand Pixel Studio is not intended for users under the age of 13. We do not knowingly collect personal data from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us at <a href="mailto:privacy@brandpixelstudio.site" className="text-primary hover:underline">privacy@brandpixelstudio.site</a> and we will delete the data promptly.
                 </p>
               </div>
 
@@ -186,9 +186,9 @@ export default function Privacy() {
                   If you have questions about this Privacy Policy, want to exercise your data rights, or have concerns about how your data is handled, contact us at:
                 </p>
                 <div className="mt-3 bg-background/60 rounded-lg p-4">
-                  <p className="text-sm text-foreground font-semibold">Cricket Watch Party — Privacy Team</p>
-                  <p className="text-sm text-muted-foreground mt-1">Email: <a href="mailto:privacy@cricketwatchparty.com" className="text-primary hover:underline">privacy@cricketwatchparty.com</a></p>
-                  <p className="text-sm text-muted-foreground">Website: <a href="https://cricketwatchparty.com/contact" className="text-primary hover:underline">cricketwatchparty.com/contact</a></p>
+                  <p className="text-sm text-foreground font-semibold">Brand Pixel Studio — Privacy Team</p>
+                  <p className="text-sm text-muted-foreground mt-1">Email: <a href="mailto:privacy@brandpixelstudio.site" className="text-primary hover:underline">privacy@brandpixelstudio.site</a></p>
+                  <p className="text-sm text-muted-foreground">Website: <a href="https://brandpixelstudio.site/contact" className="text-primary hover:underline">brandpixelstudio.site/contact</a></p>
                 </div>
               </div>
 

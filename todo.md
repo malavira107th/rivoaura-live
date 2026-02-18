@@ -67,3 +67,11 @@
 - [x] Add host moderation: mute/unmute other users
 - [x] Add host badge and moderation UI panel in Room page
 - [x] Write tests for moderation features (68 tests total)
+- [x] Update domain references from cricketwatchparty.com to brandpixelstudio.site
+- [x] Update meta tags, OG tags, and legal pages with new domain
+- [x] Ensure branding is cohesive — no mismatched or confusing references
+- [x] Rebrand from "Cricket Watch Party" to "Brand Pixel Studio" across entire site
+- [x] Update all email addresses from @cricketwatchparty.com to @brandpixelstudio.site
+- [x] Update navbar, footer, meta tags, page titles with new brand name
+- [x] Update legal pages (Privacy, Terms, Disclaimer) with new brand
+- [x] Update FAQ and other content pages with new brand

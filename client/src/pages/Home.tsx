@@ -1,5 +1,5 @@
 /*
- * HOME PAGE — Cricket Watch Party
+ * HOME PAGE — Brand Pixel Studio
  * Content: User-hosted watch parties with built-in audio & chat rooms
  */
 import { Link } from "wouter";

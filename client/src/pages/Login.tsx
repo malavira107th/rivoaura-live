@@ -42,7 +42,7 @@ export default function Login() {
 
   const signupMutation = trpc.auth.signup.useMutation({
     onSuccess: async () => {
-      toast.success("Account created! Welcome to Cricket Watch Party!");
+      toast.success("Account created! Welcome to Brand Pixel Studio!");
       await utils.auth.me.invalidate();
       setLocation(returnTo);
     },
@@ -77,7 +77,7 @@ export default function Login() {
           <div className="text-center mb-8">
             <img
               src={LOGO_URL}
-              alt="Cricket Watch Party"
+              alt="Brand Pixel Studio"
               className="w-16 h-16 rounded-xl mx-auto mb-4"
             />
             <h1 className="font-display text-2xl font-bold tracking-tight">
@@ -85,7 +85,7 @@ export default function Login() {
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
               {mode === "login"
-                ? "Sign in to your Cricket Watch Party account"
+                ? "Sign in to your Brand Pixel Studio account"
                 : "Create your account and start hosting watch parties"}
             </p>
           </div>

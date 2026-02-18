@@ -1,5 +1,5 @@
 /*
- * PROFILE PAGE — Cricket Watch Party
+ * PROFILE PAGE — Brand Pixel Studio
  * Allows users to edit their name, favorite team, and password.
  */
 import { useState, useEffect } from "react";

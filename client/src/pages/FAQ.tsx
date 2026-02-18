@@ -24,7 +24,7 @@ export default function FAQ() {
               </h1>
             </div>
             <p className="text-muted-foreground mb-10">
-              Everything you need to know about Cricket Watch Party.
+              Everything you need to know about Brand Pixel Studio.
             </p>
 
             <Accordion type="single" collapsible className="space-y-3">

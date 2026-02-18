@@ -36,7 +36,7 @@ const RULES = [
   {
     icon: Gavel,
     title: "Platform Enforcement",
-    body: "While hosts moderate their own parties, the Cricket Watch Party team monitors the platform for serious violations. Repeated reports against a user across multiple parties may result in a permanent platform ban. Use the Report button if you see something that crosses the line."
+    body: "While hosts moderate their own parties, the Brand Pixel Studio team monitors the platform for serious violations. Repeated reports against a user across multiple parties may result in a permanent platform ban. Use the Report button if you see something that crosses the line."
   }
 ];
 
@@ -55,7 +55,7 @@ export default function Guidelines() {
               </h1>
             </div>
             <p className="text-muted-foreground mb-10 max-w-lg">
-              Cricket Watch Party is a community-driven platform. These guidelines apply to everyone — hosts, speakers, and listeners alike.
+              Brand Pixel Studio is a community-driven platform. These guidelines apply to everyone — hosts, speakers, and listeners alike.
             </p>
 
             {/* Spirit of the Game */}
