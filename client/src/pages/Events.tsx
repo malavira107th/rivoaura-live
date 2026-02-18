@@ -13,7 +13,7 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 
 const FORMATS = ["All", "T20", "ODI", "Test"] as const;
-const LEAGUES = ["All", "IPL", "International", "Big Bash", "PSL", "CPL"] as const;
+const LEAGUES = ["All", "Premier League", "International", "World Cup", "Regional Cup", "Super League"] as const;
 
 export default function Events() {
   const [selectedFormat, setSelectedFormat] = useState<string>("All");

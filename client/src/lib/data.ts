@@ -5,14 +5,14 @@ export const SITE_NAME = "Brand Pixel Studio";
 export const SITE_DOMAIN = "brandpixelstudio.site";
 
 // Images served from CDN
-export const HERO_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/AfkTYILLgjbXxzsw.jpg";
-export const COMMUNITY_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/EeSvvKtxWEekqKgg.jpg";
-export const AUDIO_ROOM_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/RczGcEnsTwUUuRQj.jpg";
-export const CRICKET_ACTION_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/OtBFudazIZyFnlOB.jpg";
-export const HOW_IT_WORKS_BG = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/gxXAMLCDeQRHNtlH.jpg";
+export const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/hero.jpg";
+export const COMMUNITY_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/community.jpg";
+export const AUDIO_ROOM_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/audio-room.jpg";
+export const CRICKET_ACTION_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/cricket-action.jpg";
+export const HOW_IT_WORKS_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/how-it-works-bg.jpg";
 
 export type EventFormat = "T20" | "ODI" | "Test";
-export type EventLeague = "IPL" | "International" | "Big Bash" | "PSL" | "CPL";
+export type EventLeague = "Premier League" | "International" | "Regional Cup" | "Super League" | "Championship";
 export type EventStatus = "upcoming" | "live" | "completed";
 export type EventVisibility = "public" | "private";
 
@@ -35,21 +35,21 @@ export interface WatchPartyEvent {
 
 export const TESTIMONIALS = [
   {
-    name: "Rohan Desai",
-    location: "Bangalore",
-    text: "I hosted my first watch party during the IPL final — 200 fans joined and the energy was unreal. It felt like having my own commentary box.",
+    name: "R.D.",
+    location: "Fan from South Asia",
+    text: "I hosted my first watch party during a major league final — 200 fans joined and the energy was unreal. It felt like having my own commentary box.",
     avatar: "RD"
   },
   {
-    name: "Priya Nair",
-    location: "London",
+    name: "P.N.",
+    location: "Fan from Europe",
     text: "Living abroad, I missed watching cricket with friends. Now I host a private party for my crew every match day. It's like being back home.",
     avatar: "PN"
   },
   {
-    name: "Amit Sharma",
-    location: "Delhi",
-    text: "I joined a public party for the India vs Australia match. 5,000 fans, live audio, real-time chat — nothing else comes close to this experience.",
+    name: "A.S.",
+    location: "Fan from North India",
+    text: "I joined a public party for a major international match. 5,000 fans, live audio, real-time chat — nothing else comes close to this experience.",
     avatar: "AS"
   }
 ];
@@ -97,10 +97,10 @@ export const FAQ_DATA = [
   },
   {
     question: "Is there a mobile app?",
-    answer: "Currently, Brand Pixel Studio is a mobile-first web platform — it works perfectly on any modern phone browser. A native iOS and Android app is on our roadmap."
+    answer: "Currently, Brand Pixel Studio is a mobile-first web platform — it works perfectly on any modern phone browser. A native mobile app is on our roadmap."
   },
   {
-    question: "How is this different from a WhatsApp group or Discord server?",
+    question: "How is this different from a regular group chat or voice call?",
     answer: "Brand Pixel Studio is purpose-built for live cricket. It has structured audio rooms (not chaotic group chats), host moderation tools, match-specific parties with countdowns, capacity management, and a community of cricket fans — not a general-purpose chat app."
   }
 ];

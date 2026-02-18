@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
-const LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/KbVoRshuecRczigy.png";
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/logo-large.png";
 
 export default function Login() {
   const [, setLocation] = useLocation();
@@ -123,7 +123,7 @@ export default function Login() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Virat Kohli"
+                  placeholder="Your Name"
                   required
                   className="w-full px-4 py-2.5 rounded-lg bg-card border border-border/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                 />
@@ -173,7 +173,7 @@ export default function Login() {
                   type="text"
                   value={favoriteTeam}
                   onChange={(e) => setFavoriteTeam(e.target.value)}
-                  placeholder="e.g., India, Mumbai Indians, CSK"
+                  placeholder="e.g., your favorite cricket team"
                   className="w-full px-4 py-2.5 rounded-lg bg-card border border-border/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                 />
               </div>

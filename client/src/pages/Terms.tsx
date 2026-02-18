@@ -46,7 +46,7 @@ export default function Terms() {
                 <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mt-4">
                   <p className="text-sm text-foreground font-semibold mb-1">Important Clarification</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Brand Pixel Studio is a <strong className="text-foreground">second-screen companion service</strong>. We do not broadcast, stream, rebroadcast, or provide access to any live cricket match footage, video, or audio commentary. Users must have their own subscription to an official broadcaster (e.g., Disney+ Hotstar, Willow TV, Sky Sports) to watch the actual match. Our platform provides the social experience alongside the match — not the match itself.
+                    Brand Pixel Studio is a <strong className="text-foreground">second-screen companion service</strong>. We do not broadcast, stream, rebroadcast, or provide access to any live cricket match footage, video, or audio commentary. Users must have their own subscription to an official broadcaster or licensed streaming provider in their region to watch the actual match. Our platform provides the social experience alongside the match — not the match itself.
                   </p>
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default function Terms() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">9. Intellectual Property</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  The Brand Pixel Studio name, logo, website design, and all original content on the Platform are owned by Brand Pixel Studio. You may not copy, reproduce, distribute, or create derivative works from any part of the Platform without our prior written consent. Cricket team names, logos, and match data referenced on the Platform belong to their respective owners (ICC, BCCI, IPL, etc.) and are used for informational purposes only.
+                  The Brand Pixel Studio name, logo, website design, and all original content on the Platform are owned by Brand Pixel Studio. You may not copy, reproduce, distribute, or create derivative works from any part of the Platform without our prior written consent. Cricket team names, logos, and match data referenced on the Platform belong to their respective owners and are used for informational purposes only.
                 </p>
               </div>
 

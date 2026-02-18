@@ -28,7 +28,7 @@ export default function Disclaimer() {
               <div className="bg-primary/5 border border-primary/20 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-primary">Critical Notice — Please Read Carefully</h2>
                 <p className="text-sm text-foreground leading-relaxed font-medium">
-                  Brand Pixel Studio is an independent, community-driven platform built by cricket fans, for cricket fans. We are <strong>NOT affiliated with, endorsed by, sponsored by, or connected to</strong> the International Cricket Council (ICC), Board of Control for Cricket in India (BCCI), Indian Premier League (IPL), Cricket Australia (CA), England and Wales Cricket Board (ECB), Pakistan Cricket Board (PCB), or any other national or international cricket governing body, broadcaster, team, or player. All team names, tournament names, logos, and trademarks mentioned on this platform are the property of their respective owners and are used solely for identification and informational purposes.
+                  Brand Pixel Studio is an independent, community-driven platform built by cricket fans, for cricket fans. We are <strong>NOT affiliated with, endorsed by, sponsored by, or connected to</strong> any national or international cricket governing body, league, broadcaster, team, or player. All team names, tournament names, logos, and trademarks mentioned on this platform are the property of their respective owners and are used solely for identification and informational purposes.
                 </p>
               </div>
 
@@ -47,7 +47,7 @@ export default function Disclaimer() {
                   Our platform is a <strong className="text-foreground">"second-screen" social companion</strong>. It provides live audio rooms and text chat rooms where fans can talk to each other while watching a match on their own screens. Think of it as a group phone call with friends during a match — we provide the call, not the match.
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  To watch any cricket match, you must have your own legal subscription to an official broadcaster such as Disney+ Hotstar, JioCinema, Sky Sports, Willow TV, Kayo Sports, or any other licensed provider in your region. Brand Pixel Studio has no relationship with any of these services.
+                  To watch any cricket match, you must have your own legal subscription to an official broadcaster or licensed streaming provider in your region. Brand Pixel Studio has no relationship with any broadcasting or streaming services.
                 </p>
               </div>
 
@@ -94,7 +94,7 @@ export default function Disclaimer() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">Platform Availability & Warranty</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Brand Pixel Studio is provided on an <strong className="text-foreground">"as is"</strong> and <strong className="text-foreground">"as available"</strong> basis. We make no warranties, express or implied, regarding the Platform's availability, reliability, or fitness for any particular purpose. The Platform may experience downtime, bugs, or interruptions — particularly during high-traffic moments like IPL finals or World Cup matches. We will do our best to keep the Platform running, but we cannot guarantee uninterrupted service. We are not liable for any loss, inconvenience, or frustration caused by Platform downtime or technical issues.
+                  Brand Pixel Studio is provided on an <strong className="text-foreground">"as is"</strong> and <strong className="text-foreground">"as available"</strong> basis. We make no warranties, express or implied, regarding the Platform's availability, reliability, or fitness for any particular purpose. The Platform may experience downtime, bugs, or interruptions — particularly during high-traffic moments such as major tournament finals. We will do our best to keep the Platform running, but we cannot guarantee uninterrupted service. We are not liable for any loss, inconvenience, or frustration caused by Platform downtime or technical issues.
                 </p>
               </div>
 

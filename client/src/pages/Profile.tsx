@@ -175,7 +175,7 @@ export default function Profile() {
                   value={favoriteTeam}
                   onChange={(e) => setFavoriteTeam(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg bg-background border border-border/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-all text-sm"
-                  placeholder="e.g., India, Mumbai Indians, CSK"
+                  placeholder="e.g., your favorite cricket team"
                 />
               </div>
 

@@ -7,17 +7,17 @@ vi.mock("./db", () => {
   const mockEvents = [
     {
       id: 1,
-      slug: "ind-vs-aus-2026",
-      title: "India vs Australia — T20 Showdown",
-      team1: "India",
-      team2: "Australia",
+      slug: "team-a-vs-team-b-2026",
+      title: "Team Alpha vs Team Beta — T20 Showdown",
+      team1: "Team Alpha",
+      team2: "Team Beta",
       format: "T20" as const,
-      league: "ICC T20 World Cup 2026",
-      venue: "Wankhede Stadium, Mumbai",
+      league: "World Cup 2026",
+      venue: "National Stadium, Metro City",
       startTime: new Date("2026-03-15T14:00:00Z"),
       maxCapacity: 10000,
       status: "upcoming" as const,
-      hosts: JSON.stringify([{ name: "Rahul", bio: "Cricket analyst" }]),
+      hosts: JSON.stringify([{ name: "Host One", bio: "Cricket analyst" }]),
       agenda: JSON.stringify([{ time: "1:30 PM", title: "Pre-match discussion" }]),
       visibility: "public" as const,
       createdBy: 1,
@@ -26,13 +26,13 @@ vi.mock("./db", () => {
     },
     {
       id: 2,
-      slug: "eng-vs-pak-2026",
-      title: "England vs Pakistan — ODI Series",
-      team1: "England",
-      team2: "Pakistan",
+      slug: "team-c-vs-team-d-2026",
+      title: "Team Gamma vs Team Delta — ODI Series",
+      team1: "Team Gamma",
+      team2: "Team Delta",
       format: "ODI" as const,
-      league: "ICC Champions Trophy 2026",
-      venue: "Lord's Cricket Ground, London",
+      league: "Champions Trophy 2026",
+      venue: "Central Cricket Ground, Capital City",
       startTime: new Date("2026-04-01T10:00:00Z"),
       maxCapacity: 5000,
       status: "upcoming" as const,
@@ -145,7 +145,7 @@ function createAuthContext(overrides?: Partial<AuthenticatedUser>): TrpcContext 
     password: "hashed_password123",
     loginMethod: "custom",
     role: "user",
-    favoriteTeam: "India",
+    favoriteTeam: "Team Alpha",
     createdAt: new Date(),
     updatedAt: new Date(),
     lastSignedIn: new Date(),
@@ -271,7 +271,7 @@ describe("events.list", () => {
 
     // Only 1 event is public, the other is private
     expect(events).toHaveLength(1);
-    expect(events[0]).toHaveProperty("slug", "ind-vs-aus-2026");
+    expect(events[0]).toHaveProperty("slug", "team-a-vs-team-b-2026");
     expect(events[0]).toHaveProperty("seatsTaken");
     expect(typeof events[0].seatsTaken).toBe("number");
   });
@@ -280,11 +280,11 @@ describe("events.list", () => {
 describe("events.bySlug", () => {
   it("returns a single event with seat and waitlist counts", async () => {
     const caller = appRouter.createCaller(createPublicContext());
-    const event = await caller.events.bySlug({ slug: "ind-vs-aus-2026" });
+    const event = await caller.events.bySlug({ slug: "team-a-vs-team-b-2026" });
 
-    expect(event.slug).toBe("ind-vs-aus-2026");
-    expect(event.team1).toBe("India");
-    expect(event.team2).toBe("Australia");
+    expect(event.slug).toBe("team-a-vs-team-b-2026");
+    expect(event.team1).toBe("Team Alpha");
+    expect(event.team2).toBe("Team Beta");
     expect(event).toHaveProperty("seatsTaken");
     expect(event).toHaveProperty("waitlistCount");
   });
@@ -434,7 +434,7 @@ describe("registration.myEvents", () => {
     const myEvents = await caller.registration.myEvents();
 
     expect(myEvents).toHaveLength(1);
-    expect(myEvents[0]).toHaveProperty("slug", "ind-vs-aus-2026");
+    expect(myEvents[0]).toHaveProperty("slug", "team-a-vs-team-b-2026");
     expect(myEvents[0]).toHaveProperty("registeredAt");
   });
 
@@ -492,7 +492,7 @@ describe("auth.updateProfile", () => {
 
   it("allows authenticated user to update favorite team", async () => {
     const caller = appRouter.createCaller(createAuthContext());
-    const result = await caller.auth.updateProfile({ favoriteTeam: "Australia" });
+    const result = await caller.auth.updateProfile({ favoriteTeam: "Team Beta" });
     expect(result).toEqual({ success: true });
   });
 
@@ -519,11 +519,11 @@ describe("events.create with invite code", () => {
     const caller = appRouter.createCaller(createAuthContext());
     const result = await caller.events.create({
       title: "Private Match",
-      team1: "India",
-      team2: "Pakistan",
+      team1: "Team E",
+      team2: "Team F",
       format: "T20",
-      league: "Asia Cup",
-      venue: "Dubai",
+      league: "Continental Cup",
+      venue: "Sports Arena",
       startTime: new Date("2026-08-01T10:00:00Z"),
       visibility: "private",
     });
@@ -537,11 +537,11 @@ describe("events.create with invite code", () => {
     const caller = appRouter.createCaller(createAuthContext());
     const result = await caller.events.create({
       title: "Public Match",
-      team1: "England",
-      team2: "Australia",
+      team1: "Team G",
+      team2: "Team H",
       format: "ODI",
-      league: "Ashes",
-      venue: "Lord's",
+      league: "Bilateral Series",
+      venue: "Cricket Oval",
       startTime: new Date("2026-09-01T10:00:00Z"),
       visibility: "public",
     });

@@ -231,7 +231,7 @@ export default function ComponentsShowcase() {
       <main className="container max-w-6xl mx-auto">
         <div className="space-y-2 justify-between flex">
           <h2 className="text-3xl font-bold tracking-tight mb-6">
-            Shadcn/ui Component Library
+            UI Component Library
           </h2>
           <Button variant="outline" size="icon" onClick={toggleTheme}>
             {theme === "light" ? (
@@ -426,7 +426,7 @@ export default function ComponentsShowcase() {
                       <SelectValue placeholder="Select a fruit" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="apple">Apple</SelectItem>
+                      <SelectItem value="option-a">Option A</SelectItem>
                       <SelectItem value="banana">Banana</SelectItem>
                       <SelectItem value="orange">Orange</SelectItem>
                     </SelectContent>
@@ -696,7 +696,7 @@ export default function ComponentsShowcase() {
                   <Label>Avatar</Label>
                   <div className="flex gap-4">
                     <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarImage src="" />
                       <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <Avatar>
@@ -1429,7 +1429,7 @@ export default function ComponentsShowcase() {
 
       <footer className="border-t py-6 mt-12">
         <div className="container text-center text-sm text-muted-foreground">
-          <p>Shadcn/ui Component Showcase</p>
+          <p>UI Component Showcase</p>
         </div>
       </footer>
     </div>

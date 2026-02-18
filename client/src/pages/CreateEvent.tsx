@@ -16,17 +16,17 @@ import { Link } from "wouter";
 const FORMATS = ["T20", "ODI", "Test"] as const;
 
 const POPULAR_LEAGUES = [
-  "IPL",
-  "ICC World Cup",
-  "ICC Champions Trophy",
-  "The Ashes",
-  "Big Bash League",
-  "CPL",
-  "PSL",
-  "SA20",
-  "ICC T20 World Cup",
-  "Asia Cup",
-  "Border-Gavaskar Trophy",
+  "Premier League",
+  "World Cup",
+  "Champions Trophy",
+  "Test Series",
+  "Regional Cup",
+  "Super League",
+  "Championship",
+  "T20 League",
+  "Bilateral Series",
+  "Continental Cup",
+  "Invitational Trophy",
   "Other",
 ];
 
@@ -39,7 +39,7 @@ export default function CreateEvent() {
   const [team1, setTeam1] = useState("");
   const [team2, setTeam2] = useState("");
   const [format, setFormat] = useState<"T20" | "ODI" | "Test">("T20");
-  const [league, setLeague] = useState("IPL");
+  const [league, setLeague] = useState("Premier League");
   const [venue, setVenue] = useState("");
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -165,7 +165,7 @@ export default function CreateEvent() {
                       type="text"
                       value={team1}
                       onChange={(e) => setTeam1(e.target.value)}
-                      placeholder="e.g., India"
+                      placeholder="e.g., Team A"
                       required
                       className="w-full px-4 py-2.5 rounded-lg bg-background border border-border/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                     />
@@ -176,7 +176,7 @@ export default function CreateEvent() {
                       type="text"
                       value={team2}
                       onChange={(e) => setTeam2(e.target.value)}
-                      placeholder="e.g., Australia"
+                      placeholder="e.g., Team B"
                       required
                       className="w-full px-4 py-2.5 rounded-lg bg-background border border-border/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                     />
@@ -191,7 +191,7 @@ export default function CreateEvent() {
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder={team1 && team2 ? `${team1} vs ${team2}` : "e.g., India vs Australia - Semi Final"}
+                    placeholder={team1 && team2 ? `${team1} vs ${team2}` : "e.g., Team A vs Team B - Semi Final"}
                     className="w-full px-4 py-2.5 rounded-lg bg-background border border-border/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                   />
                 </div>
@@ -229,7 +229,7 @@ export default function CreateEvent() {
                     type="text"
                     value={venue}
                     onChange={(e) => setVenue(e.target.value)}
-                    placeholder="e.g., Wankhede Stadium, Mumbai"
+                    placeholder="e.g., National Stadium, City"
                     required
                     className="w-full px-4 py-2.5 rounded-lg bg-background border border-border/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                   />

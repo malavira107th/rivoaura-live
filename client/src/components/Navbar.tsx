@@ -31,7 +31,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <img
-            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/UtPcPpKVxBvAiypp.png"
+            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/logo.png"
             alt="Brand Pixel Studio Logo"
             className="w-9 h-9 rounded-lg"
           />

@@ -1,6 +1,6 @@
 /**
  * Quick example (matches curl usage):
- *   await callDataApi("Youtube/search", {
+ *   await callDataApi("Video/search", {
  *     query: { gl: "US", hl: "en", q: "cricket" },
  *   })
  */
