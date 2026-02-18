@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/EaGClusPGotwPQor.png"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/UtPcPpKVxBvAiypp.png"
                 alt="Brand Pixel Studio Logo"
                 className="w-8 h-8 rounded-lg"
               />

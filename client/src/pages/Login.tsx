@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
-const LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/vGvxfRlsaAoMtCnO.png";
+const LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/KbVoRshuecRczigy.png";
 
 export default function Login() {
   const [, setLocation] = useLocation();

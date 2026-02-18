@@ -4,12 +4,12 @@
 export const SITE_NAME = "Brand Pixel Studio";
 export const SITE_DOMAIN = "brandpixelstudio.site";
 
-// Images hosted on CDN for fast loading
-export const HERO_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/QrdJgrySPLjkVdyO.jpg";
-export const COMMUNITY_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/WgCuOGHzbZZTFzBz.jpg";
-export const AUDIO_ROOM_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/XCpNGgARtiaNQXCy.jpg";
-export const CRICKET_ACTION_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/gyurfemppgCqfMjv.jpg";
-export const HOW_IT_WORKS_BG = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/zdmMJWyNNhrziugT.jpg";
+// Images served from CDN
+export const HERO_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/AfkTYILLgjbXxzsw.jpg";
+export const COMMUNITY_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/EeSvvKtxWEekqKgg.jpg";
+export const AUDIO_ROOM_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/RczGcEnsTwUUuRQj.jpg";
+export const CRICKET_ACTION_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/OtBFudazIZyFnlOB.jpg";
+export const HOW_IT_WORKS_BG = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/gxXAMLCDeQRHNtlH.jpg";
 
 export type EventFormat = "T20" | "ODI" | "Test";
 export type EventLeague = "IPL" | "International" | "Big Bash" | "PSL" | "CPL";
