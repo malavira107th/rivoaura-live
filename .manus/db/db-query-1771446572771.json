@@ -1,0 +1,58 @@
+{
+  "query": "SELECT id, title, team1, team2, league, venue FROM events ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2EKhjpwgmHfHvW4.8f04a21fc0b9 --database SKAJHsMmNePfWoSaEf6sA3 --execute SELECT id, title, team1, team2, league, venue FROM events ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "India vs Australia",
+      "team1": "India",
+      "team2": "Australia",
+      "league": "International",
+      "venue": "Narendra Modi Stadium, Ahmedabad"
+    },
+    {
+      "id": "2",
+      "title": "Mumbai Indians vs Chennai Super Kings",
+      "team1": "Mumbai Indians",
+      "team2": "Chennai Super Kings",
+      "league": "IPL",
+      "venue": "Wankhede Stadium, Mumbai"
+    },
+    {
+      "id": "3",
+      "title": "India vs England",
+      "team1": "India",
+      "team2": "England",
+      "league": "International",
+      "venue": "Eden Gardens, Kolkata"
+    },
+    {
+      "id": "4",
+      "title": "India vs Pakistan",
+      "team1": "India",
+      "team2": "Pakistan",
+      "league": "International",
+      "venue": "Dubai International Stadium"
+    },
+    {
+      "id": "5",
+      "title": "Royal Challengers vs Knight Riders",
+      "team1": "Royal Challengers Bengaluru",
+      "team2": "Kolkata Knight Riders",
+      "league": "IPL",
+      "venue": "M. Chinnaswamy Stadium, Bengaluru"
+    },
+    {
+      "id": "6",
+      "title": "India vs South Africa",
+      "team1": "India",
+      "team2": "South Africa",
+      "league": "International",
+      "venue": "M.A. Chidambaram Stadium, Chennai"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tteam1\tteam2\tleague\tvenue\n1\tIndia vs Australia\tIndia\tAustralia\tInternational\tNarendra Modi Stadium, Ahmedabad\n2\tMumbai Indians vs Chennai Super Kings\tMumbai Indians\tChennai Super Kings\tIPL\tWankhede Stadium, Mumbai\n3\tIndia vs England\tIndia\tEngland\tInternational\tEden Gardens, Kolkata\n4\tIndia vs Pakistan\tIndia\tPakistan\tInternational\tDubai International Stadium\n5\tRoyal Challengers vs Knight Riders\tRoyal Challengers Bengaluru\tKolkata Knight Riders\tIPL\tM. Chinnaswamy Stadium, Bengaluru\n6\tIndia vs South Africa\tIndia\tSouth Africa\tInternational\tM.A. Chidambaram Stadium, Chennai\n",
+  "stderr": "",
+  "execution_time_ms": 1559
+}

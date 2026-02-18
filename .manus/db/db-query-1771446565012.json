@@ -1,0 +1,76 @@
+{
+  "query": "SELECT id, slug, title, team1, team2, league, venue, format, status FROM events ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2EKhjpwgmHfHvW4.8f04a21fc0b9 --database SKAJHsMmNePfWoSaEf6sA3 --execute SELECT id, slug, title, team1, team2, league, venue, format, status FROM events ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "ind-aus-t20-wc",
+      "title": "India vs Australia",
+      "team1": "India",
+      "team2": "Australia",
+      "league": "International",
+      "venue": "Narendra Modi Stadium, Ahmedabad",
+      "format": "T20",
+      "status": "upcoming"
+    },
+    {
+      "id": "2",
+      "slug": "mi-csk-ipl",
+      "title": "Mumbai Indians vs Chennai Super Kings",
+      "team1": "Mumbai Indians",
+      "team2": "Chennai Super Kings",
+      "league": "IPL",
+      "venue": "Wankhede Stadium, Mumbai",
+      "format": "T20",
+      "status": "upcoming"
+    },
+    {
+      "id": "3",
+      "slug": "ind-eng-odi",
+      "title": "India vs England",
+      "team1": "India",
+      "team2": "England",
+      "league": "International",
+      "venue": "Eden Gardens, Kolkata",
+      "format": "ODI",
+      "status": "upcoming"
+    },
+    {
+      "id": "4",
+      "slug": "ind-pak-t20",
+      "title": "India vs Pakistan",
+      "team1": "India",
+      "team2": "Pakistan",
+      "league": "International",
+      "venue": "Dubai International Stadium",
+      "format": "T20",
+      "status": "upcoming"
+    },
+    {
+      "id": "5",
+      "slug": "rcb-kkr-ipl",
+      "title": "Royal Challengers vs Knight Riders",
+      "team1": "Royal Challengers Bengaluru",
+      "team2": "Kolkata Knight Riders",
+      "league": "IPL",
+      "venue": "M. Chinnaswamy Stadium, Bengaluru",
+      "format": "T20",
+      "status": "upcoming"
+    },
+    {
+      "id": "6",
+      "slug": "ind-sa-test",
+      "title": "India vs South Africa",
+      "team1": "India",
+      "team2": "South Africa",
+      "league": "International",
+      "venue": "M.A. Chidambaram Stadium, Chennai",
+      "format": "Test",
+      "status": "upcoming"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\ttitle\tteam1\tteam2\tleague\tvenue\tformat\tstatus\n1\tind-aus-t20-wc\tIndia vs Australia\tIndia\tAustralia\tInternational\tNarendra Modi Stadium, Ahmedabad\tT20\tupcoming\n2\tmi-csk-ipl\tMumbai Indians vs Chennai Super Kings\tMumbai Indians\tChennai Super Kings\tIPL\tWankhede Stadium, Mumbai\tT20\tupcoming\n3\tind-eng-odi\tIndia vs England\tIndia\tEngland\tInternational\tEden Gardens, Kolkata\tODI\tupcoming\n4\tind-pak-t20\tIndia vs Pakistan\tIndia\tPakistan\tInternational\tDubai International Stadium\tT20\tupcoming\n5\trcb-kkr-ipl\tRoyal Challengers vs Knight Riders\tRoyal Challengers Bengaluru\tKolkata Knight Riders\tIPL\tM. Chinnaswamy Stadium, Bengaluru\tT20\tupcoming\n6\tind-sa-test\tIndia vs South Africa\tIndia\tSouth Africa\tInternational\tM.A. Chidambaram Stadium, Chennai\tTest\tupcoming\n",
+  "stderr": "",
+  "execution_time_ms": 1519
+}
