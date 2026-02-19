@@ -1,8 +1,8 @@
-// Brand Pixel Studio — Shared Data & Constants
+// Rivoaura Live — Shared Data & Constants
 // Platform where fans host their own watch parties with built-in audio & chat rooms
 
-export const SITE_NAME = "Brand Pixel Studio";
-export const SITE_DOMAIN = "brandpixelstudio.site";
+export const SITE_NAME = "Rivoaura Live";
+export const SITE_DOMAIN = "rivoauralive.com";
 
 // Images served from CDN
 export const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/hero.jpg";
@@ -56,12 +56,12 @@ export const TESTIMONIALS = [
 
 export const FAQ_DATA = [
   {
-    question: "What is Brand Pixel Studio?",
-    answer: "Brand Pixel Studio is a free platform where cricket fans can host or join live watch parties for any cricket match. Every party comes with built-in audio rooms and live chat, so you can discuss every ball, every wicket, and every boundary with fellow fans in real-time."
+    question: "What is Rivoaura Live?",
+    answer: "Rivoaura Live is a free platform where cricket fans can host or join live watch parties for any cricket match. Every party comes with built-in audio rooms and live chat, so you can discuss every ball, every wicket, and every boundary with fellow fans in real-time."
   },
   {
     question: "Is it free to use?",
-    answer: "Yes, Brand Pixel Studio is 100% free for everyone. Create an account, host a party, or join one — no charges, no hidden fees. We may introduce optional premium features in the future, but the core experience will always be free."
+    answer: "Yes, Rivoaura Live is 100% free for everyone. Create an account, host a party, or join one — no charges, no hidden fees. We may introduce optional premium features in the future, but the core experience will always be free."
   },
   {
     question: "How do I host a watch party?",
@@ -73,7 +73,7 @@ export const FAQ_DATA = [
   },
   {
     question: "Do you provide the live video stream of the match?",
-    answer: "No. Brand Pixel Studio is a second-screen companion. You watch the match on your own TV or streaming service, and use our platform for the live audio and chat discussion around the game. Think of it as your personal commentary box."
+    answer: "No. Rivoaura Live is a second-screen companion. You watch the match on your own TV or streaming service, and use our platform for the live audio and chat discussion around the game. Think of it as your personal commentary box."
   },
   {
     question: "What can a host control?",
@@ -97,10 +97,10 @@ export const FAQ_DATA = [
   },
   {
     question: "Is there a mobile app?",
-    answer: "Currently, Brand Pixel Studio is a mobile-first web platform — it works perfectly on any modern phone browser. A native mobile app is on our roadmap."
+    answer: "Currently, Rivoaura Live is a mobile-first web platform — it works perfectly on any modern phone browser. A native mobile app is on our roadmap."
   },
   {
     question: "How is this different from a regular group chat or voice call?",
-    answer: "Brand Pixel Studio is purpose-built for live cricket. It has structured audio rooms (not chaotic group chats), host moderation tools, match-specific parties with countdowns, capacity management, and a community of cricket fans — not a general-purpose chat app."
+    answer: "Rivoaura Live is purpose-built for live cricket. It has structured audio rooms (not chaotic group chats), host moderation tools, match-specific parties with countdowns, capacity management, and a community of cricket fans — not a general-purpose chat app."
   }
 ];

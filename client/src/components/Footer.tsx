@@ -6,7 +6,7 @@ export default function Footer() {
       {/* Disclaimer Banner */}
       <div className="bg-primary/5 border-b border-primary/10">
         <div className="container py-3 text-center text-xs text-muted-foreground">
-          <strong className="text-primary/80">Disclaimer:</strong> Brand Pixel Studio is a community platform for live discussion. Match viewing requires your own official broadcast provider.
+          <strong className="text-primary/80">Disclaimer:</strong> Rivoaura Live is a community platform for live discussion. Match viewing requires your own official broadcast provider.
         </div>
       </div>
 
@@ -17,12 +17,12 @@ export default function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <img
                 src="https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/logo.png"
-                alt="Brand Pixel Studio Logo"
+                alt="Rivoaura Live Logo"
                 className="w-8 h-8 rounded-lg"
               />
               <div className="flex flex-col leading-none">
-                <span className="font-display text-base font-bold tracking-wide">BRAND PIXEL</span>
-                <span className="font-display text-[9px] font-medium tracking-[0.2em] text-primary">STUDIO</span>
+                <span className="font-display text-base font-bold tracking-wide">RIVOAURA</span>
+                <span className="font-display text-[9px] font-medium tracking-[0.2em] text-primary">LIVE</span>
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -56,19 +56,28 @@ export default function Footer() {
           <div>
             <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground mb-4">Connect</h4>
             <div className="flex flex-col gap-2">
-              <a href="mailto:support@brandpixelstudio.site" className="text-sm text-muted-foreground hover:text-primary transition-colors">support@brandpixelstudio.site</a>
-              <a href="mailto:partners@brandpixelstudio.site" className="text-sm text-muted-foreground hover:text-primary transition-colors">partners@brandpixelstudio.site</a>
+              <a href="mailto:support@rivoauralive.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">support@rivoauralive.com</a>
+              <a href="mailto:partners@rivoauralive.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">partners@rivoauralive.com</a>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Brand Pixel Studio. All rights reserved.
-          </p>
-          <p className="text-xs text-muted-foreground">
-            Made with passion for cricket fans worldwide.
-          </p>
+        <div className="mt-10 pt-6 border-t border-border/50 space-y-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-muted-foreground">
+              &copy; {new Date().getFullYear()} Rivoaura Live. All rights reserved.
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Made with passion for cricket fans worldwide.
+            </p>
+          </div>
+          <div className="text-center sm:text-left">
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">RIVOAURA PRIVATE LIMITED</strong><br />
+              Ground Floor, A 96, Shankar Garden, Vikas Puri, New Delhi, West Delhi, Delhi, 110018<br />
+              CIN: U74999DL2016PTC306805
+            </p>
+          </div>
         </div>
       </div>
     </footer>

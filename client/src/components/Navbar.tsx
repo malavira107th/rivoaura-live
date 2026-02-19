@@ -32,15 +32,15 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2 group">
           <img
             src="https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/logo.png"
-            alt="Brand Pixel Studio Logo"
+            alt="Rivoaura Live Logo"
             className="w-9 h-9 rounded-lg"
           />
           <div className="flex flex-col leading-none">
             <span className="font-display text-lg font-bold tracking-wide text-foreground">
-              BRAND PIXEL
+              RIVOAURA
             </span>
             <span className="font-display text-[10px] font-medium tracking-[0.25em] text-primary uppercase">
-              Studio
+              Live
             </span>
           </div>
         </Link>

@@ -105,15 +105,15 @@ export default function Contact() {
                 <div className="bg-card border border-border/60 rounded-xl p-6">
                   <Mail className="w-5 h-5 text-primary mb-3" />
                   <h3 className="font-display text-sm font-bold uppercase tracking-wider mb-1">General Support</h3>
-                  <a href="mailto:support@brandpixelstudio.site" className="text-sm text-primary hover:underline">
-                    support@brandpixelstudio.site
+                  <a href="mailto:support@rivoauralive.com" className="text-sm text-primary hover:underline">
+                    support@rivoauralive.com
                   </a>
                 </div>
                 <div className="bg-card border border-border/60 rounded-xl p-6">
                   <Mail className="w-5 h-5 text-primary mb-3" />
                   <h3 className="font-display text-sm font-bold uppercase tracking-wider mb-1">Partnerships</h3>
-                  <a href="mailto:partners@brandpixelstudio.site" className="text-sm text-primary hover:underline">
-                    partners@brandpixelstudio.site
+                  <a href="mailto:partners@rivoauralive.com" className="text-sm text-primary hover:underline">
+                    partners@rivoauralive.com
                   </a>
                 </div>
                 <div className="bg-card border border-border/60 rounded-xl p-6">

@@ -1,5 +1,5 @@
 /*
- * HOME PAGE — Brand Pixel Studio
+ * HOME PAGE — Rivoaura Live
  * Content: User-hosted watch parties with built-in audio & chat rooms
  */
 import { Link } from "wouter";

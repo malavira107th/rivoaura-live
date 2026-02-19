@@ -1,5 +1,5 @@
 /*
- * PROFILE PAGE — Brand Pixel Studio
+ * PROFILE PAGE — Rivoaura Live
  * Allows users to edit their name, favorite team, and password.
  */
 import { useState, useEffect } from "react";
