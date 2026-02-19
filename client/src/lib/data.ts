@@ -4,12 +4,12 @@
 export const SITE_NAME = "Rivoaura Live";
 export const SITE_DOMAIN = "rivoauralive.com";
 
-// Images served from CDN
-export const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/hero.jpg";
-export const COMMUNITY_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/community.jpg";
-export const AUDIO_ROOM_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/audio-room.jpg";
-export const CRICKET_ACTION_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/cricket-action.jpg";
-export const HOW_IT_WORKS_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663073602365/SKAJHsMmNePfWoSaEf6sA3/brand-assets/how-it-works-bg.jpg";
+// Images served from local assets
+export const HERO_IMAGE = "/images/hero.webp";
+export const COMMUNITY_IMAGE = "/images/community.webp";
+export const AUDIO_ROOM_IMAGE = "/images/audio-room.webp";
+export const CRICKET_ACTION_IMAGE = "/images/cricket-action.webp";
+export const HOW_IT_WORKS_BG = "/images/how-it-works-bg.webp";
 
 export type EventFormat = "T20" | "ODI" | "Test";
 export type EventLeague = "Premier League" | "International" | "Regional Cup" | "Super League" | "Championship";
