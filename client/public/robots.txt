@@ -1,0 +1,11 @@
+# Robots.txt for Rivoaura Live
+# Allow all bots to crawl all pages
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://rivoauralive.com/sitemap.xml
+
+# Crawl delay (optional, helps prevent server overload)
+Crawl-delay: 1

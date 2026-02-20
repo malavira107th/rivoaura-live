@@ -1,14 +1,27 @@
-# Rivoaura Live - Button Functionality Fixes
+# Rivoaura Live - SEO & Bot Crawling Optimization
 
-## Button Audit & Fixes
-- [ ] Audit all buttons on homepage
-- [x] "Sign In" button - show login message (handled by Navbar)
-- [x] "Host a Watch Party" button - show login required
-- [x] "Browse Public Parties" button - show login required
-- [x] Footer "Host a Party" - show login required
-- [x] Footer "Browse Parties" - show login required
-- [ ] Footer "Public Parties" - show login required
-- [ ] Navigation links (Watch Parties, FAQ, Contact) - create placeholder pages or show coming soon
-- [ ] Test all button click handlers
-- [ ] Deploy fixes to Vercel
-- [ ] Verify on live site
+## SEO Issues to Fix
+- [x] Audit current HTML for bot accessibility
+- [x] Add comprehensive meta tags (title, description, keywords, OG tags)
+- [x] Add structured data (JSON-LD) for Organization, WebSite, and WebApplication
+- [x] Ensure all content is in HTML (added noscript fallback with full content)
+- [x] Add robots.txt file
+- [x] Add sitemap.xml
+- [ ] Optimize for Google's Mobile-Friendly test
+- [ ] Test with Google Search Console Rich Results
+- [ ] Verify no cloaking (same content for bots and users)
+- [ ] Deploy and verify with Google bot crawler
+
+## Google Policy Compliance
+- [ ] No cloaking - same content for all users
+- [ ] All text content in HTML
+- [ ] Proper meta descriptions
+- [ ] No hidden text or links
+- [ ] Mobile-friendly design
+
+
+## Image Issues
+- [x] Check which images are not loading (CloudFront URLs were broken)
+- [x] Fix broken image URLs (downloaded from Unsplash, saved locally)
+- [x] Ensure all images are accessible (all images now in /client/public/)
+- [ ] Test images on live site (pending deployment)
