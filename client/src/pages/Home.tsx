@@ -1,4 +1,4 @@
-/**
+/*
  * HOME PAGE — Rivoaura Live (Static Version - Full Featured)
  * Content: User-hosted watch parties with built-in audio & chat rooms
  */
@@ -8,8 +8,13 @@ import { ArrowRight, Headphones, UserPlus, Search, Shield, Mic2, Quote, Plus, Us
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { HERO_IMAGE, COMMUNITY_IMAGE, AUDIO_ROOM_IMAGE, HOW_IT_WORKS_BG, TESTIMONIALS } from "@/lib/data";
+// Using browser alert for now
 
 export default function Home() {
+  const handleLoginRequired = (feature: string) => {
+    alert(`Please sign in to ${feature}.\n\nUser registration and login coming soon! The platform is currently in preview mode.`);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
@@ -69,20 +74,20 @@ export default function Home() {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="flex flex-col sm:flex-row gap-3"
               >
-                <Link
-                  href="/events/create"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                <button
+                  onClick={() => handleLoginRequired("host a watch party")}
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   Host a Watch Party
-                </Link>
-                <Link
-                  href="/events"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg border border-border bg-card/50 text-foreground font-semibold text-sm hover:bg-card transition-all"
+                </button>
+                <button
+                  onClick={() => handleLoginRequired("browse public parties")}
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg border border-border bg-card/50 text-foreground font-semibold text-sm hover:bg-card transition-all cursor-pointer"
                 >
                   Browse Public Parties
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </button>
               </motion.div>
 
               {/* Compliance Notice */}
@@ -107,27 +112,27 @@ export default function Home() {
       {/* ===== HOW IT WORKS ===== */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={HOW_IT_WORKS_BG} alt="" className="w-full h-full object-cover opacity-40" />
-          <div className="absolute inset-0 bg-background/80" />
+          <img src={HOW_IT_WORKS_BG} alt="" className="w-full h-full object-cover opacity-10" />
         </div>
 
         <div className="container relative z-10">
-          <div className="text-center mb-14">
+          <div className="text-center mb-12">
             <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-3">
               HOW IT WORKS
             </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">
+            <p className="text-muted-foreground max-w-md mx-auto">
               Whether you want to host your own party or join someone else's — it takes less than a minute.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* HOST PATH */}
-            <div className="bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl p-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                <Plus className="w-3.5 h-3.5 text-primary" />
-                <span className="text-xs font-semibold text-primary uppercase tracking-wide">I Want to Host</span>
+            <div className="bg-card/80 backdrop-blur-sm border border-border/60 rounded-xl p-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 mb-6">
+                <Plus className="w-3 h-3 text-primary" />
+                <span className="text-xs font-bold text-primary tracking-wide uppercase">I Want to Host</span>
               </div>
+
               <div className="space-y-6">
                 {[
                   { step: "01", title: "Create Your Party", desc: "Pick the match, set your capacity (10 friends or 10,000 fans), and write your party rules." },
@@ -135,9 +140,13 @@ export default function Home() {
                   { step: "03", title: "Go Live & Moderate", desc: "When the match starts, your audio room goes live. Control who speaks, mute or remove anyone. It's your party." },
                 ].map((item) => (
                   <div key={item.step} className="flex gap-4">
-                    <div className="font-display text-2xl font-bold text-primary/30 shrink-0 w-8">{item.step}</div>
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center">
+                        <span className="text-sm font-bold text-primary">{item.step}</span>
+                      </div>
+                    </div>
                     <div>
-                      <h4 className="font-display text-sm font-bold mb-1">{item.title}</h4>
+                      <h3 className="font-display text-base font-bold mb-1">{item.title}</h3>
                       <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
@@ -147,10 +156,11 @@ export default function Home() {
 
             {/* JOIN PATH */}
             <div className="bg-card/80 backdrop-blur-sm border border-border/60 rounded-xl p-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/50 border border-border/60 mb-6">
-                <Users className="w-3.5 h-3.5 text-foreground" />
-                <span className="text-xs font-semibold text-foreground uppercase tracking-wide">I Want to Join</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 mb-6">
+                <Users className="w-3 h-3 text-primary" />
+                <span className="text-xs font-bold text-primary tracking-wide uppercase">I Want to Join</span>
               </div>
+
               <div className="space-y-6">
                 {[
                   { step: "01", title: "Browse Public Parties", desc: "Explore upcoming watch parties on the listing page. Filter by match, format, or league." },
@@ -158,9 +168,13 @@ export default function Home() {
                   { step: "03", title: "Join the Room", desc: "When the match starts, join the live audio room. Listen in, chat, or request to speak." },
                 ].map((item) => (
                   <div key={item.step} className="flex gap-4">
-                    <div className="font-display text-2xl font-bold text-muted-foreground/30 shrink-0 w-8">{item.step}</div>
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center">
+                        <span className="text-sm font-bold text-primary">{item.step}</span>
+                      </div>
+                    </div>
                     <div>
-                      <h4 className="font-display text-sm font-bold mb-1">{item.title}</h4>
+                      <h3 className="font-display text-base font-bold mb-1">{item.title}</h3>
                       <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
@@ -171,27 +185,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== FEATURES — WHAT YOU GET ===== */}
-      <section className="py-20 border-y border-border/50">
+      {/* ===== FEATURES SECTION ===== */}
+      <section className="py-24 border-y border-border/50">
         <div className="container">
-          <div className="text-center mb-14">
+          <div className="text-center mb-12">
             <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-3">
               EVERYTHING YOU NEED.
               <br />
               <span className="text-gradient-saffron">NOTHING YOU DON'T.</span>
             </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">
+            <p className="text-muted-foreground max-w-md mx-auto">
               Built for cricket fans, by cricket fans. Every feature is designed to make your watch party unforgettable.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
               { icon: Headphones, title: "Built-in Audio Rooms", desc: "Every party gets a live audio room. No Zoom links, no third-party apps. Just click and talk." },
               { icon: Settings, title: "Full Host Control", desc: "Set capacity, write rules, mute or remove users, control who speaks. Your party, your rules." },
               { icon: Globe, title: "Public Parties", desc: "List your party publicly so any fan can discover and join. Great for building a following." },
               { icon: Lock, title: "Private Parties", desc: "Keep it exclusive with a private invite link. Perfect for watching with just your friends." },
-              { icon: Users, title: "Waitlist System", desc: "Party full? Fans join the waitlist and get notified automatically when a spot opens up." },
+              { icon: UserPlus, title: "Waitlist System", desc: "Party full? Fans join the waitlist and get notified automatically when a spot opens up." },
               { icon: Shield, title: "Safe & Moderated", desc: "Hosts moderate their own parties. Report abusive users with one click. Zero tolerance for toxicity." },
             ].map((item, i) => (
               <motion.div
@@ -249,8 +263,8 @@ export default function Home() {
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.location}</p>
+                    <p className="text-sm font-semibold">{t.name}</p>
+                    <p className="text-xs text-muted-foreground">{t.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -293,20 +307,20 @@ export default function Home() {
                 Stop watching alone. Host a party for your crew or join a public one. It's free, it's live, and it's built for cricket fans.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link
-                  href="/events/create"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                <button
+                  onClick={() => handleLoginRequired("host your party")}
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   Host Your Party
-                </Link>
-                <Link
-                  href="/events"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border border-border bg-card/50 text-foreground font-semibold hover:bg-card transition-all"
+                </button>
+                <button
+                  onClick={() => handleLoginRequired("browse parties")}
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border border-border bg-card/50 text-foreground font-semibold hover:bg-card transition-all cursor-pointer"
                 >
                   Browse Parties
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </button>
               </div>
             </div>
           </div>

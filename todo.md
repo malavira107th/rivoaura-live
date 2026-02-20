@@ -1,33 +1,14 @@
-# Rivoaura Live - Full Backend Deployment to Vercel
+# Rivoaura Live - Button Functionality Fixes
 
-## Phase 1: Logo Fix
-- [x] Download logo from CDN
-- [x] Add logo to client/public/logo.webp
-- [x] Update Navbar.tsx to use /logo.webp
-- [x] Test logo displays correctly
-
-## Phase 2: Vercel Backend Configuration
-- [ ] Create api/ directory for serverless functions
-- [ ] Create api/trpc/[trpc].ts handler
-- [ ] Update vercel.json for API routes
-- [ ] Configure build settings
-
-## Phase 3: Database & Environment
-- [ ] Get database connection string from user
-- [ ] Set DATABASE_URL in Vercel
-- [ ] Set JWT_SECRET in Vercel
-- [ ] Test database connection
-
-## Phase 4: Remove Coming Soon
-- [ ] Update Home.tsx - remove all "Coming Soon" text
-- [ ] Enable Host a Party button
-- [ ] Enable all CTA buttons
-- [ ] Update button states to active
-
-## Phase 5: Deploy & Test
-- [ ] Push all changes to GitHub
-- [ ] Deploy to Vercel
-- [ ] Test user registration
-- [ ] Test user login
-- [ ] Test event creation
-- [ ] Verify all features work
+## Button Audit & Fixes
+- [ ] Audit all buttons on homepage
+- [x] "Sign In" button - show login message (handled by Navbar)
+- [x] "Host a Watch Party" button - show login required
+- [x] "Browse Public Parties" button - show login required
+- [x] Footer "Host a Party" - show login required
+- [x] Footer "Browse Parties" - show login required
+- [ ] Footer "Public Parties" - show login required
+- [ ] Navigation links (Watch Parties, FAQ, Contact) - create placeholder pages or show coming soon
+- [ ] Test all button click handlers
+- [ ] Deploy fixes to Vercel
+- [ ] Verify on live site
