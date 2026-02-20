@@ -15,7 +15,12 @@ const LOGO_URL = "/logo.webp";
 
 export default function Login() {
   const [, setLocation] = useLocation();
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  
+  // Get tab from URL params (e.g., /login?tab=signup)
+  const params = new URLSearchParams(window.location.search);
+  const initialTab = params.get("tab") === "signup" ? "signup" : "login";
+  
+  const [mode, setMode] = useState<"login" | "signup">(initialTab);
   const [showPassword, setShowPassword] = useState(false);
   const utils = trpc.useUtils();
 
@@ -26,7 +31,6 @@ export default function Login() {
   const [favoriteTeam, setFavoriteTeam] = useState("");
 
   // Get returnTo from URL params
-  const params = new URLSearchParams(window.location.search);
   const returnTo = params.get("returnTo") || "/";
 
   const loginMutation = trpc.auth.login.useMutation({

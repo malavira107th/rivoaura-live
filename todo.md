@@ -1,20 +1,11 @@
-# Rivoaura Live - Footer Logo & Login Redirect Fixes
+# Rivoaura Live - Footer Link Fixes
 
-## Footer Logo Issue
-- [x] Check Footer component for logo
-- [x] Add logo to footer if missing (updated to use /logo.webp)
-- [ ] Verify logo displays correctly in footer (pending deployment)
-
-## Button Redirect to Login
-- [x] Create /login page component (already exists)
-- [x] Update "Host a Watch Party" button to redirect to /login
-- [x] Update "Browse Public Parties" button to redirect to /login
-- [x] Update footer "Host Your Party" button to redirect to /login
-- [x] Update footer "Browse Parties" button to redirect to /login
-- [x] Remove alert() calls, use navigation instead
-- [ ] Test all button redirects (pending build)
-
-## Deployment
-- [ ] Build and test locally
-- [ ] Push to GitHub
-- [ ] Verify on live site
+## Footer Link Issues
+- [x] Check Footer.tsx for "Host a Party" link
+- [x] Identify why footer link shows error (was linking to /events/create which doesn't exist)
+- [x] Update "Host a Party" to redirect to /login?tab=signup
+- [x] Update "Browse Parties" link to redirect to /login?tab=signup
+- [x] Ensure all footer navigation links work
+- [ ] Test all footer links locally (pending build)
+- [ ] Deploy fixes to Vercel
+- [ ] Verify footer links on live site
