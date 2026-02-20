@@ -8,12 +8,7 @@ import { ArrowRight, Headphones, UserPlus, Search, Shield, Mic2, Quote, Plus, Us
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { HERO_IMAGE, COMMUNITY_IMAGE, AUDIO_ROOM_IMAGE, HOW_IT_WORKS_BG, TESTIMONIALS } from "@/lib/data";
-// Using browser alert for now
-
 export default function Home() {
-  const handleLoginRequired = (feature: string) => {
-    alert(`Please sign in to ${feature}.\n\nUser registration and login coming soon! The platform is currently in preview mode.`);
-  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -74,20 +69,20 @@ export default function Home() {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="flex flex-col sm:flex-row gap-3"
               >
-                <button
-                  onClick={() => handleLoginRequired("host a watch party")}
+                <Link
+                  href="/login"
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   Host a Watch Party
-                </button>
-                <button
-                  onClick={() => handleLoginRequired("browse public parties")}
+                </Link>
+                <Link
+                  href="/login"
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg border border-border bg-card/50 text-foreground font-semibold text-sm hover:bg-card transition-all cursor-pointer"
                 >
                   Browse Public Parties
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
               </motion.div>
 
               {/* Compliance Notice */}
@@ -307,20 +302,20 @@ export default function Home() {
                 Stop watching alone. Host a party for your crew or join a public one. It's free, it's live, and it's built for cricket fans.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <button
-                  onClick={() => handleLoginRequired("host your party")}
+                <Link
+                  href="/login"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   Host Your Party
-                </button>
-                <button
-                  onClick={() => handleLoginRequired("browse parties")}
+                </Link>
+                <Link
+                  href="/login"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border border-border bg-card/50 text-foreground font-semibold hover:bg-card transition-all cursor-pointer"
                 >
                   Browse Parties
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/rivoaura-live-assets/logo.webp"
+                src="/logo.webp"
                 alt="Rivoaura Live Logo"
                 className="w-8 h-8 rounded-lg"
               />

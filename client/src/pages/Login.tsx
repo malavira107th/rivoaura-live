@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/rivoaura-live-assets/logo-large.webp";
+const LOGO_URL = "/logo.webp";
 
 export default function Login() {
   const [, setLocation] = useLocation();

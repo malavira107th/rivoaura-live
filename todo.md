@@ -1,27 +1,20 @@
-# Rivoaura Live - SEO & Bot Crawling Optimization
+# Rivoaura Live - Footer Logo & Login Redirect Fixes
 
-## SEO Issues to Fix
-- [x] Audit current HTML for bot accessibility
-- [x] Add comprehensive meta tags (title, description, keywords, OG tags)
-- [x] Add structured data (JSON-LD) for Organization, WebSite, and WebApplication
-- [x] Ensure all content is in HTML (added noscript fallback with full content)
-- [x] Add robots.txt file
-- [x] Add sitemap.xml
-- [ ] Optimize for Google's Mobile-Friendly test
-- [ ] Test with Google Search Console Rich Results
-- [ ] Verify no cloaking (same content for bots and users)
-- [ ] Deploy and verify with Google bot crawler
+## Footer Logo Issue
+- [x] Check Footer component for logo
+- [x] Add logo to footer if missing (updated to use /logo.webp)
+- [ ] Verify logo displays correctly in footer (pending deployment)
 
-## Google Policy Compliance
-- [ ] No cloaking - same content for all users
-- [ ] All text content in HTML
-- [ ] Proper meta descriptions
-- [ ] No hidden text or links
-- [ ] Mobile-friendly design
+## Button Redirect to Login
+- [x] Create /login page component (already exists)
+- [x] Update "Host a Watch Party" button to redirect to /login
+- [x] Update "Browse Public Parties" button to redirect to /login
+- [x] Update footer "Host Your Party" button to redirect to /login
+- [x] Update footer "Browse Parties" button to redirect to /login
+- [x] Remove alert() calls, use navigation instead
+- [ ] Test all button redirects (pending build)
 
-
-## Image Issues
-- [x] Check which images are not loading (CloudFront URLs were broken)
-- [x] Fix broken image URLs (downloaded from Unsplash, saved locally)
-- [x] Ensure all images are accessible (all images now in /client/public/)
-- [ ] Test images on live site (pending deployment)
+## Deployment
+- [ ] Build and test locally
+- [ ] Push to GitHub
+- [ ] Verify on live site
