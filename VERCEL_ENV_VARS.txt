@@ -1,0 +1,11 @@
+# Environment Variables for Vercel Deployment
+# Add these in Vercel Dashboard → Project Settings → Environment Variables
+
+# JWT Secret (for authentication)
+JWT_SECRET=b06ee2b6d08edfd8ad4fe056aeda74b8f1eaacd6ae9926eab3f3800e768c803f
+
+# Database URL (your MySQL/TiDB connection string)
+DATABASE_URL=your_database_url_here
+
+# Node Environment
+NODE_ENV=production

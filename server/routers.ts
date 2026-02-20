@@ -4,7 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
-import { sdk } from "./_core/sdk";
+import { createToken } from "./_core/auth";
 import {
   getAllEvents,
   getEventBySlug,
@@ -72,15 +72,17 @@ export const appRouter = router({
           throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to create account." });
         }
 
-        // Create session token
-        const sessionToken = await sdk.createSessionToken(user.openId, {
-          name: user.name || "",
-          expiresInMs: ONE_YEAR_MS,
-        });
+        // Create JWT session token
+        const sessionToken = await createToken(user.id.toString(), user.email);
 
         // Set cookie
-        const cookieOptions = getSessionCookieOptions(ctx.req);
-        ctx.res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+        ctx.res.cookie(COOKIE_NAME, sessionToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          maxAge: ONE_YEAR_MS,
+          path: "/",
+        });
 
         const { password, ...safeUser } = user;
         return { success: true, user: safeUser };
@@ -106,15 +108,17 @@ export const appRouter = router({
         // Update last signed in
         await updateUserLastSignedIn(user.id);
 
-        // Create session token
-        const sessionToken = await sdk.createSessionToken(user.openId, {
-          name: user.name || "",
-          expiresInMs: ONE_YEAR_MS,
-        });
+        // Create JWT session token
+        const sessionToken = await createToken(user.id.toString(), user.email);
 
         // Set cookie
-        const cookieOptions = getSessionCookieOptions(ctx.req);
-        ctx.res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+        ctx.res.cookie(COOKIE_NAME, sessionToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          maxAge: ONE_YEAR_MS,
+          path: "/",
+        });
 
         const { password, ...safeUser } = user;
         return { success: true, user: safeUser };
