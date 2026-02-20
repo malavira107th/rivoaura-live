@@ -1,21 +1,5 @@
 {
   "buildCommand": "pnpm run build:client",
   "outputDirectory": "dist",
-  "installCommand": "pnpm install",
-  "framework": null,
-  "functions": {
-    "api/**/*.ts": {
-      "runtime": "@vercel/node@3.2.28"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/api/trpc/:path*",
-      "destination": "/api/trpc/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "installCommand": "pnpm install"
 }
