@@ -31,7 +31,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <img
-            src="/images/logo.webp"
+            src="https://d2xsxph8kpxj0f.cloudfront.net/rivoaura-live-assets/logo.webp"
             alt="Rivoaura Live Logo"
             className="w-9 h-9 rounded-lg"
           />

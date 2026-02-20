@@ -5,11 +5,11 @@ export const SITE_NAME = "Rivoaura Live";
 export const SITE_DOMAIN = "rivoauralive.com";
 
 // Images served from local assets
-export const HERO_IMAGE = "/images/hero.webp";
-export const COMMUNITY_IMAGE = "/images/community.webp";
-export const AUDIO_ROOM_IMAGE = "/images/audio-room.webp";
-export const CRICKET_ACTION_IMAGE = "/images/cricket-action.webp";
-export const HOW_IT_WORKS_BG = "/images/how-it-works-bg.webp";
+export const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/rivoaura-live-assets/hero.webp";
+export const COMMUNITY_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/rivoaura-live-assets/community.webp";
+export const AUDIO_ROOM_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/rivoaura-live-assets/audio-room.webp";
+export const CRICKET_ACTION_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/rivoaura-live-assets/cricket-action.webp";
+export const HOW_IT_WORKS_BG = "https://d2xsxph8kpxj0f.cloudfront.net/rivoaura-live-assets/how-it-works-bg.webp";
 
 export type EventFormat = "T20" | "ODI" | "Test";
 export type EventLeague = "Premier League" | "International" | "Regional Cup" | "Super League" | "Championship";

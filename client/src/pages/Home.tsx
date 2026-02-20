@@ -92,25 +92,18 @@ export default function Home() {
                 </Link>
               </motion.div>
 
-              {/* Social Proof */}
+              {/* Compliance Notice */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.7, delay: 0.5 }}
-                className="mt-10 flex items-center gap-3"
+                className="mt-10 p-4 rounded-lg border border-border/60 bg-card/50"
               >
-                <div className="flex -space-x-2">
-                  {["RD", "PN", "AS", "VK"].map((initials, i) => (
-                    <div
-                      key={i}
-                      className="w-8 h-8 rounded-full bg-secondary border-2 border-background flex items-center justify-center text-[10px] font-bold text-muted-foreground"
-                    >
-                      {initials}
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  <span className="text-foreground font-semibold">Thousands of fans</span> hosting and joining parties worldwide
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground">Important:</strong> Rivoaura Live is a community platform for live discussion during cricket matches. Match viewing requires your own official broadcast subscription (TV, streaming service, etc.). We do not provide live match streams. By using this platform, you agree to our{" "}
+                  <Link href="/terms" className="text-primary hover:underline">Terms & Conditions</Link> and{" "}
+                  <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>. For support, contact{" "}
+                  <a href="mailto:support@rivoauralive.com" className="text-primary hover:underline">support@rivoauralive.com</a>.
                 </p>
               </motion.div>
             </div>
@@ -515,7 +508,7 @@ export default function Home() {
                 <span className="text-gradient-saffron">YOUR RULES.</span>
               </h2>
               <p className="text-muted-foreground max-w-md mx-auto mb-8">
-                Stop watching alone. Host a party for your crew or join a public one with thousands of fans. It's free, it's live, and it's built for cricket.
+                Stop watching alone. Host a party for your crew or join a public one. It's free, it's live, and it's built for cricket fans.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link
