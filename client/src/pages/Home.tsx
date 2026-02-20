@@ -265,7 +265,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { value: "100%", label: "Free Forever" },
-              { value: "Coming", label: "Soon" },
+              { value: "Live", label: "Audio Rooms" },
               { value: "You", label: "Control Everything" },
               { value: "0", label: "Tolerance for Abuse" },
             ].map((stat) => (
