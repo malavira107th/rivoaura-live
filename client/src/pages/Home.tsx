@@ -69,10 +69,13 @@ export default function Home() {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="flex flex-col sm:flex-row gap-3"
               >
-                <div className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-primary/60 text-primary-foreground font-semibold text-sm cursor-not-allowed">
+                <Link
+                  href="/events/create"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                >
                   <Plus className="w-4 h-4" />
-                  Host a Watch Party (Coming Soon)
-                </div>
+                  Host a Watch Party
+                </Link>
                 <Link
                   href="/events"
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg border border-border bg-card/50 text-foreground font-semibold text-sm hover:bg-card transition-all"
@@ -290,10 +293,13 @@ export default function Home() {
                 Stop watching alone. Host a party for your crew or join a public one. It's free, it's live, and it's built for cricket fans.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <div className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary/60 text-primary-foreground font-semibold cursor-not-allowed">
+                <Link
+                  href="/events/create"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                >
                   <Plus className="w-4 h-4" />
-                  Host Your Party (Coming Soon)
-                </div>
+                  Host Your Party
+                </Link>
                 <Link
                   href="/events"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border border-border bg-card/50 text-foreground font-semibold hover:bg-card transition-all"

@@ -1,5 +1,18 @@
 {
-  "buildCommand": "pnpm run build:client",
+  "buildCommand": "pnpm install && pnpm run build:client",
   "outputDirectory": "dist/public",
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/api/trpc/(.*)",
+      "destination": "/api/trpc/[trpc]"
+    }
+  ],
+  "functions": {
+    "api/trpc/[trpc].ts": {
+      "runtime": "nodejs20.x",
+      "maxDuration": 10
+    }
+  }
 }

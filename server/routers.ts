@@ -296,7 +296,7 @@ export const appRouter = router({
         if (seatsTaken >= event.maxCapacity) {
           throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Event is full. Please join the waitlist." });
         }
-        await registerForEvent(ctx.user.id, input.eventId);
+        await registerForEvent({ userId: ctx.user.id, eventId: input.eventId });
         return { success: true, message: "You are registered!" };
       }),
 
@@ -327,7 +327,7 @@ export const appRouter = router({
         if (existing) {
           throw new TRPCError({ code: "CONFLICT", message: "You are already on the waitlist." });
         }
-        await joinWaitlist(ctx.user.id, input.eventId);
+        await joinWaitlist({ userId: ctx.user.id, eventId: input.eventId });
         return { success: true, message: "You've joined the waitlist!" };
       }),
   }),
