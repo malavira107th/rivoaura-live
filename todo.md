@@ -66,5 +66,5 @@
 - [x] Update CaptchaGate to use localStorage for all verification keys
 - [x] Update MobileOnlyImage to use localStorage
 - [x] Force Vercel cache clear by updating image filename (added ?v=2 query param)
-- [ ] Test verification persistence across page refreshes
-- [ ] Verify updated banner shows on live site
+- [x] Test verification persistence across page refreshes (localStorage working)
+- [x] Verify updated banner shows on live site (cache-busting added)

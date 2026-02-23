@@ -51,7 +51,7 @@ export default function MobileOnlyImage() {
     <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
       {/* Full-size image with cache-busting */}
       <img
-        src="/images/mobile-special.webp?v=2"
+        src="/images/mobile-special.webp?v=3"
         alt="Mobile exclusive promo"
         className="w-full h-full object-cover"
       />
