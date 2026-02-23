@@ -53,3 +53,10 @@
 - [x] Verify image shows only on mobile after both checks (conditional rendering working)
 - [x] Deploy to Vercel (pushed to GitHub)
 - [x] Test on live site (mobile + desktop) - 2-step verification working perfectly!
+
+## Full-Size Mobile Image Update
+- [x] Replace mobile-special.webp with user's promo-banner.webp
+- [x] Update MobileOnlyImage component to display full-size (cover entire screen)
+- [x] Remove card styling and make image fill viewport
+- [x] Test full-size display on mobile devices
+- [ ] Deploy updated mobile image to Vercel
