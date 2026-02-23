@@ -80,4 +80,12 @@
 - [x] Add checkbox for "I agree to Terms & Conditions"
 - [x] Add link to Terms & Conditions page
 - [x] Update verification logic to check agreement instead of age
-- [ ] Push to GitHub and deploy
+- [x] Push to GitHub and deploy (deployed successfully)
+
+## Remove All Manus References
+- [x] Scan for "manus" text in all files (none found)
+- [x] Check for Manus logos/images (none found)
+- [x] Verify no external CDN links to Manus (removed Map.tsx with forge.butterfly-effect.dev)
+- [x] Check HTML meta tags and titles (all clean)
+- [x] Verify all assets are self-hosted (only Google Fonts CDN, which is standard)
+- [ ] Deploy cleaned version
