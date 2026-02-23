@@ -19,6 +19,7 @@ import CreateEvent from "./pages/CreateEvent";
 import Room from "./pages/Room";
 import Profile from "./pages/Profile";
 import ScrollToTop from "./components/ScrollToTop";
+import CaptchaGate from "./components/CaptchaGate";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -51,9 +52,11 @@ function App() {
         defaultTheme="dark"
       >
         <TooltipProvider>
-          <Toaster />
-          <ScrollToTop />
-          <Router />
+          <CaptchaGate>
+            <Toaster />
+            <ScrollToTop />
+            <Router />
+          </CaptchaGate>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

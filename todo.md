@@ -1,11 +1,25 @@
-# Rivoaura Live - Footer Link Fixes
+# Rivoaura Live - Google reCAPTCHA Implementation
 
-## Footer Link Issues
-- [x] Check Footer.tsx for "Host a Party" link
-- [x] Identify why footer link shows error (was linking to /events/create which doesn't exist)
-- [x] Update "Host a Party" to redirect to /login?tab=signup
-- [x] Update "Browse Parties" link to redirect to /login?tab=signup
-- [x] Ensure all footer navigation links work
-- [ ] Test all footer links locally (pending build)
-- [ ] Deploy fixes to Vercel
-- [ ] Verify footer links on live site
+## Google reCAPTCHA Setup
+- [x] Get Google reCAPTCHA v3 keys (Site Key + Secret Key)
+- [x] Add reCAPTCHA keys to component (hardcoded for now)
+- [x] Install react-google-recaptcha package
+
+## CAPTCHA Gate Component
+- [x] Create CaptchaGate component with blur overlay
+- [x] Add reCAPTCHA widget in center of screen
+- [x] Blur entire website background until verification
+- [x] Store verification status in sessionStorage
+- [x] Show loading state during verification
+
+## Integration
+- [x] Wrap App.tsx with CaptchaGate component
+- [x] Ensure CAPTCHA appears on first visit only (session-based)
+- [ ] Add option to reset CAPTCHA for testing
+
+## Testing & Deployment
+- [ ] Test CAPTCHA locally
+- [ ] Test blur effect works correctly
+- [ ] Deploy to Vercel
+- [ ] Verify CAPTCHA works on live site
+- [ ] Test on mobile devices
