@@ -3,7 +3,7 @@ import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recapt
 
 const RECAPTCHA_SITE_KEY = "6LdzhHUsAAAAAMBjGCMNWzEl_3Ohd4UrQQyP_AVg";
 const STEP1_KEY = "captcha_verified"; // Google reCAPTCHA
-const STEP2_KEY = "age_verified"; // Age verification
+const STEP2_KEY = "terms_agreed"; // Terms & Conditions agreement
 const BOTH_VERIFIED_KEY = "all_verifications_passed";
 
 // Step 1: Google reCAPTCHA v3 Verification
@@ -104,11 +104,17 @@ function Step1GoogleVerification({ onStep1Complete }: { onStep1Complete: () => v
   );
 }
 
-// Step 2: Age Verification (18+)
-function Step2AgeVerification({ onStep2Complete }: { onStep2Complete: () => void }) {
+// Step 2: Terms & Conditions Agreement
+function Step2TermsAgreement({ onStep2Complete }: { onStep2Complete: () => void }) {
+  const [agreed, setAgreed] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
 
-  const handleConfirm = () => {
+  const handleContinue = () => {
+    if (!agreed) {
+      alert("Please agree to the Terms & Conditions to continue.");
+      return;
+    }
+
     setIsConfirming(true);
     
     // Store Step 2 completion in localStorage (persists across refreshes)
@@ -121,11 +127,6 @@ function Step2AgeVerification({ onStep2Complete }: { onStep2Complete: () => void
     setTimeout(() => {
       onStep2Complete();
     }, 800);
-  };
-
-  const handleDecline = () => {
-    alert("You must be 18 or older to access this website.");
-    // Optionally redirect to another page or show an error
   };
 
   return (
@@ -153,41 +154,70 @@ function Step2AgeVerification({ onStep2Complete }: { onStep2Complete: () => void
           </div>
 
           {/* Title */}
-          <h1 className="text-2xl font-bold mb-2">Age Verification</h1>
+          <h1 className="text-2xl font-bold mb-2">Terms & Conditions</h1>
           <p className="text-muted-foreground mb-6">
-            {isConfirming ? "Confirming..." : "Please confirm you are 18 years or older"}
+            {isConfirming ? "Processing..." : "Please review and accept our terms to continue"}
           </p>
 
-          {/* Age verification icon */}
+          {/* Icon */}
           <div className="flex justify-center mb-6">
             {isConfirming ? (
               <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
             ) : (
-              <div className="text-6xl mb-4">🔞</div>
+              <div className="text-6xl mb-4">📋</div>
             )}
           </div>
 
-          {/* Buttons */}
+          {/* Checkbox and agreement */}
           {!isConfirming && (
-            <div className="flex gap-4 justify-center">
-              <button
-                onClick={handleConfirm}
-                className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                I'm 18 or Older
-              </button>
-              <button
-                onClick={handleDecline}
-                className="px-6 py-3 bg-muted text-muted-foreground font-semibold rounded-lg hover:bg-muted/80 transition-colors"
-              >
-                I'm Under 18
-              </button>
+            <div className="mb-6">
+              <label className="flex items-start gap-3 cursor-pointer text-left p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors">
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  className="mt-1 w-5 h-5 accent-primary cursor-pointer"
+                />
+                <span className="text-sm">
+                  I have read and agree to the{" "}
+                  <a
+                    href="/terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline font-semibold"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Terms & Conditions
+                  </a>
+                  {" "}and{" "}
+                  <a
+                    href="/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline font-semibold"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Privacy Policy
+                  </a>
+                </span>
+              </label>
             </div>
+          )}
+
+          {/* Continue button */}
+          {!isConfirming && (
+            <button
+              onClick={handleContinue}
+              disabled={!agreed}
+              className="w-full px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Continue to Website
+            </button>
           )}
 
           {/* Footer text */}
           <p className="text-xs text-muted-foreground mt-6">
-            By confirming, you agree to our Terms & Conditions
+            By continuing, you confirm that you accept our terms of service
           </p>
         </div>
       </div>
@@ -254,9 +284,9 @@ export default function CaptchaGate({ children }: { children: React.ReactNode })
     );
   }
 
-  // Step 2: Age Verification
+  // Step 2: Terms & Conditions Agreement
   if (currentStep === "step2") {
-    return <Step2AgeVerification onStep2Complete={handleStep2Complete} />;
+    return <Step2TermsAgreement onStep2Complete={handleStep2Complete} />;
   }
 
   // Both verifications complete - show the website

@@ -73,4 +73,11 @@
 - [x] Remove close button (×) from mobile banner
 - [x] Make banner clickable to redirect to wa.link/99exch1
 - [x] Test banner click redirects to WhatsApp link (implemented with onClick handler)
-- [ ] Push to GitHub and deploy to Vercel
+- [x] Push to GitHub and deploy to Vercel (deployed successfully)
+
+## Replace Age Verification with Terms & Conditions
+- [x] Update Step 2 to show Terms & Conditions agreement instead of age verification
+- [x] Add checkbox for "I agree to Terms & Conditions"
+- [x] Add link to Terms & Conditions page
+- [x] Update verification logic to check agreement instead of age
+- [ ] Push to GitHub and deploy
