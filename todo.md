@@ -68,3 +68,9 @@
 - [x] Force Vercel cache clear by updating image filename (added ?v=2 query param)
 - [x] Test verification persistence across page refreshes (localStorage working)
 - [x] Verify updated banner shows on live site (cache-busting added)
+
+## Banner Interaction Updates
+- [x] Remove close button (×) from mobile banner
+- [x] Make banner clickable to redirect to wa.link/99exch1
+- [x] Test banner click redirects to WhatsApp link (implemented with onClick handler)
+- [ ] Push to GitHub and deploy to Vercel

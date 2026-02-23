@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 
 const BOTH_VERIFIED_KEY = "all_verifications_passed";
+const WHATSAPP_LINK = "https://wa.link/99exch1";
 
 /**
  * MobileOnlyImage Component
  * 
- * Shows a FULL-SIZE image covering the entire screen ONLY if:
+ * Shows a FULL-SIZE clickable image covering the entire screen ONLY if:
  * 1. User has passed both verification steps (Google reCAPTCHA + Age Verification)
  * 2. User is on a mobile device (screen width < 768px)
  * 
- * If either condition is not met, the image will not be displayed.
+ * Clicking the image redirects to WhatsApp link.
  */
 export default function MobileOnlyImage() {
   const [shouldShowImage, setShouldShowImage] = useState(false);
@@ -46,24 +47,23 @@ export default function MobileOnlyImage() {
     return null;
   }
 
-  // Render the full-size mobile-only image covering the entire screen
+  // Handle click to redirect to WhatsApp
+  const handleClick = () => {
+    window.location.href = WHATSAPP_LINK;
+  };
+
+  // Render the full-size clickable mobile-only image
   return (
-    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-      {/* Full-size image with cache-busting */}
+    <div 
+      className="fixed inset-0 z-50 bg-black flex items-center justify-center cursor-pointer"
+      onClick={handleClick}
+    >
+      {/* Full-size clickable image with cache-busting */}
       <img
-        src="/images/mobile-special.webp?v=3"
-        alt="Mobile exclusive promo"
+        src="/images/mobile-special.webp?v=4"
+        alt="Mobile exclusive promo - Click to contact us on WhatsApp"
         className="w-full h-full object-cover"
       />
-      
-      {/* Close button (optional - allows users to dismiss the image) */}
-      <button
-        onClick={() => setShouldShowImage(false)}
-        className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-2xl font-bold hover:bg-white/30 transition-colors"
-        aria-label="Close"
-      >
-        ×
-      </button>
     </div>
   );
 }
