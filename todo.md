@@ -59,4 +59,12 @@
 - [x] Update MobileOnlyImage component to display full-size (cover entire screen)
 - [x] Remove card styling and make image fill viewport
 - [x] Test full-size display on mobile devices
-- [ ] Deploy updated mobile image to Vercel
+- [x] Deploy updated mobile image to Vercel (checkpoint saved)
+
+## Bug Fixes
+- [x] Fix verification persistence - change sessionStorage to localStorage
+- [x] Update CaptchaGate to use localStorage for all verification keys
+- [x] Update MobileOnlyImage to use localStorage
+- [x] Force Vercel cache clear by updating image filename (added ?v=2 query param)
+- [ ] Test verification persistence across page refreshes
+- [ ] Verify updated banner shows on live site

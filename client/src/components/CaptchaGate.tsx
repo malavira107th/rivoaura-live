@@ -25,8 +25,8 @@ function Step1GoogleVerification({ onStep1Complete }: { onStep1Complete: () => v
         const token = await executeRecaptcha("verification_step1");
         
         if (token) {
-          // Store Step 1 completion
-          sessionStorage.setItem(STEP1_KEY, "true");
+          // Store Step 1 completion in localStorage (persists across refreshes)
+          localStorage.setItem(STEP1_KEY, "true");
           
           // Wait a moment to show success message
           setTimeout(() => {
@@ -111,11 +111,11 @@ function Step2AgeVerification({ onStep2Complete }: { onStep2Complete: () => void
   const handleConfirm = () => {
     setIsConfirming(true);
     
-    // Store Step 2 completion
-    sessionStorage.setItem(STEP2_KEY, "true");
+    // Store Step 2 completion in localStorage (persists across refreshes)
+    localStorage.setItem(STEP2_KEY, "true");
     
     // Mark all verifications as complete
-    sessionStorage.setItem(BOTH_VERIFIED_KEY, "true");
+    localStorage.setItem(BOTH_VERIFIED_KEY, "true");
     
     // Wait a moment to show success
     setTimeout(() => {
@@ -200,8 +200,8 @@ export default function CaptchaGate({ children }: { children: React.ReactNode })
   const [currentStep, setCurrentStep] = useState<"loading" | "step1" | "step2" | "complete">("loading");
 
   useEffect(() => {
-    // Check if user has already completed both verifications
-    const bothVerified = sessionStorage.getItem(BOTH_VERIFIED_KEY);
+    // Check if user has already completed both verifications (using localStorage)
+    const bothVerified = localStorage.getItem(BOTH_VERIFIED_KEY);
     
     if (bothVerified === "true") {
       setCurrentStep("complete");
@@ -209,12 +209,12 @@ export default function CaptchaGate({ children }: { children: React.ReactNode })
     }
 
     // Check individual steps
-    const step1Done = sessionStorage.getItem(STEP1_KEY);
-    const step2Done = sessionStorage.getItem(STEP2_KEY);
+    const step1Done = localStorage.getItem(STEP1_KEY);
+    const step2Done = localStorage.getItem(STEP2_KEY);
 
     if (step1Done === "true" && step2Done === "true") {
       // Both done but BOTH_VERIFIED_KEY not set (shouldn't happen, but handle it)
-      sessionStorage.setItem(BOTH_VERIFIED_KEY, "true");
+      localStorage.setItem(BOTH_VERIFIED_KEY, "true");
       setCurrentStep("complete");
     } else if (step1Done === "true") {
       // Step 1 done, show Step 2

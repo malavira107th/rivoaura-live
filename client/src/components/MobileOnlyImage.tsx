@@ -16,8 +16,8 @@ export default function MobileOnlyImage() {
 
   useEffect(() => {
     const checkConditions = () => {
-      // Condition 1: Check if both verifications passed
-      const bothVerified = sessionStorage.getItem(BOTH_VERIFIED_KEY) === "true";
+      // Condition 1: Check if both verifications passed (using localStorage)
+      const bothVerified = localStorage.getItem(BOTH_VERIFIED_KEY) === "true";
       
       // Condition 2: Check if user is on mobile (screen width < 768px)
       const isMobile = window.innerWidth < 768;
@@ -49,9 +49,9 @@ export default function MobileOnlyImage() {
   // Render the full-size mobile-only image covering the entire screen
   return (
     <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-      {/* Full-size image */}
+      {/* Full-size image with cache-busting */}
       <img
-        src="/images/mobile-special.webp"
+        src="/images/mobile-special.webp?v=2"
         alt="Mobile exclusive promo"
         className="w-full h-full object-cover"
       />
