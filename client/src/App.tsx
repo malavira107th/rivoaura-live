@@ -20,6 +20,7 @@ import Room from "./pages/Room";
 import Profile from "./pages/Profile";
 import ScrollToTop from "./components/ScrollToTop";
 import CaptchaGate from "./components/CaptchaGate";
+import MobileOnlyImage from "./components/MobileOnlyImage";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -56,6 +57,7 @@ function App() {
             <Toaster />
             <ScrollToTop />
             <Router />
+            <MobileOnlyImage />
           </CaptchaGate>
         </TooltipProvider>
       </ThemeProvider>
