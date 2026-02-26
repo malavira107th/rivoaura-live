@@ -26,7 +26,7 @@ function Step1GoogleVerification({ onStep1Complete }: { onStep1Complete: () => v
         
         if (token) {
           // Store Step 1 completion in localStorage (persists across refreshes)
-          localStorage.setItem(STEP1_KEY, "true");
+          sessionStorage.setItem(STEP1_KEY, "true");
           
           // Wait a moment to show success message
           setTimeout(() => {
@@ -118,10 +118,10 @@ function Step2TermsAgreement({ onStep2Complete }: { onStep2Complete: () => void 
     setIsConfirming(true);
     
     // Store Step 2 completion in localStorage (persists across refreshes)
-    localStorage.setItem(STEP2_KEY, "true");
+    sessionStorage.setItem(STEP2_KEY, "true");
     
     // Mark all verifications as complete
-    localStorage.setItem(BOTH_VERIFIED_KEY, "true");
+    sessionStorage.setItem(BOTH_VERIFIED_KEY, "true");
     
     // Wait a moment to show success
     setTimeout(() => {
@@ -231,22 +231,21 @@ export default function CaptchaGate({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     // Check if user has already completed both verifications (using localStorage)
-    const bothVerified = localStorage.getItem(BOTH_VERIFIED_KEY);
-    
-    if (bothVerified === "true") {
+    const bothDone = sessionStorage.getItem(BOTH_VERIFIED_KEY) === "true";
+    if (bothDone) {
       setCurrentStep("complete");
       return;
     }
 
     // Check individual steps
-    const step1Done = localStorage.getItem(STEP1_KEY);
-    const step2Done = localStorage.getItem(STEP2_KEY);
+    const step1Done = sessionStorage.getItem(STEP1_KEY) === "true";
+    const step2Done = sessionStorage.getItem(STEP2_KEY) === "true";
 
-    if (step1Done === "true" && step2Done === "true") {
+    if (step1Done && step2Done) {
       // Both done but BOTH_VERIFIED_KEY not set (shouldn't happen, but handle it)
-      localStorage.setItem(BOTH_VERIFIED_KEY, "true");
+      sessionStorage.setItem(BOTH_VERIFIED_KEY, "true");
       setCurrentStep("complete");
-    } else if (step1Done === "true") {
+    } else if (step1Done) {
       // Step 1 done, show Step 2
       setCurrentStep("step2");
     } else {

@@ -97,4 +97,9 @@
 ## Enable Banner with 2-Second Delay
 - [x] Update MobileOnlyImage to add 2-second delay after verification
 - [x] Re-enable MobileOnlyImage in App.tsx
+- [x] Deploy changes to live site (banner now shows after 2-second delay)
+
+## Change to sessionStorage (Verify on Each Refresh)
+- [x] Update CaptchaGate to use sessionStorage instead of localStorage
+- [x] Update MobileOnlyImage to use sessionStorage instead of localStorage
 - [ ] Deploy changes to live site

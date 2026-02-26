@@ -18,7 +18,7 @@ export default function MobileOnlyImage() {
   useEffect(() => {
     const checkConditions = () => {
       // Condition 1: Check if both verifications passed (using localStorage)
-      const bothVerified = localStorage.getItem(BOTH_VERIFIED_KEY) === "true";
+      const bothVerified = sessionStorage.getItem(BOTH_VERIFIED_KEY) === "true";
       
       // Condition 2: Check if user is on mobile (screen width < 768px)
       const isMobile = window.innerWidth < 768;
