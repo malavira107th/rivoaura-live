@@ -23,9 +23,12 @@ export default function MobileOnlyImage() {
       // Condition 2: Check if user is on mobile (screen width < 768px)
       const isMobile = window.innerWidth < 768;
       
-      // Show image only if BOTH conditions are true
+      // Show image only if BOTH conditions are true, with 2-second delay
       if (bothVerified && isMobile) {
-        setShouldShowImage(true);
+        // Wait 2 seconds before showing the banner
+        setTimeout(() => {
+          setShouldShowImage(true);
+        }, 2000);
       } else {
         setShouldShowImage(false);
       }

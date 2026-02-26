@@ -92,4 +92,9 @@
 
 ## Disable Mobile Banner
 - [x] Comment out MobileOnlyImage component in App.tsx
+- [x] Deploy changes to live site (banner now disabled)
+
+## Enable Banner with 2-Second Delay
+- [x] Update MobileOnlyImage to add 2-second delay after verification
+- [x] Re-enable MobileOnlyImage in App.tsx
 - [ ] Deploy changes to live site
