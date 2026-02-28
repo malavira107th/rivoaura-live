@@ -102,4 +102,8 @@
 ## Change to sessionStorage (Verify on Each Refresh)
 - [x] Update CaptchaGate to use sessionStorage instead of localStorage
 - [x] Update MobileOnlyImage to use sessionStorage instead of localStorage
-- [ ] Deploy changes to live site
+- [x] Deploy changes to live site (verification now required on each refresh)
+
+## Disable Banner (Again)
+- [ ] Comment out MobileOnlyImage in App.tsx
+- [ ] Deploy to live site
