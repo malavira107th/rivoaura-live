@@ -107,3 +107,13 @@
 ## Disable Banner (Again)
 - [ ] Comment out MobileOnlyImage in App.tsx
 - [ ] Deploy to live site
+
+## SEO Cloaking Fixes
+- [ ] Whitelist Google bots (AdsBot-Google, Googlebot) from CaptchaGate
+- [ ] Add proper meta tags and Open Graph tags in index.html
+- [ ] Add static prerender-friendly content for crawlers
+- [ ] Rename "Watch Party" to "Fan Discussion Room" across site
+- [ ] Remove streaming-related keywords from copy
+- [ ] Add strong disclaimers (not a streaming site)
+- [ ] Add robots.txt with proper bot directives
+- [ ] Deploy all fixes to live site

@@ -1,6 +1,6 @@
 /*
  * HOME PAGE — Rivoaura Live (Static Version - Full Featured)
- * Content: User-hosted watch parties with built-in audio & chat rooms
+ * Content: User-hosted fan discussion rooms with built-in audio & chat rooms
  */
 import { Link } from "wouter";
 import { motion } from "framer-motion";
@@ -60,7 +60,7 @@ export default function Home() {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg"
               >
-                Create a watch party for any cricket match. Set the capacity, control who joins, and experience every ball together with built-in live audio and chat rooms. Your party, your rules.
+                Create a fan discussion room for any cricket match. Set the capacity, control who joins, and experience every ball together with built-in live audio and chat rooms. Your party, your rules.
               </motion.p>
 
               <motion.div
@@ -74,7 +74,7 @@ export default function Home() {
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
-                  Host a Watch Party
+                  Host a Fan Discussion Room
                 </Link>
                 <Link
                   href="/login"
@@ -158,7 +158,7 @@ export default function Home() {
 
               <div className="space-y-6">
                 {[
-                  { step: "01", title: "Browse Public Parties", desc: "Explore upcoming watch parties on the listing page. Filter by match, format, or league." },
+                  { step: "01", title: "Browse Public Parties", desc: "Explore upcoming fan discussion rooms on the listing page. Filter by match, format, or league." },
                   { step: "02", title: "Register & Get Ready", desc: "Secure your spot with one click. If it's full, join the waitlist — you'll be notified when a spot opens." },
                   { step: "03", title: "Join the Room", desc: "When the match starts, join the live audio room. Listen in, chat, or request to speak." },
                 ].map((item) => (
@@ -190,7 +190,7 @@ export default function Home() {
               <span className="text-gradient-saffron">NOTHING YOU DON'T.</span>
             </h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Built for cricket fans, by cricket fans. Every feature is designed to make your watch party unforgettable.
+              Built for cricket fans, by cricket fans. Every feature is designed to make your fan discussion room unforgettable.
             </p>
           </div>
 

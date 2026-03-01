@@ -121,7 +121,7 @@ function EventDetailContent({ event, isAuthenticated, registerMutation, waitlist
     const start = new Date(event.startTime);
     const end = new Date(start.getTime() + 4 * 60 * 60 * 1000);
     const formatDate = (d: Date) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Rivoaura Live: ${event.team1} vs ${event.team2}`)}&dates=${formatDate(start)}/${formatDate(end)}&details=${encodeURIComponent(`Join the live audio watch party on Rivoaura Live!`)}&location=${encodeURIComponent(event.venue)}`;
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Rivoaura Live: ${event.team1} vs ${event.team2}`)}&dates=${formatDate(start)}/${formatDate(end)}&details=${encodeURIComponent(`Join the live audio fan discussion room on Rivoaura Live!`)}&location=${encodeURIComponent(event.venue)}`;
     window.open(url, "_blank");
     toast.success("Opening calendar...");
   };
@@ -229,7 +229,7 @@ function EventDetailContent({ event, isAuthenticated, registerMutation, waitlist
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="bg-card border border-border/60 rounded-xl p-6"
                 >
-                  <h3 className="font-display text-lg font-bold mb-5">Watch Party Schedule</h3>
+                  <h3 className="font-display text-lg font-bold mb-5">Fan Discussion Room Schedule</h3>
                   <div className="space-y-0">
                     {agenda.map((item, i) => (
                       <div key={i} className="flex gap-4 items-start relative">

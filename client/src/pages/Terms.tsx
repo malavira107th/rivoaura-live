@@ -39,8 +39,8 @@ export default function Terms() {
                   Rivoaura Live is a free, community-driven platform that allows cricket fans to:
                 </p>
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside mb-3">
-                  <li><strong className="text-foreground">Host watch parties</strong> — Create a party for any cricket match, set the capacity (how many fans can join), define rules, and choose whether the party is public (visible to everyone) or private (accessible only via a shareable invite link).</li>
-                  <li><strong className="text-foreground">Join watch parties</strong> — Browse public parties or use an invite link to join private parties. Experience the match together with other fans through built-in live audio and chat rooms.</li>
+                  <li><strong className="text-foreground">Host fan discussion rooms</strong> — Create a party for any cricket match, set the capacity (how many fans can join), define rules, and choose whether the party is public (visible to everyone) or private (accessible only via a shareable invite link).</li>
+                  <li><strong className="text-foreground">Join fan discussion rooms</strong> — Browse public parties or use an invite link to join private parties. Experience the match together with other fans through built-in live audio and chat rooms.</li>
                   <li><strong className="text-foreground">Manage their party</strong> — Hosts have full control over their party, including moderation, capacity, and rules.</li>
                 </ul>
                 <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mt-4">
@@ -76,8 +76,8 @@ export default function Terms() {
 
               {/* 5. Hosting a Party */}
               <div className="bg-card border border-border/60 rounded-xl p-6">
-                <h2 className="font-display text-lg font-bold mb-3 text-foreground">5. Hosting a Watch Party</h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-3">When you host a watch party, you agree to:</p>
+                <h2 className="font-display text-lg font-bold mb-3 text-foreground">5. Hosting a Fan Discussion Room</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3">When you host a fan discussion room, you agree to:</p>
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
                   <li><strong className="text-foreground">Moderate your party responsibly.</strong> You are the admin of your party. You are responsible for maintaining a respectful environment within your party's audio and chat rooms.</li>
                   <li><strong className="text-foreground">Set accurate information.</strong> The match, teams, venue, date/time, and capacity you provide must be truthful.</li>
@@ -92,8 +92,8 @@ export default function Terms() {
 
               {/* 6. Joining a Party */}
               <div className="bg-card border border-border/60 rounded-xl p-6">
-                <h2 className="font-display text-lg font-bold mb-3 text-foreground">6. Joining a Watch Party</h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-3">When you join a watch party, you agree to:</p>
+                <h2 className="font-display text-lg font-bold mb-3 text-foreground">6. Joining a Fan Discussion Room</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3">When you join a fan discussion room, you agree to:</p>
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
                   <li>Respect the host's rules and moderation decisions.</li>
                   <li>Behave respectfully toward all participants — no hate speech, harassment, abuse, or threats.</li>
@@ -118,7 +118,7 @@ export default function Terms() {
                     <tbody className="text-muted-foreground">
                       <tr className="border-b border-border/20">
                         <td className="py-2 pr-4">Visibility</td>
-                        <td className="py-2 pr-4">Listed on the Watch Parties page</td>
+                        <td className="py-2 pr-4">Listed on the Fan Discussion Rooms page</td>
                         <td className="py-2">Hidden — accessible only via invite link</td>
                       </tr>
                       <tr className="border-b border-border/20">
@@ -189,7 +189,7 @@ export default function Terms() {
                 </p>
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
                   <li>We do not guarantee the Platform will be available 24/7 or free from errors or interruptions.</li>
-                  <li>We are not responsible for the behavior, content, or actions of users within watch parties.</li>
+                  <li>We are not responsible for the behavior, content, or actions of users within fan discussion rooms.</li>
                   <li>We are not responsible for the accuracy of match schedules, scores, or team information displayed on the Platform.</li>
                   <li>We are not liable for any indirect, incidental, special, or consequential damages arising from your use of the Platform.</li>
                   <li>Since the Platform is free, our total liability to you for any claim shall not exceed zero dollars ($0).</li>

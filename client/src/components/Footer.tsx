@@ -26,7 +26,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Host your own cricket watch party or join one. Built-in audio rooms, live chat, and full host control. Free for everyone.
+              Host your own cricket fan discussion room or join one. Built-in audio rooms, live chat, and full host control. Free for everyone.
             </p>
           </div>
 

@@ -81,7 +81,7 @@ export default function MyEvents() {
         <div className="container max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <h1 className="font-display text-4xl font-bold tracking-tight mb-2">MY EVENTS</h1>
-            <p className="text-muted-foreground mb-8">Welcome back! Here are your registered watch parties.</p>
+            <p className="text-muted-foreground mb-8">Welcome back! Here are your registered fan discussion rooms.</p>
 
             {isLoading ? (
               <div className="flex justify-center py-16">

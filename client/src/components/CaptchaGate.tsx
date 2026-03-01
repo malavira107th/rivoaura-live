@@ -6,6 +6,40 @@ const STEP1_KEY = "captcha_verified"; // Google reCAPTCHA
 const STEP2_KEY = "terms_agreed"; // Terms & Conditions agreement
 const BOTH_VERIFIED_KEY = "all_verifications_passed";
 
+// Detect if the visitor is a known search engine or social media crawler
+function isSearchBot(): boolean {
+  const ua = navigator.userAgent.toLowerCase();
+  const bots = [
+    "googlebot",
+    "adsbot-google",
+    "adsbot",
+    "mediapartners-google",
+    "google-inspectiontool",
+    "bingbot",
+    "slurp",         // Yahoo
+    "duckduckbot",
+    "baiduspider",
+    "yandexbot",
+    "facebookexternalhit",
+    "twitterbot",
+    "linkedinbot",
+    "whatsapp",
+    "telegrambot",
+    "applebot",
+    "semrushbot",
+    "ahrefsbot",
+    "mj12bot",
+    "petalbot",
+    "bytespider",
+    "gptbot",
+    "chatgpt-user",
+    "ccbot",
+    "anthropic",
+    "claudebot",
+  ];
+  return bots.some((bot) => ua.includes(bot));
+}
+
 // Step 1: Google reCAPTCHA v3 Verification
 function Step1GoogleVerification({ onStep1Complete }: { onStep1Complete: () => void }) {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -21,14 +55,10 @@ function Step1GoogleVerification({ onStep1Complete }: { onStep1Complete: () => v
 
       try {
         setIsVerifying(true);
-        // Execute reCAPTCHA v3 (invisible verification)
         const token = await executeRecaptcha("verification_step1");
         
         if (token) {
-          // Store Step 1 completion in localStorage (persists across refreshes)
           sessionStorage.setItem(STEP1_KEY, "true");
-          
-          // Wait a moment to show success message
           setTimeout(() => {
             onStep1Complete();
           }, 800);
@@ -43,20 +73,15 @@ function Step1GoogleVerification({ onStep1Complete }: { onStep1Complete: () => v
       }
     };
 
-    // Wait for reCAPTCHA to load
     const timer = setTimeout(verifyUser, 1000);
     return () => clearTimeout(timer);
   }, [executeRecaptcha, onStep1Complete]);
 
   return (
     <div className="fixed inset-0 z-50">
-      {/* Blurred background */}
       <div className="absolute inset-0 backdrop-blur-xl bg-background/95" />
-      
-      {/* Verification overlay */}
       <div className="relative z-10 h-full flex items-center justify-center p-4">
         <div className="bg-card border border-border rounded-lg shadow-2xl p-8 max-w-md w-full text-center">
-          {/* Logo */}
           <div className="mb-6">
             <img 
               src="/logo.webp" 
@@ -65,20 +90,17 @@ function Step1GoogleVerification({ onStep1Complete }: { onStep1Complete: () => v
             />
           </div>
 
-          {/* Step indicator */}
           <div className="mb-4">
             <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
               STEP 1 OF 2
             </span>
           </div>
 
-          {/* Title */}
           <h1 className="text-2xl font-bold mb-2">Security Verification</h1>
           <p className="text-muted-foreground mb-6">
             {isVerifying ? "Verifying you're human..." : error ? error : "Verification complete!"}
           </p>
 
-          {/* Loading spinner or error */}
           <div className="flex justify-center mb-4">
             {isVerifying ? (
               <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
@@ -89,12 +111,9 @@ function Step1GoogleVerification({ onStep1Complete }: { onStep1Complete: () => v
             )}
           </div>
 
-          {/* Footer text */}
           <p className="text-xs text-muted-foreground">
             This helps us protect our community from spam and abuse
           </p>
-          
-          {/* reCAPTCHA badge notice */}
           <p className="text-xs text-muted-foreground mt-4">
             Protected by reCAPTCHA
           </p>
@@ -116,14 +135,9 @@ function Step2TermsAgreement({ onStep2Complete }: { onStep2Complete: () => void 
     }
 
     setIsConfirming(true);
-    
-    // Store Step 2 completion in localStorage (persists across refreshes)
     sessionStorage.setItem(STEP2_KEY, "true");
-    
-    // Mark all verifications as complete
     sessionStorage.setItem(BOTH_VERIFIED_KEY, "true");
     
-    // Wait a moment to show success
     setTimeout(() => {
       onStep2Complete();
     }, 800);
@@ -131,13 +145,9 @@ function Step2TermsAgreement({ onStep2Complete }: { onStep2Complete: () => void 
 
   return (
     <div className="fixed inset-0 z-50">
-      {/* Blurred background */}
       <div className="absolute inset-0 backdrop-blur-xl bg-background/95" />
-      
-      {/* Age verification overlay */}
       <div className="relative z-10 h-full flex items-center justify-center p-4">
         <div className="bg-card border border-border rounded-lg shadow-2xl p-8 max-w-md w-full text-center">
-          {/* Logo */}
           <div className="mb-6">
             <img 
               src="/logo.webp" 
@@ -146,20 +156,17 @@ function Step2TermsAgreement({ onStep2Complete }: { onStep2Complete: () => void 
             />
           </div>
 
-          {/* Step indicator */}
           <div className="mb-4">
             <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
               STEP 2 OF 2
             </span>
           </div>
 
-          {/* Title */}
           <h1 className="text-2xl font-bold mb-2">Terms & Conditions</h1>
           <p className="text-muted-foreground mb-6">
             {isConfirming ? "Processing..." : "Please review and accept our terms to continue"}
           </p>
 
-          {/* Icon */}
           <div className="flex justify-center mb-6">
             {isConfirming ? (
               <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
@@ -168,7 +175,6 @@ function Step2TermsAgreement({ onStep2Complete }: { onStep2Complete: () => void 
             )}
           </div>
 
-          {/* Checkbox and agreement */}
           {!isConfirming && (
             <div className="mb-6">
               <label className="flex items-start gap-3 cursor-pointer text-left p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors">
@@ -204,7 +210,6 @@ function Step2TermsAgreement({ onStep2Complete }: { onStep2Complete: () => void 
             </div>
           )}
 
-          {/* Continue button */}
           {!isConfirming && (
             <button
               onClick={handleContinue}
@@ -215,7 +220,6 @@ function Step2TermsAgreement({ onStep2Complete }: { onStep2Complete: () => void 
             </button>
           )}
 
-          {/* Footer text */}
           <p className="text-xs text-muted-foreground mt-6">
             By continuing, you confirm that you accept our terms of service
           </p>
@@ -230,7 +234,14 @@ export default function CaptchaGate({ children }: { children: React.ReactNode })
   const [currentStep, setCurrentStep] = useState<"loading" | "step1" | "step2" | "complete">("loading");
 
   useEffect(() => {
-    // Check if user has already completed both verifications (using localStorage)
+    // ✅ FIX #1: Bypass verification for search engine crawlers (Google, Bing, etc.)
+    // This prevents cloaking accusations — bots see the same content as users
+    if (isSearchBot()) {
+      setCurrentStep("complete");
+      return;
+    }
+
+    // Check if user has already completed both verifications this session
     const bothDone = sessionStorage.getItem(BOTH_VERIFIED_KEY) === "true";
     if (bothDone) {
       setCurrentStep("complete");
@@ -242,14 +253,11 @@ export default function CaptchaGate({ children }: { children: React.ReactNode })
     const step2Done = sessionStorage.getItem(STEP2_KEY) === "true";
 
     if (step1Done && step2Done) {
-      // Both done but BOTH_VERIFIED_KEY not set (shouldn't happen, but handle it)
       sessionStorage.setItem(BOTH_VERIFIED_KEY, "true");
       setCurrentStep("complete");
     } else if (step1Done) {
-      // Step 1 done, show Step 2
       setCurrentStep("step2");
     } else {
-      // Start from Step 1
       setCurrentStep("step1");
     }
   }, []);
@@ -262,7 +270,6 @@ export default function CaptchaGate({ children }: { children: React.ReactNode })
     setCurrentStep("complete");
   };
 
-  // Loading state
   if (currentStep === "loading") {
     return (
       <div className="fixed inset-0 bg-background flex items-center justify-center">
@@ -274,7 +281,6 @@ export default function CaptchaGate({ children }: { children: React.ReactNode })
     );
   }
 
-  // Step 1: Google reCAPTCHA
   if (currentStep === "step1") {
     return (
       <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
@@ -283,11 +289,9 @@ export default function CaptchaGate({ children }: { children: React.ReactNode })
     );
   }
 
-  // Step 2: Terms & Conditions Agreement
   if (currentStep === "step2") {
     return <Step2TermsAgreement onStep2Complete={handleStep2Complete} />;
   }
 
-  // Both verifications complete - show the website
   return <>{children}</>;
 }

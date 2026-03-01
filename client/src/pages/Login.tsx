@@ -90,7 +90,7 @@ export default function Login() {
             <p className="text-sm text-muted-foreground mt-1">
               {mode === "login"
                 ? "Sign in to your Rivoaura Live account"
-                : "Create your account and start hosting watch parties"}
+                : "Create your account and start hosting fan discussion rooms"}
             </p>
           </div>
 

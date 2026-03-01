@@ -164,7 +164,7 @@ export default function Events() {
               </div>
               <h3 className="font-display text-xl font-bold mb-2">No Public Parties Yet</h3>
               <p className="text-muted-foreground text-sm max-w-sm mx-auto mb-6">
-                Be the first to host a public watch party for an upcoming match!
+                Be the first to host a public fan discussion room for an upcoming match!
               </p>
               <Link
                 href={isAuthenticated ? "/events/create" : "/login"}

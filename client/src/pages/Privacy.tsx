@@ -31,7 +31,7 @@ export default function Privacy() {
                   Rivoaura Live ("we," "us," or "our") operates the website at <strong className="text-foreground">rivoauralive.com</strong> (the "Platform"). This Privacy Policy explains exactly what personal data we collect, why we collect it, how we store and protect it, and your rights regarding that data.
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Rivoaura Live is a free, community-driven platform where cricket fans host and join live watch parties with built-in audio and chat rooms. By creating an account or using the Platform, you agree to the data practices described below.
+                  Rivoaura Live is a free, community-driven platform where cricket fans host and join live fan discussion rooms with built-in audio and chat rooms. By creating an account or using the Platform, you agree to the data practices described below.
                 </p>
               </div>
 
@@ -109,7 +109,7 @@ export default function Privacy() {
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">Your data is used exclusively for the following purposes:</p>
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
                   <li><strong className="text-foreground">Account Management:</strong> Create and authenticate your account using your email and password.</li>
-                  <li><strong className="text-foreground">Hosting & Joining Parties:</strong> Display your name as a host or participant in watch parties you create or join.</li>
+                  <li><strong className="text-foreground">Hosting & Joining Parties:</strong> Display your name as a host or participant in fan discussion rooms you create or join.</li>
                   <li><strong className="text-foreground">Event Notifications:</strong> Send you email reminders about upcoming parties you've registered for (you can opt out).</li>
                   <li><strong className="text-foreground">Platform Safety:</strong> Enforce our Community Guidelines, detect abuse, and protect users from harmful behavior.</li>
                   <li><strong className="text-foreground">Product Improvement:</strong> Analyze aggregate, anonymized usage patterns to improve the Platform (e.g., which match formats are most popular).</li>

@@ -62,7 +62,7 @@ export default function Guidelines() {
             <div className="bg-card border border-border/60 rounded-xl p-6 mb-6">
               <h2 className="font-display text-xl font-bold mb-3">The Spirit of the Game</h2>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Every watch party is hosted by a fan, for fans. Whether you're hosting for 10 friends or 10,000 strangers, the same spirit applies: respect, passion, and love for cricket. Treat others as you would want to be treated on and off the field.
+                Every fan discussion room is hosted by a fan, for fans. Whether you're hosting for 10 friends or 10,000 strangers, the same spirit applies: respect, passion, and love for cricket. Treat others as you would want to be treated on and off the field.
               </p>
             </div>
 

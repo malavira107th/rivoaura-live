@@ -1,5 +1,5 @@
 /*
- * CREATE EVENT PAGE — Any logged-in user can create a watch party
+ * CREATE EVENT PAGE — Any logged-in user can create a fan discussion room
  * Design: Stadium Noir
  */
 import { useState } from "react";
@@ -138,7 +138,7 @@ export default function CreateEvent() {
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Watch Parties
+            Back to Fan Discussion Rooms
           </Link>
 
           <motion.div
@@ -150,7 +150,7 @@ export default function CreateEvent() {
               CREATE A <span className="text-gradient-saffron">WATCH PARTY</span>
             </h1>
             <p className="text-muted-foreground mb-8">
-              Set up a live audio watch party for an upcoming cricket match. Fill in the details below.
+              Set up a live audio fan discussion room for an upcoming cricket match. Fill in the details below.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -306,7 +306,7 @@ export default function CreateEvent() {
                   </div>
                   <p className="text-xs text-muted-foreground mt-1.5">
                     {visibility === "public"
-                      ? "Your party will appear on the public Watch Parties page for everyone to see."
+                      ? "Your party will appear on the public Fan Discussion Rooms page for everyone to see."
                       : "Your party will only be accessible via a shareable link. It won't appear on the public listing."}
                   </p>
                 </div>
@@ -407,7 +407,7 @@ export default function CreateEvent() {
                 className="w-full py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {createMutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
-                Create Watch Party
+                Create Fan Discussion Room
               </button>
             </form>
           </motion.div>

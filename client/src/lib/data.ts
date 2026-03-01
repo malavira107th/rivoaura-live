@@ -1,5 +1,5 @@
 // Rivoaura Live — Shared Data & Constants
-// Platform where fans host their own watch parties with built-in audio & chat rooms
+// Platform where fans host their own fan discussion rooms with built-in audio & chat rooms
 
 export const SITE_NAME = "Rivoaura Live";
 export const SITE_DOMAIN = "rivoauralive.com";
@@ -37,7 +37,7 @@ export const TESTIMONIALS = [
   {
     name: "R.D.",
     location: "Fan from South Asia",
-    text: "I hosted my first watch party during a major league final — 200 fans joined and the energy was unreal. It felt like having my own commentary box.",
+    text: "I hosted my first fan discussion room during a major league final — 200 fans joined and the energy was unreal. It felt like having my own commentary box.",
     avatar: "RD"
   },
   {
@@ -57,19 +57,19 @@ export const TESTIMONIALS = [
 export const FAQ_DATA = [
   {
     question: "What is Rivoaura Live?",
-    answer: "Rivoaura Live is a free platform where cricket fans can host or join live watch parties for any cricket match. Every party comes with built-in audio rooms and live chat, so you can discuss every ball, every wicket, and every boundary with fellow fans in real-time."
+    answer: "Rivoaura Live is a free platform where cricket fans can host or join live fan discussion rooms for any cricket match. Every party comes with built-in audio rooms and live chat, so you can discuss every ball, every wicket, and every boundary with fellow fans in real-time."
   },
   {
     question: "Is it free to use?",
     answer: "Yes, Rivoaura Live is 100% free for everyone. Create an account, host a party, or join one — no charges, no hidden fees. We may introduce optional premium features in the future, but the core experience will always be free."
   },
   {
-    question: "How do I host a watch party?",
+    question: "How do I host a fan discussion room?",
     answer: "Sign up for a free account, click 'Create Party' in the top menu, pick the match, set your capacity (how many fans can join), write your party rules, choose whether it's public or private, and you're live! You control everything — who joins, who speaks, and how the party runs."
   },
   {
     question: "What's the difference between public and private parties?",
-    answer: "Public parties appear on the Watch Parties page for anyone to discover and join. Private parties are hidden — only people with your unique invite link can find and join them. Perfect for watching with just your friends or a specific group."
+    answer: "Public parties appear on the Fan Discussion Rooms page for anyone to discover and join. Private parties are hidden — only people with your unique invite link can find and join them. Perfect for watching with just your friends or a specific group."
   },
   {
     question: "Do you provide the live video stream of the match?",

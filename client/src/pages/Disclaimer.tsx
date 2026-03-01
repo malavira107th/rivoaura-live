@@ -86,7 +86,7 @@ export default function Disclaimer() {
               <div className="bg-card border border-border/60 rounded-xl p-6">
                 <h2 className="font-display text-lg font-bold mb-3 text-foreground">Match Information Accuracy</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Match schedules, team names, venues, dates, and times displayed on the Platform are provided by users when they create watch parties and may also be sourced from publicly available information. We do not guarantee the accuracy, completeness, or timeliness of this information. Match schedules can change due to weather, ground conditions, broadcaster decisions, or other factors beyond our control. Always verify match details with the official broadcaster or cricket board before relying on information from this Platform.
+                  Match schedules, team names, venues, dates, and times displayed on the Platform are provided by users when they create fan discussion rooms and may also be sourced from publicly available information. We do not guarantee the accuracy, completeness, or timeliness of this information. Match schedules can change due to weather, ground conditions, broadcaster decisions, or other factors beyond our control. Always verify match details with the official broadcaster or cricket board before relying on information from this Platform.
                 </p>
               </div>
 

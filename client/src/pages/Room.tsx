@@ -140,7 +140,7 @@ export default function Room() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h2 className="font-display text-2xl font-bold text-foreground mb-4">Sign In Required</h2>
-          <p className="text-muted-foreground mb-6">You need to be logged in to join a watch party room.</p>
+          <p className="text-muted-foreground mb-6">You need to be logged in to join a fan discussion room room.</p>
           <Link href="/login" className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold">
             Sign In
           </Link>
@@ -162,7 +162,7 @@ export default function Room() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h2 className="font-display text-2xl font-bold text-foreground mb-4">Party Not Found</h2>
-          <Link href="/events" className="text-primary hover:underline">Browse Watch Parties</Link>
+          <Link href="/events" className="text-primary hover:underline">Browse Fan Discussion Rooms</Link>
         </div>
       </div>
     );
@@ -476,7 +476,7 @@ export default function Room() {
             <div className="text-center py-4 mb-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs">
                 <MessageSquare className="w-3.5 h-3.5" />
-                Welcome to the watch party room!
+                Welcome to the fan discussion room room!
               </div>
               {isHost && (
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/20 text-primary text-xs mt-2 ml-2">

@@ -1,11 +1,42 @@
-# Robots.txt for Rivoaura Live
-# Allow all bots to crawl all pages
-
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://rivoauralive.com/sitemap.xml
+# Allow all major search engine crawlers explicitly
+User-agent: Googlebot
+Allow: /
 
-# Crawl delay (optional, helps prevent server overload)
-Crawl-delay: 1
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Sitemap
+Sitemap: https://www.rivoauralive.com/sitemap.xml

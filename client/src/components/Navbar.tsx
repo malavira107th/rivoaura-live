@@ -7,7 +7,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/events", label: "Watch Parties" },
+  { href: "/events", label: "Fan Discussion Rooms" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
