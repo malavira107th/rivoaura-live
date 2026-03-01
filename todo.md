@@ -128,3 +128,8 @@
 - [ ] Add FAQ section to Home page
 - [ ] Register all new routes in App.tsx
 - [ ] Build and push to GitHub - verify live site changes
+
+## Remove Step 2 Verification
+- [ ] Rewrite CaptchaGate to remove Terms & Conditions step
+- [ ] Keep only Google reCAPTCHA as single verification
+- [ ] Deploy to live site
