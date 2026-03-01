@@ -26,7 +26,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Host your own cricket fan discussion room or join one. Built-in audio rooms, live chat, and full host control. Free for everyone.
+              Host your own cricket fan discussion room or join one. Built-in audio rooms, live chat, and full host control. <strong className="text-foreground">NOT a streaming service.</strong>
             </p>
           </div>
 
@@ -34,8 +34,8 @@ export default function Footer() {
           <div>
             <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground mb-4">Explore</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/login?tab=signup" className="text-sm text-muted-foreground hover:text-primary transition-colors">Public Parties</Link>
-              <Link href="/login?tab=signup" className="text-sm text-muted-foreground hover:text-primary transition-colors">Host a Party</Link>
+              <Link href="/events" className="text-sm text-muted-foreground hover:text-primary transition-colors">Public Rooms</Link>
+              <Link href="/login?tab=signup" className="text-sm text-muted-foreground hover:text-primary transition-colors">Host a Room</Link>
               <Link href="/faq" className="text-sm text-muted-foreground hover:text-primary transition-colors">FAQ</Link>
               <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact Us</Link>
               <Link href="/guidelines" className="text-sm text-muted-foreground hover:text-primary transition-colors">Community Guidelines</Link>
@@ -49,6 +49,7 @@ export default function Footer() {
               <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms & Conditions</Link>
               <Link href="/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">Disclaimer</Link>
+              <Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link>
             </div>
           </div>
 

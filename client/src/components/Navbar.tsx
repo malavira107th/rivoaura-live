@@ -7,7 +7,8 @@ import { useAuth } from "@/_core/hooks/useAuth";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/events", label: "Fan Discussion Rooms" },
+  { href: "/events", label: "Discussion Rooms" },
+  { href: "/about", label: "About Us" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -68,7 +69,7 @@ export default function Navbar() {
                 className="px-4 py-2 rounded-md text-sm font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors flex items-center gap-1.5"
               >
                 <Plus className="w-3.5 h-3.5" />
-                Create Party
+                Create Room
               </Link>
               <Link
                 href="/my-events"
@@ -150,7 +151,7 @@ export default function Navbar() {
                     className="px-4 py-3 rounded-md text-sm font-semibold bg-primary/10 text-primary border border-primary/20 flex items-center gap-1.5"
                   >
                     <Plus className="w-3.5 h-3.5" />
-                    Create Party
+                    Create Room
                   </Link>
                   <Link
                     href="/my-events"

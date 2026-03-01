@@ -109,11 +109,22 @@
 - [ ] Deploy to live site
 
 ## SEO Cloaking Fixes
-- [ ] Whitelist Google bots (AdsBot-Google, Googlebot) from CaptchaGate
-- [ ] Add proper meta tags and Open Graph tags in index.html
-- [ ] Add static prerender-friendly content for crawlers
-- [ ] Rename "Watch Party" to "Fan Discussion Room" across site
-- [ ] Remove streaming-related keywords from copy
-- [ ] Add strong disclaimers (not a streaming site)
-- [ ] Add robots.txt with proper bot directives
-- [ ] Deploy all fixes to live site
+- [x] Whitelist Google bots (AdsBot-Google, Googlebot) from CaptchaGate
+- [x] Add proper meta tags and Open Graph tags in index.html
+- [x] Add static prerender-friendly content for crawlers
+- [x] Rename "Watch Party" to "Fan Discussion Room" across site (11 files updated)
+- [x] Remove streaming-related keywords from copy
+- [x] Add strong disclaimers (not a streaming site)
+- [x] Add robots.txt with proper bot directives
+- [x] Deploy all fixes to live site (pushed to GitHub, Vercel deploying)
+
+## Critical Fixes (Google Ad Suspension)
+- [ ] Create Privacy Policy page (/privacy route)
+- [ ] Create Terms of Service page (/terms route)
+- [ ] Create About Us page (/about route)
+- [ ] Remove ALL "Watch Party" wording from Home.tsx
+- [ ] Remove "100% Free Forever" from Home.tsx
+- [ ] Move disclaimer to TOP of Home page (above the fold)
+- [ ] Add FAQ section to Home page
+- [ ] Register all new routes in App.tsx
+- [ ] Build and push to GitHub - verify live site changes
